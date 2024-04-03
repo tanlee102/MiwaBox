@@ -1,0 +1,25 @@
+@media (max-width: 370px) {
+    .layout-left-box{
+        width: calc(100% - 70px) !important;
+    }
+}
+
+@media (max-width: 769px) {
+    .layout-left-box{
+        transform: translateX(-100%);
+        position: absolute !important;
+        height: 100%;
+    }
+    .btn-showLeftBox{
+        display: inline-block;
+    }
+}
+
+@media (min-width: 770px) {
+    .layout-left-box{
+        transform: translateX(0);
+    }
+    .btn-showLeftBox{
+        display: none;
+    }
+}

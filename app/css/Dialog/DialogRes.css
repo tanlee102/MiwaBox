@@ -1,0 +1,51 @@
+@media only screen and (min-width: 925px) {
+
+    .dialog-preview > div {
+        width: 900px !important;
+    }
+
+}
+
+@media only screen and (min-width: 820px)  and (max-width: 925px) {
+
+    .dialog-preview > div {
+        width: calc(100% - 20px) !important;
+    }
+
+}
+
+
+@media only screen and (min-width: 650px)  and (max-width: 820px) {
+
+    .dialog-preview > div {
+        width: calc(100% - 30px) !important;
+    }
+
+}
+
+
+@media only screen and (max-width: 650px){ /* - 599*/
+
+    .dialog-preview > div {
+        width: calc(100% - 10px) !important;
+    }
+
+
+    .dialog-confirm > div {
+        width: calc(100% - 10px);
+    }
+
+    .dialog-form > div{
+        width: calc(100% - 10px);
+    }
+
+}
+
+
+@media only screen and (max-width: 400px){ 
+
+    .dialog-preview > div {
+        width: 100% !important;
+    }
+
+}

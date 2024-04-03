@@ -1,0 +1,11 @@
+@media (max-width: 713px) {
+    .contain-random{
+        width: calc(100% - 30px);
+    }
+}
+
+@media (max-width: 610px) {
+    .contain-random{
+        width: calc(100% - 8px);
+    }
+}

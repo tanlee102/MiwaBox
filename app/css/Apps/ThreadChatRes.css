@@ -1,0 +1,32 @@
+/* Styles for screens smaller than 480px (Extra Small) */
+@media (max-width: 390px) {
+    .text-chat-thread > img, .text-chat-thread > video{
+        max-width: calc(100% - 25px);
+        min-height: 100px;
+        max-height: 320px;
+    }
+}
+
+@media (min-width: 390px) and (max-width: 769px) {
+    .text-chat-thread > img, .text-chat-thread > video{
+        max-width: 320px;
+        min-height: 230px;
+        max-height: 460px;
+    }
+}
+
+@media (min-width: 770px) and (max-width: 1279px) {
+    .text-chat-thread > img, .text-chat-thread > video{
+        max-width: 360px;
+        min-height: 270px;
+        max-height: 490px;
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1919px) {
+    .text-chat-thread > img, .text-chat-thread > video{
+        max-width: 490px;
+        min-height: 300px;
+        max-height: 540px;
+    }
+}

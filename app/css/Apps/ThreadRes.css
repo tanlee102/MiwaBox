@@ -1,0 +1,11 @@
+@media (max-width: 500px) {
+    .contain-thread{
+        width: calc(100% - 20px) !important;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 1400px) {
+    .contain-thread{
+        width: calc(100% - 50px) !important;
+    }
+}

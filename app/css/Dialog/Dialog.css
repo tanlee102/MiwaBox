@@ -1,0 +1,312 @@
+.dialog-confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    z-index: 99;
+
+    display: none;
+
+    height: 100%;
+    overflow: auto;
+    overflow-y: auto;
+
+    /* visibility: hidden; */
+    /* opacity: 1;
+    transition: all 0.1s linear; */    
+}
+
+.dialog-preview {
+    z-index: 55;
+}
+
+.active-confirm{
+    display: inline-flex;
+    /* visibility: visible;
+    opacity: 1;
+    transition: all 0.08s linear; */
+}
+
+.dialog-confirm > div {
+    position: relative;
+    margin: auto;
+    width: 400px;
+    height: auto;
+}
+
+.dialog-confirm > div > div{
+    margin-top: 10px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+    border-radius: 3px;
+}
+
+.content[dark-mode="true"] .dialog-confirm > div > div{
+    background-color: rgb(78, 78, 78);
+}
+
+.dialog-form > div{
+    width: calc(550px);
+}
+
+.input-dialog-form{
+    display: flex;
+    justify-content: left;
+}
+
+.input-dialog-form input{
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid rgb(141, 141, 141);
+    padding: 5px 10px;
+}
+.content[dark-mode="true"] .input-dialog-form input{
+    background-color: #434343;
+    border-color: black;
+    color: white;
+}
+
+.input-dialog-form span{
+    background-color: coral;
+    height: 100%;
+    margin: auto;
+    margin-left: 10px;
+    font-size: 13px;
+    text-align: center;
+    padding: 6px 5px;
+    color: white;
+    border-radius: 3px;
+}
+
+.pool-of-words{
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+    max-height: 300px;
+    overflow: auto;
+    background-color: #e7e7e7;
+    border-radius: 3px;
+    clear:both !important;
+    float: none !important;
+}
+.content[dark-mode="true"] .pool-of-words{
+    background-color: #848484 !important;
+}
+
+.pool-of-words span{
+    background-color: #5D5D5D !important;
+}
+
+.content[dark-mode="true"] .pool-of-words span{
+    background-color: black !important;
+}
+
+.dialog-confirm > div > div header {
+    padding: 10px 8px;
+    background-color: #f6f7f9;
+    border-bottom: 1px solid #e5e5e5
+}
+.content[dark-mode="true"] .dialog-confirm > div > div header {
+    background-color: #5a5a5a;
+    border-bottom: 1px solid #373737;
+    color: white;
+}
+.dialog-confirm > div > div header h3 {
+    font-size: 14px;
+    margin: 0;
+    color: #555;
+    display: inline-block
+}
+.content[dark-mode="true"] .dialog-confirm > div > div header h3 { 
+    color: rgb(227, 227, 227);
+}
+.dialog-confirm > div > div header .fa-close {
+    float: right;
+    color: #c4c5c7;
+    cursor: pointer;
+    transition: all .5s ease;
+    padding: 0 2px;
+    border-radius: 1px    
+}
+.content[dark-mode="true"] .dialog-confirm > div > div header .fa-close {
+    color: rgb(227, 227, 227);
+}
+.dialog-confirm > div > div header .fa-close:hover {
+    color: #b9b9b9
+}
+.dialog-confirm > div > div header .fa-close:active {
+    box-shadow: 0 0 5px #673AB7;
+    color: #a2a2a2
+}
+.dialog-confirm > div > div .dialog-msg {
+    padding: 12px 10px;
+    color:black;
+}
+.content[dark-mode="true"] .dialog-confirm > div > div .dialog-msg {
+    color: rgb(239, 239, 239);
+}
+.dialog-confirm > div > div .dialog-msg p{
+    margin: 0;
+    line-height: 21px;
+    font-size: 15px;
+}
+.content[dark-mode="true"] .dialog-confirm > div > div footer {
+    border-top: 1px solid #242424;
+}
+.dialog-confirm > div > div footer {
+    border-top: 1px solid #e5e5e5;
+    padding: 8px 10px
+}
+.dialog-confirm > div > div footer .controls {
+    direction: rtl;
+    display: flex;
+}
+.dialog-confirm > div > div footer .controls .button {
+    padding: 5px 15px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+.button {
+  cursor: pointer
+}
+.button-default {
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgba(204, 204, 204, 0.5);
+    color: #5D5D5D;
+}
+.button-danger {
+    background-color: #f44336;
+    border: 1px solid #d32f2f;
+    color: #f5f5f5
+}
+.link {
+  padding: 5px 10px;
+  cursor: pointer
+}
+
+
+
+
+.dialog-nokit{
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-nokit input{
+    font-size: 15px;
+    margin: 7px 0px;
+    padding: 5px 7px;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 3px;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.content[dark-mode="true"] .dialog-nokit input{
+    background-color: rgb(70, 70, 70);
+    color: white;
+    border-color: rgb(48, 48, 48);
+}
+.dialog-nokit input:focus{
+    border: 1px solid cornflowerblue !important;
+}
+
+
+.dialog-nokit select{
+    cursor: pointer;
+    width: 110px !important;
+    font-size: 15px;
+    margin: 7px 0px;
+    padding: 4px 7px;
+    border: 1px solid rgb(131, 131, 131);
+    border-radius: 3px;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    resize: none;
+    color: black;
+    border-color: rgb(192, 192, 192);
+    background-color: rgb(245, 245, 245);
+}
+
+.content[dark-mode="true"] .dialog-nokit select{
+    background-color: rgb(70, 70, 70);
+    border-color: rgb(48, 48, 48);
+    color: white;
+}
+
+
+
+
+
+
+.snippet{
+    width: auto;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #515151;
+  color: #515151;
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: .5s;
+}
+.content[dark-mode="true"] .dot-flashing {
+    background-color: #c3c3c3;
+    color: #979797;
+}
+.dot-flashing::before, .dot-flashing::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #515151;
+  color: #515151;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+.content[dark-mode="true"] .dot-flashing::before {
+    background-color: #c3c3c3;
+    color: #979797;
+}
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #515151;
+  color: #515151;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+.content[dark-mode="true"] .dot-flashing::after {
+    background-color: #c3c3c3;
+    color: #979797;
+}
+
+@keyframes dotFlashing {
+  0% {
+    background-color: #515151;
+  }
+  50%,
+  100% {
+    background-color: #cacaca;
+  }
+}

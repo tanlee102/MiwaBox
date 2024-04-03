@@ -1,0 +1,19 @@
+@media (max-width: 510px) {
+    .layout-right-box{
+        position: absolute !important;
+        height: calc(100%);
+        min-width: calc(100%) !important;
+    }
+}
+
+@media (max-width: 1099px) {
+    .layout-right-box{
+        display: none;
+    }
+}
+
+@media (min-width: 1100px) {
+    .layout-right-box{
+        display: block;
+    }
+}

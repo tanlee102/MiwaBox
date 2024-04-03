@@ -1,0 +1,48 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid  #ddd;
+    border-radius: 3px;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    word-break: break-all;
+  }
+
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  .tbm-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 7px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 4px;
+    margin-bottom: 3px;
+  }
+
+.tbm-search{
+  display: flex;
+  width: auto;
+  flex-direction: row;
+  margin: 2px 5px 2px 5px;
+}
+.tbm-search input{
+  padding: 4px 9px;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid rgb(130, 130, 130);
+}
+.tbm-search svg{
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+  fill: black;
+  cursor: pointer;
+}

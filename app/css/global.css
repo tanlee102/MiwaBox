@@ -1,0 +1,121 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body, main, html{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+img, svg, button, ul, li, .non-select{
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+a, a:link, a:visited, a:focus, a:hover, a:active{
+    color: black;
+    text-decoration:none;
+    cursor: crosshair;
+}
+
+.user-svg path{
+    fill: none !important;
+}
+.user-svg #secondary{
+    fill: rgb(168, 199, 255) !important;
+}
+.set-display-svg path{
+    fill: rgb(139, 180, 255) !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contain-loader-hozon{
+    display: block;
+    width: 100%;
+    padding: 10px 0px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loader-hozon {
+  width: 25px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 5px solid;
+  border-color: cornflowerblue transparent;
+  animation: l1 1s infinite;
+}
+@keyframes l1 {to{transform: rotate(.5turn)}}
+
+
+
+.loader-roundo {
+  margin-left: 14.5px;
+  margin-right: 3.5px;
+  margin-top: auto;
+  margin-bottom: 6px;
+  width: 26px;
+  --b: 4px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgb(25, 49, 94);
+  -webkit-mask:
+    repeating-conic-gradient(#0000 0deg,#000 1deg 70deg,#0000 71deg 90deg),
+    radial-gradient(farthest-side,#0000 calc(100% - var(--b) - 1px),#000 calc(100% - var(--b)));
+  -webkit-mask-composite: destination-in;
+          mask-composite: intersect;
+  animation: l5 1s infinite;
+}
+@keyframes l5 {to{transform: rotate(.5turn)}}
+
+
+#notice-popout{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
+    min-width: 100px;
+    padding: 10px 9px;
+    border-radius: 10px;
+    height: auto;
+    background-color: cornflowerblue;
+    z-index: 2000;   
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+#notice-popout span{
+    color: white;
+    margin-right: 5px;
+}
+#notice-popout svg{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+#notice-popout svg path{
+    fill: white !important;
+}

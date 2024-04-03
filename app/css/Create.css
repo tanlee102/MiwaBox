@@ -1,0 +1,319 @@
+.contain-create-app{
+    width: calc(100% - 10px);
+    height: auto;
+    /* background-color: aqua; */
+    padding: 0px 5px;
+}
+
+.row-create-app{
+    width: calc(100% - 10px);
+    padding: 5px;
+    height: auto;
+    /* background-color: azure; */
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.row-create-app div{
+    display: block;
+}
+
+.row-create-app div:first-child{
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.row-create-app div:last-child{
+    float: left;
+}
+
+.row-create-app div span{
+    display: flex;
+    width: auto;
+    float: left;
+    flex-direction: row;
+    background-color: rgb(225, 225, 225);
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    margin-right: 7px;
+    border-radius: 4px;
+    border: 1px solid rgb(186, 186, 186);
+    cursor: pointer;
+}
+
+.row-create-app div span svg{
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.fillcolor{
+    fill: rgb(34, 34, 34);
+}
+
+.strokecolor{
+    stroke: black;
+}
+.selected-create-app{
+    background-color: rgb(201, 219, 255) !important;
+    border: 1px solid cornflowerblue !important;
+}
+
+
+.row-create-app input{
+    display: block;
+    padding: 7px 10px;
+    outline: none;
+    border: 1px solid rgb(185, 185, 185);
+    border-radius: 4px;
+    font-size: 1.1em;
+}
+
+.row-create-app .dropdown{
+    margin: -5px;
+}
+
+
+
+
+.contain-create-app
+
+
+.contain-load-create-sm{
+    position: relative;
+    height: 90pt;
+    /* background-color: aqua; */
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.load-create-sm{
+    margin-top: 25pt;
+    height: 75pt;
+    width: 100pt;
+    transform: scale(1.5) !important;
+    display: flex;
+    justify-content: center;
+    /* background-color: bisque; */
+}
+
+.loader-create {	
+	--c1: #7dc5ff;
+	--c2: #3f9ed8;
+	--c3: #425458;
+	--bg: #242d31;
+	--sp: 2s;
+	--dl: -2s;
+	--ttf: cubic-bezier(0.25, 0.46, 0.45, 0.94);	
+}
+
+.loader-create *, .loader-create {
+	transform-style: preserve-3d;
+	box-sizing: border-box;
+}
+
+.loader-create {
+	width: 40pt;
+	height: 40pt;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	transition: all 0.33s ease 0s;
+	transform: rotateX(50deg) rotate(45deg);
+	margin-top: 18pt;
+	border-radius: 100%;
+	animation: floating 2s ease-in-out -3s infinite alternate;
+}
+
+@keyframes floating {
+	50% { margin-top: 14pt; }
+}
+
+.loader-create:before {
+	content: "";
+	position: absolute;
+	width: 16pt;
+	height: 16pt;
+	background: #0001;
+	animation: shadow 2s var(--ttf) var(--dl) infinite alternate;
+	filter: blur(5px);
+	transform: translateZ(-10pt);
+}
+
+@keyframes shadow {
+	0%, 25% {
+		width: 12pt;
+		height: 12pt;
+		transform: translateZ(-24pt);
+		filter: blur(10px);
+	}	
+	100% {
+		width: 16pt;
+		height: 16pt;
+		transform: translateZ(-18pt);
+	}
+}
+
+@keyframes leaping-1 {
+	0%, 25% { transform: translateZ(2.5pt); }
+	100% { transform: translateZ(-5pt); }
+}
+
+@keyframes leaping-2 {
+	0%, 25% { transform: translateZ(2.5pt); }
+	100% { transform: translateZ(22pt); }
+}
+
+@keyframes leaping-3 {
+	0%, 25% { transform: translateZ(2.5pt); }
+	100% { transform: translateZ(40pt); }
+}
+
+.cuboid {
+	--width: 20;
+	--height: 20;
+	--depth: 5.5;
+	position: absolute;
+	height: calc(var(--height) * 1pt);
+	width: calc(var(--width) * 1pt);
+	transform: translateZ(2.5pt);
+	animation: leaping-1 var(--sp) var(--ttf) var(--dl) infinite alternate;
+}
+
+.cuboid:nth-child(2) {
+	--width: 12.2;
+	--height: 12.2;
+	transform: translateZ(2.65pt);
+	animation-name: leaping-2;
+}
+
+.cuboid:nth-child(3) {
+	--width: 5.75;
+	--height: 5.75;
+	transform: translateZ(2.675pt);
+	animation-name: leaping-3;
+}
+
+.cuboid .side {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 100%;
+	width: 100%;
+	border-radius: 2px;
+	background: var(--c3);
+}
+
+.cuboid .side:nth-of-type(1) {
+	transform: translate3d(-50%, -50%, calc(var(--depth) * 0.5pt));
+	background: var(--c1);
+}
+.cuboid .side:nth-of-type(2) {
+	transform: translate3d(-50%, -50%, calc(var(--depth) * -0.5pt)) rotateY(180deg);
+}
+.cuboid .side:nth-of-type(3) {
+	width: calc(var(--depth) * 1pt);
+	transform: translate(-50%, -50%) rotateY(90deg)	translate3d(0, 0, calc(var(--width) * 0.5pt));
+	background: var(--c2);
+}
+.cuboid .side:nth-of-type(4) {
+	width: calc(var(--depth) * 1pt);
+	transform: translate(-50%, -50%) rotateY(-90deg) translate3d(0, 0, calc(var(--width) * 0.5pt));
+}
+.cuboid .side:nth-of-type(5) {
+	height: calc(var(--depth) * 1pt);
+	transform: translate(-50%, -50%) rotateX(90deg) translate3d(0, 0, calc(var(--height) * 0.5pt));
+}
+.cuboid .side:nth-of-type(6) {
+	height: calc(var(--depth) * 1pt);
+	transform: translate(-50%, -50%) rotateX(-90deg) translate3d(0, 0, calc(var(--height) * 0.5pt));
+	background: var(--c3);
+}
+
+
+.cuboid:nth-child(1) .side:nth-child(1):before {
+	content: "";
+	position: absolute;
+	width: 60%;
+	height: 60%;
+	background: conic-gradient(from -45deg at 4.95pt 4.99pt, var(--c3) 0 135deg, var(--bg) 0 225deg, var(--c2) 0 100%);
+	left: 20%;
+	top: 20%;
+}
+
+.cuboid:nth-child(2) .side:nth-child(1):before {
+	content: "";
+	position: absolute;
+	width: 44%;
+	height: 44%;
+	background: conic-gradient(from -45deg at 5.45pt 5.35pt, var(--c3) 0 135deg, var(--bg) 0 225deg, var(--c2) 0 100%);
+	left: 27%;
+	top: 27%;
+}
+
+
+
+
+
+
+
+
+
+.loading-list-create-sm{
+    width: 100%;
+    display: block;
+    height: auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.loading-list-create-sm p{
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 5px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+
+
+
+
+.info-sm-created{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    align-items: center;
+}
+
+
+.info-sm-created p{
+    position: relative;
+    margin-bottom: 5px;
+    font-weight: bold;
+    word-break: break-all;
+}
+
+.info-sm-created span{
+    margin-top: 10px;
+    position: relative;
+    width: 100px;
+    height: auto;
+    padding: 7px 10px;
+    text-align: center;
+    background-color: cornflowerblue;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

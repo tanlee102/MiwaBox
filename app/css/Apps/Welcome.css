@@ -1,0 +1,95 @@
+.contain-welcome{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contain-welcome select{
+    margin-bottom: 40px;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+.contain-typewriter{
+    position: relative;
+    width: fit-content !important;
+}
+.welcome-text{
+    margin-top: 10px;
+    font-family: monospace;
+    max-width: 520px;
+    padding: 0px 20px;
+    line-height: 1.5em;
+    text-align: justify;
+}
+.typewriter div{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: black;
+    font-family: monospace;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .30em solid cornflowerblue; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 2s steps(30, end),
+      blink-caret .6s step-end infinite;
+}
+  
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: cornflowerblue }
+}
+
+
+
+
+
+.contain-list-launching-app{
+  display: block;
+  width: calc(100% - 50px);
+  margin: auto;
+  margin-top: 40px;
+}
+
+.contain-list-launching-app p{
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: monospace;
+}
+
+.list-launching-app{
+    position: relative;
+    margin: auto;
+    width: calc(100% - 20px);
+    text-align: center;
+}
+.list-launching-app a{
+  cursor: pointer;
+}
+.list-launching-app span{
+    cursor: pointer !important;
+    display: inline-block;
+    margin: 5px;
+    width: 100px;
+    height: auto;
+}
+
+.list-launching-app span img{
+    float: left;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

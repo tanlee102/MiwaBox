@@ -1,0 +1,25 @@
+/* Styles for screens smaller than 480px (Extra Small) */
+@media (max-width: 479px) {
+
+}
+
+/* Styles for screens between 481px and 767px (Small) */
+@media (min-width: 480px) and (max-width: 767px) {
+
+}
+
+/* Styles for screens between 768px and 1023px (Medium) */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+/* Styles for screens between 1024px and 1279px (Large) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+
+}
+
+/* Styles for screens between 1280px and 1919px (Extra Large) */
+@media (min-width: 1280px) and (max-width: 1919px) {
+
+}
+

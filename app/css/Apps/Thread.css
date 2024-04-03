@@ -1,0 +1,17 @@
+.contain-thread{
+    position: relative;
+    width: 770px;
+    margin: auto;
+    display: block;
+    height: 100%;
+}
+
+.content-thread{
+    position: relative;
+    display: inline-block;
+    min-height: calc(100% - 91px);
+    margin-top:13px;
+    margin-bottom: 13px;
+    width: 100%;
+    z-index: 1;
+}

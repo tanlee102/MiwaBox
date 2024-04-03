@@ -1,0 +1,38 @@
+.ps-bold{
+    font-weight: bold;
+}
+.ps-center{
+    text-align: center;
+}
+.ps-head{
+    line-height: 1.3em;
+    font-size: 2.4em;
+}
+
+
+.post-thread p{
+    margin: 13px 0px 11px 0px;
+}
+.post-thread p:not(.ps-head){
+    font-size: 1.1em;
+    line-height: 1.45em;
+    font-family: 'Segoe UI','Helvetica Neue',Helvetica,Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans',sans-serif;
+}
+
+
+.post-thread p img, .post-thread p video{
+    max-width: 100%;
+    max-height: 590px;
+}
+.post-thread p img{
+    cursor: pointer;
+}
+
+
+
+.post-thread p a{
+    cursor: pointer !important;
+    color: cornflowerblue;
+    text-decoration: underline;
+    word-break: break-all;
+}
