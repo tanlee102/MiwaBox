@@ -1,18 +1,20 @@
 "use client";
 
-import React, { useEffect, useState, useRef, useContext, useLayoutEffect } from "react";
+import React, { useEffect, useState, useContext, useLayoutEffect } from "react";
 
 import WrapHeaderBox from "./WrapHeaderBox";
 import Account from "../Apps/Account";
 import ThreadPost from "../Apps/ThreadPost";
 import ThreadChat from "../Apps/ThreadChat";
 import Manage from "../Apps/Manage";
+import Welcome from "../Apps/Welcome";
+import ThreadVideo from "../Apps/ThreadVideo";
+
 
 import { WindowContext } from "@/app/Context/WindowContext";
 import { AppsConext } from "@/app/Context/AppsContext";
 import { ThreadContext } from "@/app/Context/ThreadContext";
 import { hashPreScrollHeight } from "@/app/global";
-import Welcome from "../Apps/Welcome";
 
 const CenterBox = ({}) => {
 
@@ -112,6 +114,8 @@ const CenterBox = ({}) => {
             {infoApp?.appType == 0 ? <ThreadChat /> : "" }
 
             {infoApp?.appType == 1 ? <ThreadPost /> : "" }
+
+            {infoApp?.appType == 2 ? <ThreadVideo /> : "" }
 
             {infoApp?.id == 99 ? <Manage /> : "" }
             

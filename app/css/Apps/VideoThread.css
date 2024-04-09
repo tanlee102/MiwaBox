@@ -1,0 +1,334 @@
+.video-thread-container{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.head-video-thread{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 40px;
+    width: 100%;
+
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.501), rgba(0, 0, 0, 0));
+
+    display: flex;
+    flex-direction: row;
+    z-index: 10;
+}
+
+.head-video-thread span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;  
+    height: 100%;
+    text-align: center;
+
+    cursor: pointer;
+    color: white !important;
+}
+.head-video-thread span svg{
+    width: 24px;
+    height: 24px;
+}
+
+
+.head-video-thread span:first-child{
+    position: relative;
+    margin-left: 10px;
+}
+
+
+#download-btn-video-thread{
+    position: relative;
+    margin-left: 10px;
+}
+#download-btn-video-thread svg path{
+    stroke: white;
+}
+
+
+#btn-add-video-thread{
+    position: relative;
+    fill: white;
+}
+#btn-add-video-thread svg{
+    position: relative;
+    margin-left: 10px;
+    width: 26px;
+    height: 26px;
+    stroke: white;
+}
+
+
+.head-video-thread span:last-child{
+    margin-left: auto;
+    margin-right: 10px;
+}
+.head-video-thread span:last-child svg path{
+    fill:white
+}
+
+
+
+
+
+
+
+.contain-grid-video-thread{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    min-width: 400px;
+    height: calc(100% - 40px);
+    padding-top: 40px;
+
+    z-index: 9;
+
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.782);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.content-grid-video-thread{
+    width: 100%;
+    height: calc(100% - 10px);
+    padding-bottom: 10px;
+    background-color: transparent;
+    overflow-y: auto;
+}
+
+.desktop-content-grid-video-thread::-webkit-scrollbar {
+    width: 6.5px;
+}
+.desktop-content-grid-video-thread::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+.desktop-content-grid-video-thread::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 4px;
+}
+.desktop-content-grid-video-thread:hover::-webkit-scrollbar-thumb {
+    background-color: #a2a2a2d4;
+}
+
+.grid-video-thread{
+    position: relative;
+    width: calc(100% - 10px);
+    height: auto;
+    padding: 5px;
+
+    background-color: transparent;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    grid-gap: 10px;
+    z-index: 102;
+}
+
+.grid-video-thread span{
+    position: relative;
+    width: 130px;
+    height: 140px;
+    overflow: hidden;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: rgb(73, 73, 73);
+}
+
+.grid-video-thread span img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.grid-video-thread  .chose-played-video{
+    border: 2px solid rgb(149, 186, 255);
+}
+
+.grid-video-thread  .chose-played-video img{
+    opacity: 0.5;
+}
+
+
+
+
+
+.video-thread{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory !important;
+}
+.video-thread::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.video-thread > div{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+}
+
+.video-thread > div > video{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+.contain-create-video-thread{
+    position: relative;
+    width: calc(100% - 20px);
+    height: auto;
+    margin: 0px 10px ;
+}
+
+
+.contain-create-video-thread div:first-child{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.contain-create-video-thread div:first-child input{
+    position: relative;
+    width: calc(100% - 43px);
+    padding: 6px 5px;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 4px;
+    margin-right: auto;
+}
+.contain-create-video-thread div:first-child span{
+    position: relative;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+.contain-create-video-thread div:first-child span svg{
+    fill: black;
+}
+
+
+
+
+.contain-create-video-thread div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.contain-create-video-thread div:nth-child(2) video{
+    width: calc(50% - 24px);
+    height:fit-content;
+    border-radius: 4px;
+}
+
+
+#captureThumbnailBtn{
+    position: relative;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+#captureThumbnailBtn svg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    stroke: black;
+    fill: white;
+}
+#thumbnailContainer{
+    position: relative;
+    width: calc(50% - 25px);
+    height: auto;
+}
+#thumbnailContainer img{
+    width: 100%;
+    height:fit-content;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+
+
+.contain-create-video-thread > div:nth-child(3), .contain-create-video-thread > div:nth-child(4), .contain-create-video-thread > div:nth-child(5){
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+.contain-create-video-thread > div:nth-child(3) input, .contain-create-video-thread > div:nth-child(4) input, .contain-create-video-thread > div:nth-child(5) input{
+    position: relative;
+    width: 200px;
+    padding: 6px 5px;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 4px;
+    margin-right: auto;
+}
+
+
+
+
+
+.step-video-thread-button{
+    position: absolute;
+    z-index: 1000;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+    width: 30px;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: rgba(0, 0, 0, 0.232);
+    border-radius: 13px;
+}
+
+.step-video-thread-button div{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 4px 0px;
+    cursor: pointer;
+}
+
+.step-video-thread-button div svg{
+    width: 30px;
+    height: 30px;
+}
+
+.step-video-thread-button div svg path{
+    stroke: rgba(255, 255, 255, 0.224) !important;
+}
+
+.step-video-thread-button:hover div svg path{
+    stroke: rgba(255, 255, 255, 0.712) !important;
+}
+
+.step-video-thread-button div:last-child svg{
+    
+    transform: rotate(180deg);
+}

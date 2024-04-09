@@ -35,9 +35,10 @@ const RightBox = ({}) => {
                 <div>
                     <p>{infoApp?.title}</p>
                     <span>
+                        {infoApp?.appType == -1 ? (<span>System</span>) : ""}
                         {infoApp?.appType == 0 ? (<span>Chat</span>) : ""}
                         {infoApp?.appType == 1 ? (<span>Post</span>) : ""}
-                        {infoApp?.appType == 2 ? (<span>System</span>) : ""}
+                        {infoApp?.appType == 2 ? (<span>Video</span>) : ""}
                         <span>@{infoApp?.id}</span>
                     </span>
                 </div>

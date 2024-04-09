@@ -47,9 +47,12 @@ const AppsProvider = ({ children }) => {
       if(choseCategory == 0){
         abi = env_SMARTCHAIN.APP_CONTRACTS.chat.abi;
         bytecode = env_SMARTCHAIN.APP_CONTRACTS.chat.bin[env_SMARTCHAIN.NETWORKS_CHOSE_BIN[idNetwork]];
-      }else{
+      }else if(choseCategory == 1){
         abi = env_SMARTCHAIN.APP_CONTRACTS.post.abi;
         bytecode = env_SMARTCHAIN.APP_CONTRACTS.post.bin[env_SMARTCHAIN.NETWORKS_CHOSE_BIN[idNetwork]];
+      }else{
+        abi = env_SMARTCHAIN.APP_CONTRACTS.video.abi;
+        bytecode = env_SMARTCHAIN.APP_CONTRACTS.video.bin[env_SMARTCHAIN.NETWORKS_CHOSE_BIN[idNetwork]];
       }
       
       await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -136,7 +139,7 @@ const AppsProvider = ({ children }) => {
           appAddress: env_SMARTCHAIN.CONTRACT.address,
           creatorAddress: env_SMARTCHAIN.CONTRACT.address,
           idNetwork: 0,
-          appType: 2,
+          appType: -1,
         }
         if(currentIndex == 99){
           objtmp.title = env_LANG[language].infoApps[2]

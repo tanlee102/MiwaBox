@@ -4,12 +4,14 @@ import { useRouter } from 'next/navigation';
 import { env_SMARTCHAIN } from '../env';
 import { WindowContext } from '../Context/WindowContext';
 import { env_LANG } from '../env_lang';
+import { VideoThreadContext } from '../Context/VideoThreadContext';
 
 const SearchBar = ({closeLeft}) => {
 
     const router = useRouter();
     const searchParams = useSearchParams();
 
+    const {setViParam} = useContext(VideoThreadContext);
     const { currentIndex, setCurrentIndex, language } = useContext(WindowContext);
     const [idSearch, setIdSearch] = useState('');
 
@@ -22,6 +24,18 @@ const SearchBar = ({closeLeft}) => {
     }, [searchParams.get('id')]);
   
 
+
+    useEffect(() => {
+
+      if(searchParams.get('vi')){
+        setViParam(Number(searchParams.get('vi')))
+      }else{
+        setViParam(null);
+      }
+
+    }, [searchParams.get('vi')]);
+
+    
   return (
     <div className="search-app">
         <input

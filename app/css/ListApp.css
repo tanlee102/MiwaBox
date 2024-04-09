@@ -66,6 +66,9 @@
 .image-item-app circle{
     fill: black;
 }
+.image-type-app--1 path{
+    fill:  cornflowerblue !important;
+}
 .image-type-app-0 path{
     fill: rgb(159, 212, 230) !important;
 }
@@ -73,7 +76,7 @@
     fill:  rgb(174, 184, 241) !important;
 }
 .image-type-app-2 path{
-    fill:  cornflowerblue !important;
+    fill:  rgb(178, 241, 174) !important;
 }
 
 .image-item-app img{

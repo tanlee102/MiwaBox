@@ -42,12 +42,16 @@ import WindowProvider from "./Context/WindowContext";
 
 import ImageViewer from "./Components/Dialog/ImageViewer";
 import NoticePopout from "./Components/NoticePopout";
+import VideoThreadProvider from './Context/VideoThreadContext';
+import CreateVideo from './Components/CreateVideo';
+import CreateVideoButton from './Components/CreateVideoButton';
 
 export default function HomePage() {
 
   const host = typeof window !== "undefined" ? window.location.host : "miwabox.live";
   
   const [displayModalCreate, setDisplayModalCreate] = useState(false);
+  const [displayCreateVideo, setDisplayCreateVideo] = useState(false)
 
   return (
     <WindowProvider>
@@ -65,14 +69,17 @@ export default function HomePage() {
             <AppsProvider>
               <InputProvider>
                 <ThreadProvider>
-                <div className="box-container">
-                    <LeftBox setDisplayModalCreate={setDisplayModalCreate}></LeftBox>
-                    <CenterBox></CenterBox>
-                    <RightBox></RightBox>
-                </div>
-                <Modal setDisplayModal={setDisplayModalCreate} displayModal={displayModalCreate} title={<TitleCreate/>} body={<Create/>} footer={<ButtonCreate/>} displayfooter={true}></Modal>
-                <ImageViewer></ImageViewer>
-                <NoticePopout/>
+                  <VideoThreadProvider setDisplayCreateVideo={setDisplayCreateVideo}>
+                      <div className="box-container">
+                          <LeftBox setDisplayModalCreate={setDisplayModalCreate}></LeftBox>
+                          <CenterBox></CenterBox>
+                          <RightBox></RightBox>
+                      </div>
+                      <Modal setDisplayModal={setDisplayModalCreate} displayModal={displayModalCreate} title={<TitleCreate/>} body={<Create/>} footer={<ButtonCreate/>} displayfooter={true}></Modal>
+                      <Modal setDisplayModal={setDisplayCreateVideo} displayModal={displayCreateVideo} title={"Add Video"} body={<CreateVideo/>} footer={<CreateVideoButton/>} displayfooter={true}></Modal>
+                      <ImageViewer></ImageViewer>
+                      <NoticePopout/>
+                  </VideoThreadProvider>
                 </ThreadProvider>
               </InputProvider>
             </AppsProvider>

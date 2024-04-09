@@ -1,0 +1,26 @@
+
+@media (max-width: 569px) {
+    .contain-grid-video-thread{
+        min-width: 100%;
+    }
+    .grid-video-thread{
+        grid-template-columns: repeat(3, calc(33.33% - 7.5px));
+    }
+    .grid-video-thread span{
+        width: 100%;
+        height: 140px;
+    }
+}
+
+@media (min-width: 570px) and (max-width: 900px) {
+    .contain-grid-video-thread{
+        min-width: 100%;
+    }
+    .grid-video-thread{
+        grid-template-columns: repeat(4, calc(25% - 8px));
+    }
+    .grid-video-thread span{
+        width: 100%;
+        height: 190px;
+    }
+}
