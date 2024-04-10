@@ -18,7 +18,7 @@ const Welcome = () => {
         
         <select value={language} onChange={handleLanguageChange}>
             <option value="vi">Vietnamese</option>
-            <option value="en" selected>English</option>
+            <option value="en">English</option>
         </select>
 
         <div className='contain-typewriter'>
