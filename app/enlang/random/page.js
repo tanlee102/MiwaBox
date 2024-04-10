@@ -27,6 +27,7 @@ const page = () => {
   
   const intervalIdRef = useRef(null);
   const [listCon, setListCon] = useState([]);
+  const [listConIndex, setListConIndex] = useState([]);
   const countRef = useRef(-1);
 
 
@@ -71,8 +72,14 @@ const page = () => {
 
   async function getRandomJson() {
     const randomIndex = Math.floor(Math.random() * data.length);
-    const randomJson = data[randomIndex];
-    return randomJson;
+
+    if(listConIndex.indexOf(randomIndex) === -1){
+      const randomJson = data[randomIndex];
+      setListConIndex((listConIndex) => [...listConIndex, randomIndex]);
+      return randomJson;
+    }else{
+      return getRandomJson();
+    }
   }
 
 
