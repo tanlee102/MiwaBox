@@ -53,6 +53,7 @@ const ListApp = () => {
     
     async function FirstLoad(){
       if(orderListApp <= 1){
+        setItems([]);
         setDisplayLoader(true);
 
         const contract = await rpcProvider();
