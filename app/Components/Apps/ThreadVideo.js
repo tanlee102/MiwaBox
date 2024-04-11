@@ -10,7 +10,7 @@ import { AppsConext } from '@/app/Context/AppsContext'
 import { AccountContext } from '@/app/Context/AccountContext'
 import { WindowContext } from '@/app/Context/WindowContext'
 
-import HLSVideoPlayer from '../HLSVideoPlayer'
+import VideoPlayer from '../VideoPlayer';
 
 import { useRouter } from 'next/navigation'
 import { url_image_domain } from '@/app/env_video'
@@ -250,7 +250,7 @@ const ThreadVideo = () => {
                     {index == scrolDex || index == scrolDex - 1 || index == scrolDex + 1  ?
 
                         String(item?.videoUrl).includes('.m3u8') ?
-                            <HLSVideoPlayer src={item.videoUrl} />
+                            <VideoPlayer isPlay={index == scrolDex} src={item.videoUrl} />
                             :
                             <video src={item?.videoUrl} controls></video>
 
