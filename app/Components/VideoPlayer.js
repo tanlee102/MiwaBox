@@ -45,7 +45,7 @@ const VideoPlayer = ({ src, isPlay=false }) => {
                 if (playPromise !== undefined) {
                     playPromise
                         .catch(error => {
-                            console.log(error);
+                            alert(error.message);
                             video.muted = true;
                             video.play()
                                 .catch(error => {
