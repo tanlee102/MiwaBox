@@ -6,7 +6,6 @@ import Hls from 'hls.js';
 
 const HLSVideoPlayer = ({ src, isPlay }) => {
     const videoRef = useRef(null);
-    const playerRef = useRef(null);
 
     useEffect(() => {
       const video = videoRef.current;
@@ -30,55 +29,27 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
       }
 
       const Plyr = require('plyr');
-      playerRef.current = new Plyr(video, {});
+      new Plyr(video, {});
       
     }, [src, videoRef]);
 
     useEffect(() => {
-        console.log(isPlay)
+        const video = videoRef.current;
+
         if(isPlay){
-
-            videoRef.current.muted = false;
-
-                const buttons = document.querySelectorAll('.plyr__controls__item.plyr__control[data-plyr="play"]');
-                if (buttons.length >= 2) {
-                  const playButton = buttons[1]; // Select the second button
-                  playButton.click();
-                }
-              
-                playerRef.current.play();
-
-                const playPromise = videoRef.current.play();
-
-                if (playPromise !== undefined) {
-                  playPromise
-                    .then(() => {
-                      // Playback has started
-                    //   alert('Playback started');
-                    })
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise
+                .catch(error => {
+                    video.muted = true;
+                    video.play()
                     .catch(error => {
-                      // Playback failed
-                    //   alert('Playback failed: ' + error.message);
-
-                        // Mute the video
-                        videoRef.current.muted = true;
-
-                        // Try to play again
-                        videoRef.current.play()
-                        .then(() => {
-                            // Playback has started
-                            console.log('Replay started');
-                        })
-                        .catch(error => {
-                            // Retry failed
-                            console.log('Replay failed: ', error);
-                            alert('Replay failed: ' + error.message);
-                        });
-
+                        console.log('Replay failed: ', error.message);
                     });
-                }
+                });
+            }
         }else{
-            videoRef.current.pause();
+            video.pause();
         }
     }, [isPlay])
   
