@@ -28,7 +28,7 @@ const ThreadVideo = () => {
 
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
-    const {currentIndex} = useContext(WindowContext);
+    const {currentIndex, showLeft, showRight} = useContext(WindowContext);
 
     const preDex = useRef(0);
     const containerRef = useRef(null);
@@ -179,7 +179,13 @@ const ThreadVideo = () => {
 
         <div className='head-video-thread'>
 
-            <span onClick={() => {openNewWindow(link1)}}>@{username}</span>
+            <span className="btn-showLeftBox-ofVideoThread non-select" onClick={showLeft}>
+                <svg viewBox="0 0 24 24">
+                <path d="M5 6H12H19M5 12H19M5 18H19" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+            </span>
+
+            <span id='username-video-thread' onClick={() => {openNewWindow(link1)}}>@{username}</span>
 
             <span onClick={() => {openNewWindow(link2)}} id='download-btn-video-thread'>
                 <svg viewBox="0 0 24 24" fill="none"><path d="M12.5 4V17M12.5 17L7 12.2105M12.5 17L18 12.2105" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M6 21H19" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>

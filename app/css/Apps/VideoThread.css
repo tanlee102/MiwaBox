@@ -39,7 +39,7 @@
 }
 
 
-.head-video-thread span:first-child{
+#username-video-thread{
     position: relative;
     margin-left: 10px;
 }
@@ -75,6 +75,14 @@
     fill:white
 }
 
+.btn-showLeftBox-ofVideoThread{
+    margin-top: 1px;
+    margin-right: 2px;
+    margin-left: 10px;
+}
+.btn-showLeftBox-ofVideoThread svg path{
+    stroke: white;
+}
 
 
 

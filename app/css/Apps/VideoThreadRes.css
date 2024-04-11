@@ -24,3 +24,11 @@
         height: 190px;
     }
 }
+
+
+
+@media (min-width: 770px) {
+    .btn-showLeftBox-ofVideoThread{
+        display: none !important;
+    }
+}
