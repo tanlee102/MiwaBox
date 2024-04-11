@@ -15,8 +15,6 @@ const HLSVideoPlayer = ({ src }) => {
       if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(src);
-        const Plyr = require('plyr');
-        new Plyr(video, {});
         hls.attachMedia(video);
       }else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = src;
@@ -28,6 +26,10 @@ const HLSVideoPlayer = ({ src }) => {
         }
         console.error('This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API');
       }
+
+      const Plyr = require('plyr');
+      new Plyr(video, {});
+      
     }, [src, videoRef]);
   
     return (
