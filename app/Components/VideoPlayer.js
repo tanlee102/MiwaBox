@@ -50,6 +50,7 @@ const VideoPlayer = ({ src, isPlay=false }) => {
                             video.play()
                                 .catch(error => {
                                     console.log('Replay failed: ', error.message);
+                                    alert(error.message);
                                 });
                         });
                 }
