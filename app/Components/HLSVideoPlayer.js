@@ -11,7 +11,7 @@ const HLSVideoPlayer = ({ src }) => {
       const video = videoRef.current;
       if (!video) return;
   
-      video.controls = false;
+      // video.controls = true;
       if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(src);
@@ -33,7 +33,7 @@ const HLSVideoPlayer = ({ src }) => {
     }, [src, videoRef]);
   
     return (
-        <video data-displaymaxtap controls='false' ref={videoRef}/>
+        <video data-displaymaxtap  ref={videoRef}/>
     );
 }
 
