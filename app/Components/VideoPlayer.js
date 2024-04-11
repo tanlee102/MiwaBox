@@ -66,7 +66,7 @@ const VideoPlayer = ({ src, isPlay=false }) => {
             return () => {
                 video.removeEventListener('loadedmetadata', onLoad);
                 video.removeEventListener('loadeddata', onLoad);
-            };   
+            };
         }
 
     }, [src, videoRef]);
