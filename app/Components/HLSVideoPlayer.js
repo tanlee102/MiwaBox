@@ -19,11 +19,9 @@ const HLSVideoPlayer = ({ src }) => {
         try {
           video.src = src;
         } catch (error) {
-          console.log(error);
+          console.error('Error setting video source:', error);
         }
-        console.error(
-          'This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API'
-        );
+        console.error('This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API');
       }
     }, [src, videoRef]);
   
