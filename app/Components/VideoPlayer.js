@@ -37,6 +37,9 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
     useEffect(() => {
         console.log(isPlay)
         if(isPlay){
+
+            videoRef.current.muted = false;
+
                 const buttons = document.querySelectorAll('.plyr__controls__item.plyr__control[data-plyr="play"]');
                 if (buttons.length >= 2) {
                   const playButton = buttons[1]; // Select the second button
