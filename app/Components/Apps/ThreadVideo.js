@@ -60,7 +60,9 @@ const ThreadVideo = () => {
     
                     const currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
                     if (currentVideo && currentVideo?.paused) {
+                        currentVideo.muted = false;
                         const playPromise = currentVideo.play();
+                        currentVideo.muted = false;
                         if (playPromise !== undefined) {
                             playPromise
                                 .catch(error => {
