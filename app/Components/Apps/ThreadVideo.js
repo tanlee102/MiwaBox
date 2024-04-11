@@ -64,6 +64,7 @@ const ThreadVideo = () => {
                         if (playPromise !== undefined) {
                             playPromise
                                 .catch(error => {
+                                    alert(error.message);
                                     currentVideo.muted = true;
                                     currentVideo.play()
                                         .catch(error => {

@@ -44,12 +44,10 @@ const VideoPlayer = ({ src, isPlay=false }) => {
                 if (playPromise !== undefined) {
                     playPromise
                         .catch(error => {
-                            alert(error.message);
                             video.muted = true;
                             video.play()
                                 .catch(error => {
                                     console.log('Replay failed: ', error.message);
-                                    alert(error.message);
                                 });
                         });
                 }
