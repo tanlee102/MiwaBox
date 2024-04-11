@@ -28,7 +28,7 @@ const ThreadVideo = () => {
 
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
-    const {currentIndex, showLeft, showRight} = useContext(WindowContext);
+    const {currentIndex, showLeft} = useContext(WindowContext);
 
     const preDex = useRef(0);
     const containerRef = useRef(null);
@@ -255,7 +255,7 @@ const ThreadVideo = () => {
                 <div key={index}>
                     {index == scrolDex || index == scrolDex - 1 || index == scrolDex + 1  ?
                         <div className='contain-plyr'>
-                            <VideoPlayer isPlay={index == scrolDex}  src={String(item?.videoUrl)} />
+                            <VideoPlayer isMobile={isMobile} isPlay={index == scrolDex}  src={String(item?.videoUrl)} />
                         </div>
                         : 
                         null

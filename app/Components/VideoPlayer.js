@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 import 'plyr/dist/plyr.css';
 
-const VideoPlayer = ({ src, isPlay=false }) => {
+const VideoPlayer = ({ src, isPlay=false, isMobile=false}) => {
     const videoRef = useRef(null);
 
     useEffect(() => {
@@ -12,7 +12,7 @@ const VideoPlayer = ({ src, isPlay=false }) => {
         if (!video) return;
     
         video.controls = true;
-        video.playsInline = true;
+        video.playsInline = isMobile;
         if(!src.includes('.m3u8')){
             video.src = src;
         }else if (Hls.isSupported()) {
@@ -53,50 +53,16 @@ const VideoPlayer = ({ src, isPlay=false }) => {
         }
 
     }, [src, videoRef]);
-
-
-
-
-
-
-    // useEffect(() => {
-    //     if(isPlay){
-    //         const video = videoRef.current;
-
-    //         const playVideo = () => {
-    //             const playPromise = video.play();
-    //             if (playPromise !== undefined) {
-    //                 playPromise
-    //                     .catch(error => {
-    //                         video.muted = true;
-    //                         video.play()
-    //                             .catch(error => {
-    //                                 console.log('Replay failed: ', error.message);
-    //                             });
-    //                     });
-    //             }
-    //         };
-        
-    //         const onLoad = () => {
-    //             video.removeEventListener('loadedmetadata', onLoad);
-    //             video.removeEventListener('loadeddata', onLoad);
-    //             playVideo();
-    //         };
-        
-    //         video.addEventListener('loadedmetadata', onLoad);
-    //         video.addEventListener('loadeddata', onLoad);
-        
-    //         return () => {
-    //             video.removeEventListener('loadedmetadata', onLoad);
-    //             video.removeEventListener('loadeddata', onLoad);
-    //         };
-    //     }
-    // }, [src, videoRef]);
-
     
-  
+    
     return (
-        <video data-displaymaxtap playsInline controls loop ref={videoRef}/>
+        <video
+        data-displaymaxtap
+        playsInline={isMobile ? true : false}
+        controls
+        loop
+        ref={videoRef}
+      />
     );
 }
 
