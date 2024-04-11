@@ -30,7 +30,7 @@ const VideoPlayer = ({ src, isPlay=false, isMobile=false}) => {
             console.error('This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API');
         }
 
-        const Plyr = require('plyr')
+        const Plyr = require('plyr');
         const player = new Plyr(video, {
             controls: ['play', 'progress', 'current-time', 'fullscreen', 'mute'],
             controlBar: {
@@ -57,12 +57,12 @@ const VideoPlayer = ({ src, isPlay=false, isMobile=false}) => {
     
     return (
         <video
-        data-displaymaxtap
-        playsInline={isMobile ? true : false}
-        controls
-        loop
-        ref={videoRef}
-      />
+            data-displaymaxtap
+            playsInline={isMobile ? true : false}
+            controls
+            loop
+            ref={videoRef}
+        ></video>
     );
 }
 
