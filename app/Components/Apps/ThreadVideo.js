@@ -73,6 +73,7 @@ const ThreadVideo = () => {
 
                                     setTimeout(() => {
                                         currentVideo.muted = false;
+                                        currentVideo.play();
                                     }, 1000)
                                 });
                         }
