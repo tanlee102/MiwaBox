@@ -70,6 +70,10 @@ const ThreadVideo = () => {
                                         .catch(error => {
                                             console.log('Replay failed: ', error.message);
                                         });
+
+                                    setTimeout(() => {
+                                        currentVideo.muted = false;
+                                    }, 1000)
                                 });
                         }
                     }
