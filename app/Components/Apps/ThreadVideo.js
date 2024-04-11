@@ -54,8 +54,12 @@ const ThreadVideo = () => {
                 var currentIndex = Math.round(scrollTop / itemHeight);
 
                 setScrolDex(currentIndex);
+
+                console.log("check sroll")
     
                 if(preDex.current != currentIndex){
+
+                    console.log("is sroll")
     
                     var previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
                     if (previousVideo && !previousVideo?.paused) {
@@ -64,6 +68,7 @@ const ThreadVideo = () => {
     
                     var currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
                     if (currentVideo && currentVideo?.paused) {
+                        console.log("is playing")
                         currentVideo.play();
                     }
     
