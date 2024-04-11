@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
+import 'plyr/dist/plyr.css';
 
 const VideoPlayer = ({ src, isPlay=false }) => {
     const videoRef = useRef(null);
@@ -26,6 +27,9 @@ const VideoPlayer = ({ src, isPlay=false }) => {
         }
         console.error('This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API');
       }
+
+      const Plyr = require('plyr')
+      new Plyr(video, {})
       
     }, [src, videoRef]);
 
