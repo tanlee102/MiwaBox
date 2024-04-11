@@ -42,8 +42,8 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
               const playButton = buttons[1]; // Select the second button
               playButton.click();
             }
-            // playerRef.current.play();
-            // videoRef.current.play();
+            playerRef.current.play();
+            videoRef.current.play();
         }else{
             videoRef.current.pause();
         }
