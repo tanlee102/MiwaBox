@@ -37,15 +37,15 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
     useEffect(() => {
         console.log(isPlay)
         if(isPlay){
-            setTimeout(() => {
                 const buttons = document.querySelectorAll('.plyr__controls__item.plyr__control[data-plyr="play"]');
                 if (buttons.length >= 2) {
                   const playButton = buttons[1]; // Select the second button
                   playButton.click();
                 }
+              
                 playerRef.current.play();
-                videoRef.current.play();
-            }, 3000)
+                const re = videoRef.current.play();
+                alert(re)
         }else{
             videoRef.current.pause();
         }
