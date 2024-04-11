@@ -48,7 +48,7 @@ const ThreadVideo = () => {
             const onScroll = function(e) {
                 e.preventDefault();
 
-                const currentIndex = Math.floor(Number(containerRef.current.scrollTop) / itemHeight);
+                const currentIndex = Math.round(Number(containerRef.current.scrollTop) / itemHeight);
                 setScrolDex(currentIndex);
     
                 if(preDex.current != currentIndex){
@@ -64,20 +64,11 @@ const ThreadVideo = () => {
                         if (playPromise !== undefined) {
                             playPromise
                                 .catch(error => {
-                                    // alert(error.message);
                                     currentVideo.muted = true;
                                     currentVideo.play()
                                         .catch(error => {
                                             console.log('Replay failed: ', error.message);
                                         });
-
-                                    setTimeout(() => {
-                                        currentVideo.muted = false;
-                                        setTimeout(() => {
-                                            currentVideo.muted = false;
-                                            currentVideo.play();
-                                        }, 1000)
-                                    }, 1000)
                                 });
                         }
                     }
@@ -259,8 +250,8 @@ const ThreadVideo = () => {
                     {index == scrolDex || index == scrolDex - 1 || index == scrolDex + 1  ?
 
                         String(item?.videoUrl).includes('.m3u8') ?
-                            <div>
-                                <VideoPlayer isPlay={index == scrolDex && index == 0}  src={item.videoUrl} />
+                            <div className='contain-plyr'>
+                                <VideoPlayer isPlay={index == 0}  src={item.videoUrl} />
                             </div>
                             :
                             <video src={item?.videoUrl} controls></video>
