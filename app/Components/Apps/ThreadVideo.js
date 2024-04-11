@@ -64,7 +64,6 @@ const ThreadVideo = () => {
     
                     var currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
                     if (currentVideo && currentVideo?.paused) {
-                        currentVideo.load();
                         currentVideo.play();
                     }
 
