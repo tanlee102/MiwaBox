@@ -12,7 +12,7 @@ const HLSVideoPlayer = ({ src }) => {
       if (!video) return;
   
       video.controls = true;
-      video.playsInline = true
+      video.playsInline = true;
       if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(src);
@@ -29,7 +29,7 @@ const HLSVideoPlayer = ({ src }) => {
       }
 
       const Plyr = require('plyr');
-      new Plyr(video, {});
+      const player = new Plyr(video, {});
       
     }, [src, videoRef]);
   
