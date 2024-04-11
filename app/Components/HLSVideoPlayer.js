@@ -1,4 +1,7 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
+import 'plyr/dist/plyr.css';
 import Hls from 'hls.js';
 
 const HLSVideoPlayer = ({ src }) => {
@@ -12,6 +15,8 @@ const HLSVideoPlayer = ({ src }) => {
       if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(src);
+        const Plyr = require('plyr');
+        new Plyr(video, {});
         hls.attachMedia(video);
       }else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = src;

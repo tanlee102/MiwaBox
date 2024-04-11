@@ -332,3 +332,19 @@
     
     transform: rotate(180deg);
 }
+
+
+
+
+.contain-plyr{
+    position: relative;
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+.plyr{
+    display:block;
+    height:100% !important;
+    width:100% !important;
+}
