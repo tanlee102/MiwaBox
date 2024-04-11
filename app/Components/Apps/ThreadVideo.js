@@ -256,7 +256,7 @@ const ThreadVideo = () => {
 
                         String(item?.videoUrl).includes('.m3u8') ?
                             <div>
-                                <VideoPlayer isPlay={index == scrolDex} src={item.videoUrl} />
+                                <VideoPlayer isPlay={index == scrolDex && index == 0}  src={item.videoUrl} />
                             </div>
                             :
                             <video src={item?.videoUrl} controls></video>
