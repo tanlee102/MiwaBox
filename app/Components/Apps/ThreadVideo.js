@@ -60,18 +60,19 @@ const ThreadVideo = () => {
                     var previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
                     if (previousVideo && !previousVideo?.paused) {
                         previousVideo.pause();
-                        setTimeout(() => {
-                            previousVideo.pause();
-                        }, 999)
                     }
     
                     var currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
                     if (currentVideo && currentVideo?.paused) {
                         currentVideo.play();
-                        setTimeout(() => {
-                            currentVideo.play();
-                        }, 999)
                     }
+
+                    setTimeout(() => {
+                        let currentVideo = itemsRef.current[currentIndex]?.querySelector("video");
+                        if (currentVideo) {
+                            currentVideo.play();
+                        }
+                    }, 2000);
     
                     preDex.current = currentIndex    
                 }
