@@ -61,11 +61,9 @@ const ThreadVideo = () => {
                     if (previousVideo && !previousVideo?.paused) {
                         previousVideo.pause();
                     }
-                 
+    
                     var currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
-                    alert(currentVideo)
                     if (currentVideo && currentVideo?.paused) {
-                        alert(currentIndex)
                         currentVideo.play();
                     }
     
