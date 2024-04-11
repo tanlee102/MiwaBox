@@ -234,7 +234,7 @@ const ThreadVideo = () => {
         </div>
 
 
-        { !isMobile ?
+        { true ?
         <div className='step-video-thread-button'>
             <div onClick={() => {moveToIndex(scrolDex - 1)}}>
                 <svg viewBox="0 0 24 24" fill="none">
