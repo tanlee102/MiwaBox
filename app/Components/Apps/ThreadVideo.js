@@ -14,6 +14,8 @@ import dynamic from 'next/dynamic';
 const HLSVideoPlayer = dynamic(() => import("../HLSVideoPlayer"), { ssr: false });
 // import HLSVideoPlayer from '../HLSVideoPlayer'
 
+const VideoPlayer = dynamic(() => import("../VideoPlayer"), { ssr: false });
+
 import { useRouter } from 'next/navigation'
 import { url_image_domain } from '@/app/env_video'
 
@@ -59,12 +61,12 @@ const ThreadVideo = () => {
     
                     var previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
                     if (previousVideo && !previousVideo?.paused) {
-                        previousVideo.pause();
+                        // previousVideo.pause();
                     }
     
                     var currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
                     if (currentVideo && currentVideo?.paused) {
-                        currentVideo.play();
+                        // currentVideo.play();
                     }
     
                     preDex.current = currentIndex    
@@ -87,7 +89,7 @@ const ThreadVideo = () => {
 
             let previousVideo = itemsRef.current[preDex.current]?.querySelector("video");
             if (previousVideo) {
-                previousVideo.pause();
+                // previousVideo.pause();
             }
                 
             containerRef.current.scrollTop = itemHeight*index;
@@ -99,7 +101,7 @@ const ThreadVideo = () => {
             setTimeout(() => {
                 let currentVideo = itemsRef.current[index]?.querySelector("video");
                 if (currentVideo) {
-                    currentVideo.play();
+                    // currentVideo.play();
                 }
             }, 888);
         }
@@ -245,7 +247,7 @@ const ThreadVideo = () => {
 
                         String(item?.videoUrl).includes('.m3u8') ?
                             <div className='contain-plyr'>
-                                <HLSVideoPlayer src={item.videoUrl} />
+                                <VideoPlayer isPlay={index == scrolDex} src={item.videoUrl} />
                             </div>
                             :
                             <video src={item?.videoUrl} controls></video>
