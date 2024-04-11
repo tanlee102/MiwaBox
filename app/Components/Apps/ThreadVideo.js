@@ -48,10 +48,10 @@ const ThreadVideo = () => {
             const onScroll = function(e) {
                 e.preventDefault();
 
-                const currentIndex = (Number(containerRef.current.scrollTop) / itemHeight);
+                const currentIndex = Math.floor(Number(containerRef.current.scrollTop) / itemHeight);
                 setScrolDex(currentIndex);
     
-                if(preDex.current == currentIndex + 1 || preDex.current == currentIndex - 1){
+                if(preDex.current != currentIndex){
     
                     const previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
                     if (previousVideo && !previousVideo?.paused) {
