@@ -55,7 +55,22 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
                     })
                     .catch(error => {
                       // Playback failed
-                      alert('Playback failed: ' + error.message);
+                    //   alert('Playback failed: ' + error.message);
+
+                        // Mute the video
+                        videoRef.current.muted = true;
+
+                        // Try to play again
+                        videoRef.current.play()
+                        .then(() => {
+                            // Playback has started
+                            console.log('Replay started');
+                        })
+                        .catch(error => {
+                            // Retry failed
+                            console.log('Replay failed: ', error);
+                            alert('Replay failed: ' + error.message);
+                        });
 
                     });
                 }
