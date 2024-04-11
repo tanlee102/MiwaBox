@@ -234,7 +234,6 @@ const ThreadVideo = () => {
         </div>
 
 
-        { true ?
         <div className='step-video-thread-button non-select'>
             <div onClick={() => {moveToIndex(scrolDex - 1)}}>
                 <svg viewBox="0 0 24 24" fill="none">
@@ -247,7 +246,6 @@ const ThreadVideo = () => {
                 </svg>
             </div>
         </div>
-        : ""}
         
         
         <div className='video-thread' onClick={() => {setIsDisplayGrid(false)}}>
