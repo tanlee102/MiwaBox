@@ -42,13 +42,17 @@ const AccountProvider = ({ children }) => {
 
 
     const rpcProvider = async () => {
-      const rPcProvider = new ethers.JsonRpcProvider(env_SMARTCHAIN.NETWORK.rpcUrls[0]);
+      try {
+        const rPcProvider = new ethers.JsonRpcProvider(env_SMARTCHAIN.NETWORK.rpcUrls[0]);
 
-      const abi = env_SMARTCHAIN.CONTRACT.abi;
-      const contractAddress = env_SMARTCHAIN.CONTRACT.address;
-  
-      const contract = new ethers.Contract(contractAddress, abi, rPcProvider);
-      return contract;
+        const abi = env_SMARTCHAIN.CONTRACT.abi;
+        const contractAddress = env_SMARTCHAIN.CONTRACT.address;
+    
+        const contract = new ethers.Contract(contractAddress, abi, rPcProvider);
+        return contract;
+      } catch (error) {
+        return null;
+      }
     };
 
     const connect = async () => {

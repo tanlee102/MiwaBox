@@ -8,6 +8,7 @@ import { env_SMARTCHAIN } from '../env';
 import ItemApp from './ItemApp';
 import { WindowContext } from '../Context/WindowContext';
 
+
 const ListApp = () => {
 
     const { currentIndex } = useContext(WindowContext);
@@ -20,7 +21,6 @@ const ListApp = () => {
     const [displayLoader, setDisplayLoader] = useState(true);
   
     async function getListApp(index, reset){
-      setLoadState(true);
       try {
         const contract = await rpcProvider();
 
@@ -55,12 +55,20 @@ const ListApp = () => {
       if(orderListApp <= 1){
         setItems([]);
         setDisplayLoader(true);
-
-        const contract = await rpcProvider();
-        let currentId = Number(ethers.toNumber(await contract.currentId())) - 1;
-        let initialId = Number(ethers.toNumber(await contract.initialId()));
+        setLoadState(true);
         
-        getListApp(orderListApp == 0 ? initialId : currentId, true);
+        try {
+          
+          const contract = await rpcProvider();
+          let currentId = Number(ethers.toNumber(await contract.currentId())) - 1;
+          let initialId = Number(ethers.toNumber(await contract.initialId()));
+          
+          getListApp(orderListApp == 0 ? initialId : currentId, true);
+
+        } catch (error) {
+          console.log(error);
+        }
+
       }else{
         setDisplayLoader(false);
         setItems([]);
