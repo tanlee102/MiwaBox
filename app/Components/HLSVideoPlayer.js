@@ -12,6 +12,7 @@ const HLSVideoPlayer = ({ src }) => {
       if (!video) return;
   
       // video.controls = true;
+      video.playsInline = true
       if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(src);
