@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import 'plyr/dist/plyr.css';
 import Hls from 'hls.js';
 
 const HLSVideoPlayer = ({ src }) => {
@@ -27,14 +26,13 @@ const HLSVideoPlayer = ({ src }) => {
         }
         console.error('This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API');
       }
-
-      const Plyr = require('plyr');
-      const player = new Plyr(video, {});
       
     }, [src, videoRef]);
+
+    
   
     return (
-        <video data-displaymaxtap playsInline ref={videoRef}/>
+        <video data-displaymaxtap playsInline controls ref={videoRef}/>
     );
 }
 

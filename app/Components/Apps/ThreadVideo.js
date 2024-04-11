@@ -10,11 +10,7 @@ import { AppsConext } from '@/app/Context/AppsContext'
 import { AccountContext } from '@/app/Context/AccountContext'
 import { WindowContext } from '@/app/Context/WindowContext'
 
-import dynamic from 'next/dynamic';
-const HLSVideoPlayer = dynamic(() => import("../HLSVideoPlayer"), { ssr: false });
-// import HLSVideoPlayer from '../HLSVideoPlayer'
-
-const VideoPlayer = dynamic(() => import("../VideoPlayer"), { ssr: false });
+import HLSVideoPlayer from '../HLSVideoPlayer'
 
 import { useRouter } from 'next/navigation'
 import { url_image_domain } from '@/app/env_video'
@@ -47,26 +43,34 @@ const ThreadVideo = () => {
         if(data.length > 0){
             containerRef.current = document.querySelector(".video-thread");
             itemsRef.current = containerRef.current.children;
-            var itemHeight = document.querySelector(".video-thread div").offsetHeight;
+            const itemHeight = document.querySelector(".video-thread div").offsetHeight;
             
             const onScroll = function(e) {
                 e.preventDefault();
 
-                var scrollTop = containerRef.current.scrollTop;
-                var currentIndex = Math.round(scrollTop / itemHeight);
-
+                const currentIndex = Math.round(Number(containerRef.current.scrollTop) / itemHeight);
                 setScrolDex(currentIndex);
     
                 if(preDex.current != currentIndex){
     
-                    var previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
+                    const previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
                     if (previousVideo && !previousVideo?.paused) {
-                        // previousVideo.pause();
+                        previousVideo.pause();
                     }
     
-                    var currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
+                    const currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
                     if (currentVideo && currentVideo?.paused) {
-                        // currentVideo.play();
+                        const playPromise = currentVideo.play();
+                        if (playPromise !== undefined) {
+                            playPromise
+                                .catch(error => {
+                                    currentVideo.muted = true;
+                                    currentVideo.play()
+                                        .catch(error => {
+                                            console.log('Replay failed: ', error.message);
+                                        });
+                                });
+                        }
                     }
     
                     preDex.current = currentIndex    
@@ -89,7 +93,7 @@ const ThreadVideo = () => {
 
             let previousVideo = itemsRef.current[preDex.current]?.querySelector("video");
             if (previousVideo) {
-                // previousVideo.pause();
+                previousVideo.pause();
             }
                 
             containerRef.current.scrollTop = itemHeight*index;
@@ -101,7 +105,7 @@ const ThreadVideo = () => {
             setTimeout(() => {
                 let currentVideo = itemsRef.current[index]?.querySelector("video");
                 if (currentVideo) {
-                    // currentVideo.play();
+                    currentVideo.play();
                 }
             }, 888);
         }
@@ -246,9 +250,7 @@ const ThreadVideo = () => {
                     {index == scrolDex || index == scrolDex - 1 || index == scrolDex + 1  ?
 
                         String(item?.videoUrl).includes('.m3u8') ?
-                            <div className='contain-plyr'>
-                                <VideoPlayer isPlay={index == scrolDex} src={item.videoUrl} />
-                            </div>
+                            <HLSVideoPlayer src={item.videoUrl} />
                             :
                             <video src={item?.videoUrl} controls></video>
 
