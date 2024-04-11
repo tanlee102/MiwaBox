@@ -51,7 +51,7 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
                   playPromise
                     .then(() => {
                       // Playback has started
-                      alert('Playback started');
+                    //   alert('Playback started');
                     })
                     .catch(error => {
                       // Playback failed
