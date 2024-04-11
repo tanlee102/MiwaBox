@@ -13,9 +13,14 @@ const HLSVideoPlayer = ({ src }) => {
         const hls = new Hls();
         hls.loadSource(src);
         hls.attachMedia(video);
-      }else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-        videoRef.current.src = src;
+      }else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = src;
       }else {
+        try {
+          video.src = src;
+        } catch (error) {
+          console.log(error);
+        }
         console.error(
           'This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API'
         );
