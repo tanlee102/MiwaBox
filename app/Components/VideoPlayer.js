@@ -44,8 +44,20 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
                 }
               
                 playerRef.current.play();
-                const re = videoRef.current.play();
-                alert(re)
+
+                const playPromise = videoRef.current.play();
+
+                if (playPromise !== undefined) {
+                  playPromise
+                    .then(() => {
+                      // Playback has started
+                      alert('Playback started');
+                    })
+                    .catch(error => {
+                      // Playback failed
+                      alert('Playback failed: ', error);
+                    });
+                }
         }else{
             videoRef.current.pause();
         }
