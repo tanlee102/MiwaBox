@@ -33,7 +33,7 @@ const HLSVideoPlayer = ({ src }) => {
     }, [src, videoRef]);
   
     return (
-        <video data-displaymaxtap  ref={videoRef}/>
+        <video data-displaymaxtap controls='false' ref={videoRef}/>
     );
 }
 
