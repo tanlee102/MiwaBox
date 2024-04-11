@@ -207,6 +207,16 @@
     height: 100%;
 }
 
+.contain-plyr {
+    /* color: cornflowerblue */
+    --plyr-color-main: cornflowerblue;
+    --plyr-range-track-height: 3.5px;
+    --plyr-range-thumb-height: 8px;
+    --plyr-control-icon-size: 15px;
+    --plyr-range-thumb-background: cornflowerblue;
+    --plyr-control-spacing: 8px;
+}
+
 
 .contain-create-video-thread{
     position: relative;

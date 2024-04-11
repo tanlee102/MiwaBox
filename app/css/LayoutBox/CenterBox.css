@@ -82,6 +82,10 @@
     scroll-behavior: auto;
 }
 
+.full-contain-app{
+    height: calc(100%) !important;
+    margin-top: 0px !important;
+}
 
 
 

@@ -86,6 +86,9 @@ const CenterBox = ({}) => {
   return (
     <div className="layout-center-box">
 
+        {infoApp?.appType == 2 ? 
+        null
+        :(
         <WrapHeaderBox>
 
           <div className="btn-showLeftBox non-select" onClick={showLeft}>
@@ -107,9 +110,10 @@ const CenterBox = ({}) => {
           </div>
 
         </WrapHeaderBox>
+        )}
 
 
-        <div ref={containAppRef} onScroll={handleScroll} className={`contain-app ${isMobile ? 'mobile-contain-app' : 'desktop-contain-app'}`}>
+        <div ref={containAppRef} onScroll={handleScroll} className={`contain-app ${isMobile ? 'mobile-contain-app' : 'desktop-contain-app'}  ${infoApp?.appType == 2 ? 'full-contain-app' : ''}`}>
 
             {infoApp?.appType == 0 ? <ThreadChat /> : "" }
 
