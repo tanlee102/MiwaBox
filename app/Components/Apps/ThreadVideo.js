@@ -64,13 +64,13 @@ const ThreadVideo = () => {
     
                     var currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
                     if (currentVideo && currentVideo?.paused) {
+                        currentVideo.load();
                         currentVideo.play();
                     }
 
                     setTimeout(() => {
                         let currentVideo = itemsRef.current[currentIndex]?.querySelector("video");
                         if (currentVideo) {
-                            alert(currentVideo)
                             currentVideo.play();
                         }
                     }, 2000);
