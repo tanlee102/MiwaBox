@@ -254,15 +254,11 @@ const ThreadVideo = () => {
             {data?.map((item, index) => (
                 <div key={index}>
                     {index == scrolDex || index == scrolDex - 1 || index == scrolDex + 1  ?
-
-                        String(item?.videoUrl).includes('.m3u8') ?
-                            <div className='contain-plyr'>
-                                <VideoPlayer isPlay={index == 0}  src={item.videoUrl} />
-                            </div>
-                            :
-                            <video src={item?.videoUrl} controls></video>
-
-                        : null
+                        <div className='contain-plyr'>
+                            <VideoPlayer isPlay={index == scrolDex}  src={String(item?.videoUrl)} />
+                        </div>
+                        : 
+                        null
                     }
                 </div>
             ))}
