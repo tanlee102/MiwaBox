@@ -64,7 +64,7 @@ const ThreadVideo = () => {
                         if (playPromise !== undefined) {
                             playPromise
                                 .catch(error => {
-                                    alert(error.message);
+                                    // alert(error.message);
                                     currentVideo.muted = true;
                                     currentVideo.play()
                                         .catch(error => {
@@ -73,7 +73,10 @@ const ThreadVideo = () => {
 
                                     setTimeout(() => {
                                         currentVideo.muted = false;
-                                        currentVideo.play();
+                                        setTimeout(() => {
+                                            currentVideo.muted = false;
+                                            currentVideo.play();
+                                        }, 1000)
                                     }, 1000)
                                 });
                         }
