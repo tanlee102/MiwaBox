@@ -55,7 +55,8 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
                     })
                     .catch(error => {
                       // Playback failed
-                      alert(JSON.stringify(error));
+                      alert('Playback failed: ' + error.message);
+
                     });
                 }
         }else{
