@@ -66,13 +66,6 @@ const ThreadVideo = () => {
                     if (currentVideo && currentVideo?.paused) {
                         currentVideo.play();
                     }
-
-                    setTimeout(() => {
-                        let currentVideo = itemsRef.current[currentIndex]?.querySelector("video");
-                        if (currentVideo) {
-                            currentVideo.play();
-                        }
-                    }, 2000);
     
                     preDex.current = currentIndex    
                 }
