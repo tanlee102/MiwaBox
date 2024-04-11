@@ -70,6 +70,7 @@ const ThreadVideo = () => {
                     setTimeout(() => {
                         let currentVideo = itemsRef.current[currentIndex]?.querySelector("video");
                         if (currentVideo) {
+                            alert(currentVideo)
                             currentVideo.play();
                         }
                     }, 2000);
