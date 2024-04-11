@@ -38,8 +38,9 @@ const HLSVideoPlayer = ({ src, isPlay }) => {
         console.log(isPlay)
         if(isPlay){
             playerRef.current.play();
+            videoRef.current.play();
         }else{
-            playerRef.current.pause();
+            videoRef.current.pause();
         }
     }, [isPlay])
   
