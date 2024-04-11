@@ -11,7 +11,7 @@ const HLSVideoPlayer = ({ src }) => {
       const video = videoRef.current;
       if (!video) return;
   
-      // video.controls = true;
+      video.controls = true;
       video.playsInline = true
       if (Hls.isSupported()) {
         const hls = new Hls();
