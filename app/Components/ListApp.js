@@ -8,6 +8,8 @@ import { env_SMARTCHAIN } from '../env';
 import ItemApp from './ItemApp';
 import { WindowContext } from '../Context/WindowContext';
 
+import data_suggestion_true from '../data/data_suggestion_true.json'
+import data_suggestion_false from '../data/data_suggestion_false.json'
 
 const ListApp = () => {
 
@@ -69,6 +71,13 @@ const ListApp = () => {
           console.log(error);
         }
 
+      }else if(orderListApp == 2){
+        if(orderPrivacy){
+          setItems(data_suggestion_true);
+        }else{
+          setItems(data_suggestion_false);
+        }
+        setDisplayLoader(false);
       }else{
         setDisplayLoader(false);
         setItems([]);
