@@ -253,7 +253,7 @@ const ThreadVideo = () => {
                 <div key={index}>
                     {index == scrolDex || index == scrolDex - 1 || index == scrolDex + 1  ?
                         <div className='contain-plyr'>
-                            <VideoPlayer isMobile={isMobile} isPlay={index == 0}  src={String(item?.videoUrl)} />
+                            <VideoPlayer isMobile={isMobile} isPlay={index == 0 && index == scrolDex}  src={String(item?.videoUrl)} />
                         </div>
                         : 
                         null
