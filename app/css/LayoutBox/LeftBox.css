@@ -132,7 +132,7 @@
     height: 26px;
 }
 .search-app input{
-    width: calc(100% - 31px);
+    width: calc(100% - 31px) !important;
     padding: 0px 5px !important;
     height: 100%;
     background-color: transparent;
@@ -147,7 +147,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    width: auto;
+    width: 31px;
     height: 100%;
     margin-left: 5px;
     cursor: pointer;
