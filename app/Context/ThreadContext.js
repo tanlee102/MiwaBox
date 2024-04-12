@@ -145,7 +145,7 @@ const ThreadProvider = ({ children }) => {
         setLoadLatest(true);
         TimeOutToBottomContainApp(333);
 
-        const currentForwardIndex = (currentMsgsIndex >= 0 ? currentMsgsIndex  + listMessage.length : listMessage.length);
+        const currentForwardIndex = (currentMsgsIndex >= 0 ? currentMsgsIndex + listMessage.length + 1 : listMessage.length);
 
         const provider = new ethers.JsonRpcProvider(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork].rpcUrls[0]);
         const contract = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.chat.abi, provider);
