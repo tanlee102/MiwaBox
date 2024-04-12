@@ -29,7 +29,7 @@ const AppsProvider = ({ children }) => {
     const [infoApp, setInfoApp] = useState(null); //This very important!!!
     const [displayApp, setDisplayApp] = useState(false);
 
-    const [orderListApp, setOrderListApp] = useState(1);
+    const [orderListApp, setOrderListApp] = useState(2);
     const [orderPrivacy, setOrderPrivacy] = useState(1);
 
     const [listMessage, setListMessage] = useState([]);
