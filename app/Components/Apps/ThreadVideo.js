@@ -48,17 +48,17 @@ const ThreadVideo = () => {
             const onScroll = function(e) {
                 e.preventDefault();
 
-                const currentIndex = Math.round(Number(containerRef.current.scrollTop) / itemHeight);
-                setScrolDex(currentIndex);
+                const currentIndexVideo = Math.round(Number(containerRef.current.scrollTop) / itemHeight);
+                setScrolDex(currentIndexVideo);
     
-                if(preDex.current != currentIndex){
+                if(preDex.current != currentIndexVideo){
     
                     const previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
                     if (previousVideo && !previousVideo?.paused) {
                         previousVideo.pause();
                     }
     
-                    const currentVideo = itemsRef?.current[currentIndex]?.querySelector("video");
+                    const currentVideo = itemsRef?.current[currentIndexVideo]?.querySelector("video");
                     if (currentVideo && currentVideo?.paused) {
                         const playPromise = currentVideo.play();
                         if (playPromise !== undefined) {
@@ -73,7 +73,7 @@ const ThreadVideo = () => {
                         }
                     }
     
-                    preDex.current = currentIndex    
+                    preDex.current = currentIndexVideo    
                 }
             };
     
@@ -153,17 +153,18 @@ const ThreadVideo = () => {
 
 
     useEffect(() => {
-        if(scrolDex || scrolDex == 0){
-            if(data[scrolDex]){
-                setUsernam(data[scrolDex]?.username);
-                let dataLink = data[scrolDex]?.link;
-                if(dataLink){
-                    setLink1(dataLink[0]);
-                    setLink2(dataLink[dataLink.length - 1]); 
+        if(infoApp && infoApp?.appType == 2 && data.length > 0)
+            if(scrolDex || scrolDex == 0){
+                if(data[scrolDex]){
+                    setUsernam(data[scrolDex]?.username);
+                    let dataLink = data[scrolDex]?.link;
+                    if(dataLink){
+                        setLink1(dataLink[0]);
+                        setLink2(dataLink[dataLink.length - 1]); 
+                    }
                 }
             }
-        }
-    }, [scrolDex])
+    }, [scrolDex, data])
 
 
 
