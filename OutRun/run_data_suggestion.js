@@ -30,7 +30,6 @@ let contractABI = env_SMARTCHAIN.CONTRACT.abi;
 let contract = new ethers.Contract(contractAddress, contractABI, provider);
 
 
-let maxItem = 25;
 
 let forward = true;
 let privacy = false;
@@ -64,7 +63,7 @@ const main = async () => {
             }
         }
     
-        if(nextQueryID < maxId && nextQueryID > queryId && nextQueryID <= maxItem){
+        if(nextQueryID < maxId && nextQueryID > queryId){
             await getApps(nextQueryID)
         }
     
