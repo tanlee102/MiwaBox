@@ -247,6 +247,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         setGridData([]);
         setScrolDex(0);
         setCurGotId(0);
+        setIsScrollToBottomGrid(false);
       }
     },[currentIndex]);
 

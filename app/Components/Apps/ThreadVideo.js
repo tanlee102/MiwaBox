@@ -125,19 +125,26 @@ const ThreadVideo = () => {
 
 
     const refGridContainer = useRef();
+    const isScrollToBottomGridRef = useRef(isScrollToBottomGrid);
+
+    useEffect(() => {
+        isScrollToBottomGridRef.current = isScrollToBottomGrid;
+    }, [isScrollToBottomGrid]);
+    
     useEffect(() => {
         if(infoApp && infoApp.appType == 2){
             const handleScroll = () => {
                 const { scrollHeight, scrollTop, clientHeight } = refGridContainer.current;
                 const bottom = scrollHeight - scrollTop;
                 if (bottom <= clientHeight + 50) {
-                    if(isScrollToBottomGrid == false) setIsScrollToBottomGrid(true);
+                    setIsScrollToBottomGrid(!isScrollToBottomGridRef.current);
                 }
             };
             refGridContainer?.current?.addEventListener('scroll', handleScroll);
             return () => refGridContainer?.current?.removeEventListener('scroll', handleScroll);
         }
     }, [infoApp]);
+    
     
 
 
