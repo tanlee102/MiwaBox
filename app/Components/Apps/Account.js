@@ -4,6 +4,7 @@ import { AccountContext } from '@/app/Context/AccountContext';
 import { WindowContext } from '@/app/Context/WindowContext';
 import { env_SMARTCHAIN } from '@/app/env';
 import { env_LANG } from '@/app/env_lang';
+import { iconAvatars } from '@/app/env_setting';
 import React, { useContext, useEffect, useState } from 'react'
 
 const Account = () => {
@@ -11,8 +12,7 @@ const Account = () => {
     const { switchNetwork, 
             connect, account, 
             createUser, getUser, updateUser, 
-            user, setUser, 
-            iconAvatars } = useContext(AccountContext);
+            user, setUser } = useContext(AccountContext);
     const { currentIndex, language } = useContext(WindowContext);
 
     async function updateAccout(){

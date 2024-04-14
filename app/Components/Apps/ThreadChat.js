@@ -6,11 +6,11 @@ import { AppsConext } from '@/app/Context/AppsContext'
 import { WindowContext } from '@/app/Context/WindowContext'
 import { sanitizeAndUrlify } from '@/app/helper/sanitizeAndUrlify'
 import HLSVideoPlayer from '../HLSVideoPlayer'
+import { iconAvatars } from '@/app/env_setting'
 
 const ThreadChat = () => {
 
     const { showImageViewer, language } = useContext(WindowContext);
-    const { iconAvatars } = useContext(AccountContext);
     const { infoApp } = useContext(AppsConext);
     const { getMessages, listMessage, loadLatest, loader } = useContext(ThreadContext);
 
