@@ -43,14 +43,14 @@ const CenterBox = ({}) => {
     const currentScrollTop = containAppRef.current.scrollTop;
 
     if(infoApp.appType == 0){
-        if (currentScrollTop < 400 && currentScrollTop < prevScrollTop) {
+        if (currentScrollTop < 550 && currentScrollTop < prevScrollTop) {
           await getMessages();
         }
     }
     if(infoApp.appType == 1){
       const { scrollTop, scrollHeight, clientHeight } = containAppRef.current;
       const scrollBottom = scrollHeight - (scrollTop + clientHeight);
-      if (scrollBottom < 400 && currentScrollTop > prevScrollTop) {
+      if (scrollBottom < 550 && currentScrollTop > prevScrollTop) {
         await getTexts();
       }
     }
