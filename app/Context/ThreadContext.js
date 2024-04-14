@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useRef, useState } from 'react'
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { ethers } from 'ethers';
 
 import { AppsConext } from './AppsContext';
@@ -32,8 +32,7 @@ const ThreadProvider = ({ children }) => {
 
     const [currentMsgsIndex, setCurrentMsgsIndex] = useState(0);
 
-    const [loader, setLoader] = useState(false);
-
+    const [loader, setLoader] = useState(true);
     const [finished, setFinished] = useState(false);
     const [loadLatest , setLoadLatest] = useState(false);
 
@@ -43,7 +42,6 @@ const ThreadProvider = ({ children }) => {
     const getMessages = async (isReset = false) => {
 
         if(currentMsgsIndex < 0 && isReset == false) return;
-        setLoader(true);
         
         try {
             if(isReset && hashMessage.hasOwnProperty(infoApp.id)){
@@ -54,6 +52,8 @@ const ThreadProvider = ({ children }) => {
 
             }else if(isReset || currentMsgsIndex >= 0){
 
+                setLoader(true)
+
                 const provider = new ethers.JsonRpcProvider(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork].rpcUrls[0]);
                 const contract = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.chat.abi, provider);
                 const msgs = await contract.getMessages(isReset, isReset ? 0 : currentMsgsIndex, env_SMARTCHAIN.DEFAULT_LENGTH_LIST_MESSAGE);
@@ -63,6 +63,7 @@ const ThreadProvider = ({ children }) => {
                     let listUserAddress = [];
                     for(let i = 0; i < msgs.length; i++){
                         remsgs.push({
+                            index: i + (ethers.toNumber(msgs[i].timestamp) & 0xFFFF),
                             sender: msgs[i].sender,
                             value: msgs[i].value,
                             type: ethers.toNumber(msgs[i].typ),
@@ -90,19 +91,25 @@ const ThreadProvider = ({ children }) => {
                         }
                     });
             
+                    let curIndex = null
                     if(isReset){
-                        const curIndex = ethers.toNumber(await contract.messageCount()) - 1 - remsgs.length;
+                        curIndex = ethers.toNumber(await contract.messageCount()) - 1 - remsgs.length;
                         setCurrentMsgsIndex(curIndex);
                         hashCurrentMessageIndex[infoApp.id] = curIndex;
                     }else{
-                        const curIndex = currentMsgsIndex - remsgs.length;
+                        curIndex = currentMsgsIndex - remsgs.length;
                         setCurrentMsgsIndex(curIndex)
                         hashCurrentMessageIndex[infoApp.id] = curIndex;
                     }
 
-                    if(containAppRef?.current){
-                        hashPreScrollHeight['scrollHeight'] = Number(containAppRef?.current?.scrollHeight);
+                    if(curIndex <= 0){
+                        setTimeout(() => {
+                            setLoader(false)
+                        }, [1000])
                     }
+                
+                    hashPreScrollHeight['scrollHeight'] = Number(containAppRef?.current?.scrollHeight);
+                    hashPreScrollHeight['scrollTop'] =  Number(containAppRef?.current?.scrollTop);
         
                     joinedList.reverse();
                     if(isReset){
@@ -118,10 +125,6 @@ const ThreadProvider = ({ children }) => {
                     }
                 }
             }
-
-            setTimeout(() => {
-                setLoader(false);
-            },777);
             
         } catch (error) {
             console.log(error);
@@ -129,10 +132,6 @@ const ThreadProvider = ({ children }) => {
                 setCurrentMsgsIndex(0);
                 setListMessage([]);
             }
-
-            setTimeout(() => {
-                setLoader(false);
-            },777);
         }
     }
 
@@ -204,14 +203,13 @@ const ThreadProvider = ({ children }) => {
             }
 
             if(hashMessage.hasOwnProperty(infoApp.id) && isReset==true){
-                setLoader(true);
 
                 setCurrentMsgsIndex(hashCurrentMessageIndex[infoApp.id]);
                 setListMessage(hashMessage[infoApp.id]);
 
-                setLoader(false);
             }else if(finished==false || isReset==true){
-                setLoader(true);
+
+                setLoader(true)
 
                 const provider = new ethers.JsonRpcProvider(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork].rpcUrls[0]);
                 const contract = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.post.abi, provider);
@@ -219,7 +217,6 @@ const ThreadProvider = ({ children }) => {
                 const textCount = ethers.toNumber(await contract.textCount());
                 if(currentMsgsIndex >= textCount && isReset == false){ 
                     setFinished(true);
-                    setLoader(false);
                     return;
                 }else if(textCount == 0 && isReset == true){
                     hashCurrentMessageIndex[infoApp.id] = 0;
@@ -227,7 +224,6 @@ const ThreadProvider = ({ children }) => {
                     setCurrentMsgsIndex(0);
                     setListMessage([]);
                     setFinished(true);
-                    setLoader(false);
                     return;
                 }
         
@@ -266,7 +262,9 @@ const ThreadProvider = ({ children }) => {
                     }
                 }
                 setFinished(false);
-                setLoader(false);
+                setTimeout(() => {
+                    setLoader(false)
+                }, [1000])
             }
         } catch (error) {
             console.log(error);
@@ -275,7 +273,6 @@ const ThreadProvider = ({ children }) => {
                 setListMessage([]);
                 setFinished(false);
             }
-            setLoader(false);
         }
     }
 

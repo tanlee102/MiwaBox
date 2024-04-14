@@ -30,7 +30,7 @@ const ThreadChat = () => {
             </div>
 
             {listMessage?.map((item, index) => (
-                <div key={index} style={{marginTop: item.icon ? '20px' : '0px'}}  className="item-chat-thread">
+                <div key={item.index} style={{marginTop: item.icon ? '20px' : '0px'}}  className="item-chat-thread">
                     <span className='avatar-chat-thread' style={{backgroundColor:  item.icon ? "rgb(235, 235, 235)" : "transparent", marginTop: item.icon ? '18px' : '0px'}}>{item.icon ? <img src={`/icon/${iconAvatars[item.idIcon]}`}/> : "" }</span>
                     <span className='text-chat-thread'>
                         {item.icon ? <span>{item.name ? item.name : "Incognito"}</span> : ""}

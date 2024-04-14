@@ -43,7 +43,7 @@ const CenterBox = ({}) => {
     const currentScrollTop = containAppRef.current.scrollTop;
 
     if(infoApp.appType == 0){
-        if (currentScrollTop < 170 && currentScrollTop < prevScrollTop) {
+        if (currentScrollTop < 600 && currentScrollTop < prevScrollTop) {
           await getMessages();
         }
     }
@@ -61,19 +61,17 @@ const CenterBox = ({}) => {
 
   
   
-  const keepScrolling = async (relo = true) => {
+  const keepScrolling = async () => {
     if(infoApp?.appType == 0 && containAppRef?.current){
       const prevScrollHeight = hashPreScrollHeight['scrollHeight'];
       const currentScrollHeight = Number(containAppRef.current.scrollHeight);
       
       if (prevScrollHeight - currentScrollHeight > 9 || currentScrollHeight - prevScrollHeight > 9) {
         const addedItemsHeight = currentScrollHeight - prevScrollHeight;
-        if(addedItemsHeight > 0) containAppRef.current.scrollTop += addedItemsHeight;
+        if(addedItemsHeight > 0) containAppRef.current.scrollTop = hashPreScrollHeight['scrollTop'] + addedItemsHeight;
         
         hashPreScrollHeight['scrollHeight'] = currentScrollHeight;
-          if(relo == true){
-            keepScrolling(false);
-          }
+        hashPreScrollHeight['scrollTop'] = containAppRef.current.scrollTop;
       }
     }
   }
