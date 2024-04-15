@@ -47,15 +47,15 @@ export const env_SMARTCHAIN = {
           blockExplorerUrls: ["https://sepolia.etherscan.io"],
         },
         {
-          chainId: "0x13881",
-          rpcUrls: ["https://polygon-mumbai.blockpi.network/v1/rpc/public"],
-          chainName: "Mumbai Testnet",
+          chainId: "0x13882",
+          rpcUrls: ["https://rpc-amoy.polygon.technology"],
+          chainName: "Polygon Amoy Testnet",
           nativeCurrency: {
-            name: "Mumbai",
+            name: "Amoy",
             symbol: "MATIC",
             decimals: 18
           },
-          blockExplorerUrls: ["https://mumbai.polygonscan.com"],
+          blockExplorerUrls: ["https://www.oklink.com/amoy"],
         },
         {
             chainId: "0xfa2",
