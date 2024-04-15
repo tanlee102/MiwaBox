@@ -131,6 +131,7 @@ const ThreadProvider = ({ children }) => {
             if(isReset){
                 setCurrentMsgsIndex(0);
                 setListMessage([]);
+                setLoader(false);
             }
         }
     }
@@ -144,51 +145,64 @@ const ThreadProvider = ({ children }) => {
         setLoadLatest(true);
         TimeOutToBottomContainApp(333);
 
-        const currentForwardIndex = (currentMsgsIndex >= 0 ? currentMsgsIndex + listMessage.length + 1 : listMessage.length);
-
-        const provider = new ethers.JsonRpcProvider(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork].rpcUrls[0]);
-        const contract = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.chat.abi, provider);
-        const msgs = await contract.getLatestMessages(currentForwardIndex);
-
-        if(msgs){
-
-            let remsgs = [];
-            let listUserAddress = [];
-            for(let i = 0; i < msgs.length; i++){
-                remsgs.push({
-                    sender: msgs[i].sender,
-                    value: msgs[i].value,
-                    type: ethers.toNumber(msgs[i].typ),
-                    timestamp: ethers.toNumber(msgs[i].timestamp),
-                    icon: msgs[i].icon
-                });
-                if(!listUserAddress.includes(msgs[i].sender)) listUserAddress.push(msgs[i].sender);
-            }
-            const contractBox = await rpcProvider();
-            let users = await contractBox.getUsersByAddresses(listUserAddress);
-            let listUser = [];
-            for(let i = 0; i < users.length; i++){
-                listUser.push({
-                    address: listUserAddress[i],
-                    name: ethers.decodeBytes32String(users[i].name),
-                    idIcon: ethers.toNumber(users[i].idIcon),
-                });
-            }
-            const joinedList = remsgs.map(item1 => {
-                const matchedItem = listUser.find(item2 => (item2.address === item1.sender && item1.icon == true));
-                if (matchedItem) {
-                    return { ...item1, ...matchedItem };
-                } else {
-                    return item1;
-                }
-            });
-    
-            setListMessage([...listMessage, ...joinedList]);
-            hashMessage[infoApp.id] = [...listMessage, ...joinedList];
-
-            TimeOutToBottomContainApp(333);
+        let currentForwardIndex = (currentMsgsIndex >= 0 ? currentMsgsIndex + listMessage.length + 1 : listMessage.length);
+        if(listMessage.length == 0){
+            currentForwardIndex = 0;
+            setCurrentMsgsIndex(-1);
         }
-        setLoadLatest(false);
+
+        try {
+
+            const provider = new ethers.JsonRpcProvider(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork].rpcUrls[0]);
+            const contract = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.chat.abi, provider);
+            const msgs = await contract.getLatestMessages(currentForwardIndex);
+    
+            if(msgs){
+    
+                let remsgs = [];
+                let listUserAddress = [];
+                for(let i = 0; i < msgs.length; i++){
+                    remsgs.push({
+                        index: i + (ethers.toNumber(msgs[i].timestamp) & 0xFFFF),
+                        sender: msgs[i].sender,
+                        value: msgs[i].value,
+                        type: ethers.toNumber(msgs[i].typ),
+                        timestamp: ethers.toNumber(msgs[i].timestamp),
+                        icon: msgs[i].icon
+                    });
+                    if(!listUserAddress.includes(msgs[i].sender)) listUserAddress.push(msgs[i].sender);
+                }
+                const contractBox = await rpcProvider();
+                let users = await contractBox.getUsersByAddresses(listUserAddress);
+                let listUser = [];
+                for(let i = 0; i < users.length; i++){
+                    listUser.push({
+                        address: listUserAddress[i],
+                        name: ethers.decodeBytes32String(users[i].name),
+                        idIcon: ethers.toNumber(users[i].idIcon),
+                    });
+                }
+                const joinedList = remsgs.map(item1 => {
+                    const matchedItem = listUser.find(item2 => (item2.address === item1.sender && item1.icon == true));
+                    if (matchedItem) {
+                        return { ...item1, ...matchedItem };
+                    } else {
+                        return item1;
+                    }
+                });
+        
+                setListMessage([...listMessage, ...joinedList]);
+                hashMessage[infoApp.id] = [...listMessage, ...joinedList];
+    
+                TimeOutToBottomContainApp(333);
+            }
+            setLoadLatest(false);    
+
+        } catch (error) {
+            console.log(error);
+            setLoadLatest(false);   
+        }
+
     }
 
 
