@@ -190,9 +190,15 @@ const ThreadProvider = ({ children }) => {
                         return item1;
                     }
                 });
-        
-                setListMessage([...listMessage, ...joinedList]);
-                hashMessage[infoApp.id] = [...listMessage, ...joinedList];
+                
+                setListMessage(prevListMessage => {
+                    const updatedList = [...prevListMessage, ...joinedList];
+                    hashMessage[infoApp.id] = updatedList;
+                    return updatedList;
+                  });
+                  
+                // setListMessage([...listMessage, ...joinedList]);
+                // hashMessage[infoApp.id] = [...listMessage, ...joinedList];
     
                 TimeOutToBottomContainApp(333);
             }
