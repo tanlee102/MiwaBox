@@ -32,7 +32,7 @@ const VideoPlayer = ({ src, isPlay=false, isMobile=false}) => {
 
         const Plyr = require('plyr');
         const player = new Plyr(video, {
-            controls: ['play', 'progress', 'current-time', 'fullscreen', 'mute'],
+            controls: isMobile ? ['play-large', 'play', 'progress', 'current-time', 'fullscreen', 'mute'] : ['play', 'progress', 'current-time', 'fullscreen', 'mute'],
             controlBar: {
             volume: false,
             }}
