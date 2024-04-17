@@ -33,6 +33,7 @@ const ThreadVideo = () => {
     const preDex = useRef(0);
     const containerRef = useRef(null);
     const itemsRef = useRef(null);
+    const preOffsetHeight = useRef(null);
 
     const [username, setUsernam] = useState('');
     const [link1, setLink1] = useState('');
@@ -43,15 +44,17 @@ const ThreadVideo = () => {
         if(data.length > 0){
             containerRef.current = document.querySelector(".video-thread");
             itemsRef.current = containerRef.current.children;
-            const itemHeight = document.querySelector(".video-thread div").offsetHeight;
             
             const onScroll = function(e) {
                 e.preventDefault();
 
+                const itemHeight = document.querySelector(".video-thread div").offsetHeight;
+                const currentOffsetHeight = Number(document.querySelector(".video-thread div").offsetHeight);
+                
                 const currentIndexVideo = Math.round(Number(containerRef.current.scrollTop) / itemHeight);
                 setScrolDex(currentIndexVideo);
     
-                if(preDex.current != currentIndexVideo){
+                if(preDex.current != currentIndexVideo && preOffsetHeight.current == currentOffsetHeight){
     
                     const previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
                     if (previousVideo && !previousVideo?.paused) {
@@ -75,6 +78,7 @@ const ThreadVideo = () => {
     
                     preDex.current = currentIndexVideo    
                 }
+                preOffsetHeight.current = currentOffsetHeight;
             };
     
             containerRef.current.addEventListener("scroll", onScroll);
