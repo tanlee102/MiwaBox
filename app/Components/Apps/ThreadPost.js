@@ -40,9 +40,9 @@ const ThreadPost = () => {
        
           ))}
 
-          <div style={{display: loader ? "flex" : "none"}} className='contain-loader-hozon'>
+          {/* <div style={{display: loader ? "flex" : "none"}} className='contain-loader-hozon'>
             <div className="loader-hozon"></div>
-          </div>
+          </div> */}
         
       </div>
 
