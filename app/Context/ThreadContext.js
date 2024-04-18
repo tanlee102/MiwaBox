@@ -281,7 +281,7 @@ const ThreadProvider = ({ children }) => {
                         hashMessage[infoApp.id] = [...listMessage, ...retexts];
                     }
                 }
-                if(texts.length < env_SMARTCHAIN.DEFAULT_LENGTH_LIST_TEXT){
+                if(texts && texts?.length < env_SMARTCHAIN.DEFAULT_LENGTH_LIST_TEXT){
                     setFinished(true);
                 }else{
                     setFinished(false);
