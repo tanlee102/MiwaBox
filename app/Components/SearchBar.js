@@ -18,7 +18,7 @@ const SearchBar = ({closeLeft}) => {
     useEffect(() => {
       const tempSearchId = searchParams.get('id') ? Number(searchParams.get('id')) : env_SMARTCHAIN.DEFAULT_IDNDEX;
       if(String(tempSearchId) !== String(currentIndex)){
-        closeLeft();
+        if(window?.innerWidth < 770) closeLeft();
       }
       setCurrentIndex(tempSearchId);
     }, [searchParams.get('id')]);

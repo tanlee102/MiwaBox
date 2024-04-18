@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useLayoutEffect, useState } from 'react'
 import { env_SMARTCHAIN } from '../env';
 import Cookies from 'js-cookie';
 
@@ -12,9 +12,8 @@ const WindowProvider = ({ children }) => {
   const [displayImageViewer, setDisplayImageViewer] = useState(false);
   const [urlImageViewer, setUrlImageViewer] = useState("")
 
-  const [completeCloseRight, setCompleteCloseRight] = useState(false);
-  const [completeOpenLeft, setCompleteOpenLeft] = useState(false);
-  const [isOpenLeft, setIsOpenLeft] = useState(false);
+  const [completeCloseRight, setCompleteCloseRight] = useState(null);
+  const [completeOpenLeft, setCompleteOpenLeft] = useState(null);
 
   const [language, setLanguage] = useState('en');
   const [notice_pop_state, setNotice_pop_state] = useState(false);
@@ -36,63 +35,58 @@ const WindowProvider = ({ children }) => {
       }
     };
   }, [windowWidth]);
+  useLayoutEffect(() => {
+    if(window?.innerWidth) setWindowWidth(window?.innerWidth);
+  }, []); 
 
 
   useEffect(() => {
-    if(windowWidth !== null)
-    if(windowWidth < 770 ){
-      if(completeOpenLeft == false){
-        setIsOpenLeft(false)
-        document.getElementsByClassName('layout-left-box').item(0).style.transform = "translateX(-100%)";
-      }else{
-        setIsOpenLeft(true)
-        document.getElementsByClassName('layout-left-box').item(0).style.transform = "translateX(0)";
-      }
-    }else{
-      setIsOpenLeft(false)
-      setCompleteOpenLeft(false)
-      document.getElementsByClassName('layout-left-box').item(0).style.transform = "translateX(0)";
-    }
+    if(windowWidth !== null){
 
-    if(windowWidth !== null)
-    if(windowWidth < 1100 ){
-      document.getElementsByClassName('layout-right-box').item(0).style.display = "none";
-    }else{
-      if(completeCloseRight == false){
-        document.getElementsByClassName('layout-right-box').item(0).style.display = "block";
+      if(windowWidth < 770 ){
+        closeLeft()
       }else{
-        document.getElementsByClassName('layout-right-box').item(0).style.display = "none";
+        showLeft()
       }
+
+      if(windowWidth < 1100 ){
+        document.getElementsByClassName('layout-right-box').item(0).style.display = "none";
+      }else{
+        if(completeCloseRight == false || completeCloseRight == null){
+          document.getElementsByClassName('layout-right-box').item(0).style.display = "block";
+        }else{
+          document.getElementsByClassName('layout-right-box').item(0).style.display = "none";
+        }
+      }
+      
     }
   }, [windowWidth]);
 
 
-  useEffect(() => {
-      if(isOpenLeft){
-        document.getElementsByClassName('layout-left-box-overlay').item(0).style.display = "block";
-      }else{
-        document.getElementsByClassName('layout-left-box-overlay').item(0).style.display = "none";
-      }
-  }, [isOpenLeft])
-
 
   const closeLeft = () => {
-    if(window.innerWidth < 770 ){
-      setCompleteOpenLeft(false)
-      setIsOpenLeft(false)
-      document.getElementsByClassName('layout-left-box').item(0).style.transform = "translateX(-100%)";
+    setCompleteOpenLeft(false)
+    document.getElementsByClassName('layout-left-box').item(0).style.transform = "translateX(-100%)";
+    document.getElementsByClassName('layout-left-box').item(0).style.position = "absolute";
+    document.getElementsByClassName('layout-left-box-overlay').item(0).style.display = "none";
+  }
+
+  const showLeft = () => {
+    setCompleteOpenLeft(true)
+    document.getElementsByClassName('layout-left-box').item(0).style.transform = "translateX(0)";
+    if(windowWidth < 770 ){
+      document.getElementsByClassName('layout-left-box-overlay').item(0).style.display = "block";
+      document.getElementsByClassName('layout-left-box').item(0).style.position = "absolute";
+    }else{
+      document.getElementsByClassName('layout-left-box-overlay').item(0).style.display = "none";
+      document.getElementsByClassName('layout-left-box').item(0).style.position = "relative";
     }
   }
+
 
   const closeRight = () => {
     setCompleteCloseRight(true);
     document.getElementsByClassName('layout-right-box').item(0).style.display = "none";
-  }
-
-  const showLeft = () => {
-    setIsOpenLeft(true)
-    setCompleteOpenLeft(true)
-    document.getElementsByClassName('layout-left-box').item(0).style.transform = "translateX(0)";
   }
 
   const showRight = () => {
@@ -120,6 +114,7 @@ const WindowProvider = ({ children }) => {
     <WindowContext.Provider value={{currentIndex, setCurrentIndex,
                                     closeLeft, closeRight,
                                     showLeft, showRight,
+                                    completeOpenLeft,
                                     displayImageViewer, setDisplayImageViewer, urlImageViewer, showImageViewer,
                                     language, setLanguage, 
                                     notice_pop_state, setNotice_pop_state}}>

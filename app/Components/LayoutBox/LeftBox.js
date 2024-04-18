@@ -28,9 +28,6 @@ const LeftBox = ({setDisplayModalCreate}) => {
       <WrapHeaderBox>
 
         <div className="MiwaBox-logo-container">
-          <div className="btn-showLeftBox non-select" onClick={closeLeft}>
-            <svg viewBox="0 0 24 24"><path d="M5 6H12H19M5 12H19M5 18H19" stroke="#000000" strokeWidth="2" strokeLinecap="round"/></svg>
-          </div>
           <Link href={"/"}>
             <img className="MiwaBox-logo" src="/miwabox_.png"></img>
           </Link>
@@ -38,6 +35,10 @@ const LeftBox = ({setDisplayModalCreate}) => {
 
         <div className="btn-showRightBox btn-add-app non-select" onClick={() => {setDisplayModalCreate(true)}}>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" strokeWidth="1.5"/><path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" strokeWidth="1.5" strokeLinecap="round"/></svg>
+        </div>
+
+        <div className="btn-closeLeftBox btn-showRightBox non-select" onClick={closeLeft}>
+            <svg fill="#000000" viewBox="0 0 52 52"><path d="M21.5,40.6,7.9,27.1a1.57,1.57,0,0,1,0-2.2L21.5,11.4a1.57,1.57,0,0,1,2.2,0l2.2,2.2a1.57,1.57,0,0,1,0,2.2l-9.4,9.1a1.57,1.57,0,0,0,0,2.2l9.3,9.1a1.57,1.57,0,0,1,0,2.2l-2.2,2.2A1.66,1.66,0,0,1,21.5,40.6Z"/><path d="M39.6,40.6,25.8,27.1a1.57,1.57,0,0,1,0-2.2L39.6,11.4a1.57,1.57,0,0,1,2.2,0L44,13.6a1.57,1.57,0,0,1,0,2.2l-9.4,9.1a1.57,1.57,0,0,0,0,2.2l9.3,9.1a1.57,1.57,0,0,1,0,2.2l-2.2,2.2A1.66,1.66,0,0,1,39.6,40.6Z"/></svg>          
         </div>
 
       </WrapHeaderBox>
@@ -87,9 +88,3 @@ const LeftBox = ({setDisplayModalCreate}) => {
 }
 
 export default LeftBox
-
-        // const { conFirmFun } = useContext(LayoutContext);
-        // const loadBox = () =>{
-        //   conFirmFun("xxxx", "xxxx");
-        // }
-        // <button style={{marginTop: '100px'}} onClick={loadBox}>Open</button> 

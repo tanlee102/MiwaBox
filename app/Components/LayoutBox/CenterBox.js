@@ -18,7 +18,7 @@ import { hashPreScrollHeight } from "@/app/global";
 
 const CenterBox = ({}) => {
 
-  const { showRight, showLeft } = useContext(WindowContext);
+  const { showRight, showLeft, completeOpenLeft } = useContext(WindowContext);
   const { infoApp } = useContext(AppsConext);
   const { getMessages, getTexts, listMessage, containAppRef } = useContext(ThreadContext);
 
@@ -89,7 +89,7 @@ const CenterBox = ({}) => {
         :(
         <WrapHeaderBox>
 
-          <div className="btn-showLeftBox non-select" onClick={showLeft}>
+          <div className={completeOpenLeft == false ? `show-btn-showLeftBox btn-showLeftBox non-select` : `btn-showLeftBox non-select`} onClick={showLeft}>
             <svg viewBox="0 0 24 24">
               <path d="M5 6H12H19M5 12H19M5 18H19" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
             </svg>

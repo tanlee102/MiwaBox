@@ -28,7 +28,7 @@ const ThreadVideo = () => {
 
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
-    const {currentIndex, showLeft} = useContext(WindowContext);
+    const {currentIndex, showLeft, completeOpenLeft} = useContext(WindowContext);
 
     const preDex = useRef(0);
     const containerRef = useRef(null);
@@ -188,7 +188,7 @@ const ThreadVideo = () => {
 
         <div className='head-video-thread'>
 
-            <span className="btn-showLeftBox-ofVideoThread non-select" onClick={showLeft}>
+            <span className={completeOpenLeft == false ? `show-btn-showLeftBox btn-showLeftBox-ofVideoThread non-select` : `btn-showLeftBox-ofVideoThread non-select`}  onClick={showLeft}>
                 <svg viewBox="0 0 24 24">
                 <path d="M5 6H12H19M5 12H19M5 18H19" stroke="#000000" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
