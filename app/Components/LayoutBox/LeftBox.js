@@ -27,7 +27,7 @@ const LeftBox = ({setDisplayModalCreate}) => {
 
       <WrapHeaderBox>
 
-        <div className="MiwaBox-logo-container">
+        <div className="MiwaBox-logo-container non-select">
           <Link href={"/"}>
             <img className="MiwaBox-logo" src="/miwabox_.png"></img>
           </Link>

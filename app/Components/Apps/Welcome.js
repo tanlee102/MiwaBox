@@ -31,7 +31,7 @@ const Welcome = () => {
        
         <div className='contain-list-launching-app'>
             <p>Suggested Sites</p>
-            <div className='list-launching-app'>
+            <div className='list-launching-app non-select'>
             <Link href={"/enlang"}>
                 <span>
                     <img src='/icon/apps/5000_0.png' />

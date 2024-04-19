@@ -21,9 +21,8 @@ img, svg, button, ul, li, .non-select{
 }
 
 a, a:link, a:visited, a:focus, a:hover, a:active{
-    color: black;
+    color: inherit;
     text-decoration:none;
-    cursor: crosshair;
 }
 
 .user-svg path{

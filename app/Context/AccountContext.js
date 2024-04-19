@@ -126,7 +126,7 @@ const AccountProvider = ({ children }) => {
           console.log(error)
         }
       };
-      fetchAccounts();
+      if (typeof window.ethereum !== "undefined") fetchAccounts();
     }, []);
 
     

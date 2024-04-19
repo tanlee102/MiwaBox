@@ -34,7 +34,7 @@
 #action-enlang-app div{
     position: relative;
     width: auto;
-    display: block;
+    display: flex;
 }
 #action-enlang-app span{
     float: left;
@@ -53,10 +53,15 @@
     height: 27px;
     margin-right: 7px;
     padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #action-enlang-app span svg{
-    width: 100%;
-    height: 100%;
+    float: left;
+    position: relative;
+    width: 32px;
+    height: 27px;
 }
 #action-enlang-app span svg path{
     fill: white;

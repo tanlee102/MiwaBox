@@ -11,7 +11,7 @@ const VideoPlayer = ({ src, isPlay=false, isMobile=false}) => {
         const video = videoRef.current;
         if (!video) return;
     
-        video.controls = true;
+        // video.controls = true;
         video.playsInline = isMobile;
         if(!src.includes('.m3u8')){
             video.src = src;
