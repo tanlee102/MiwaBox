@@ -23,7 +23,7 @@ const OneDrivePlayer = ({src}) => {
   return (
     isError ? 
     <img className='video-onedrive-player' src="https://answers-afd.microsoft.com/static/images/image-not-found.jpg" alt="Error loading video" /> :
-    <video className='video-onedrive-player' src={videoSrc} controls autoPlay></video>
+    <video className='video-onedrive-player' src={videoSrc} controls></video>
   )
 }
 
