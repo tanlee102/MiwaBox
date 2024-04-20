@@ -7,6 +7,7 @@ import { WindowContext } from '@/app/Context/WindowContext'
 import { sanitizeAndUrlify } from '@/app/helper/sanitizeAndUrlify'
 import HLSVideoPlayer from '../HLSVideoPlayer'
 import { iconAvatars } from '@/app/env_setting'
+import OneDrivePlayer from '../OneDrivePlayer'
 
 const ThreadChat = () => {
 
@@ -42,8 +43,11 @@ const ThreadChat = () => {
                             String(item.value).includes(".m3u8") ?
                                 <HLSVideoPlayer src={item.value} />
                                 :
-                                <video src={item.value} controls />
-                            }
+                                String(item.value).includes("one.miwabox.") ?
+                                    <OneDrivePlayer src={item.value} />
+                                    :
+                                    <video src={item.value} controls />
+                        }
                         {listMessage[index+1]?.icon || (index+1 == listMessage.length) ? <span>{language === 'vi' ? new Date(Number(item.timestamp) * 1000).toLocaleString('vi-VN') : new Date(Number(item.timestamp) * 1000).toLocaleString()}</span> : ""}
                     </span>
                 </div>
