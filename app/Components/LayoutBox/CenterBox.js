@@ -66,13 +66,11 @@ const CenterBox = ({}) => {
       const prevScrollHeight = hashPreScrollHeight['scrollHeight'];
       const currentScrollHeight = Number(containAppRef.current.scrollHeight);
       
-      if (prevScrollHeight - currentScrollHeight > 9 || currentScrollHeight - prevScrollHeight > 9) {
-        const addedItemsHeight = currentScrollHeight - prevScrollHeight;
-        if(addedItemsHeight > 0) containAppRef.current.scrollTop = hashPreScrollHeight['scrollTop'] + addedItemsHeight;
-        
-        hashPreScrollHeight['scrollHeight'] = currentScrollHeight;
-        hashPreScrollHeight['scrollTop'] = containAppRef.current.scrollTop;
-      }
+      const addedItemsHeight = currentScrollHeight - prevScrollHeight;
+      if(addedItemsHeight > 0) containAppRef.current.scrollTop = hashPreScrollHeight['scrollTop'] + addedItemsHeight;
+      
+      hashPreScrollHeight['scrollHeight'] = currentScrollHeight;
+      hashPreScrollHeight['scrollTop'] = containAppRef.current.scrollTop;
     }
   }
 
