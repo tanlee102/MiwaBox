@@ -29,7 +29,7 @@ const OneDrivePlayer = ({src}) => {
             <div className="loader-hozon"></div>
         </div>
       </div>
-      : <video crossorigin="anonymous" className='video-onedrive-player' src={videoSrc} controls></video>
+      : <video crossOrigin="anonymous" className='video-onedrive-player' src={videoSrc} controls></video>
   )
 }
 
