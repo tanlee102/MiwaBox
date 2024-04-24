@@ -7,7 +7,7 @@ export const env_SMARTCHAIN = {
     TOTAL_CURRENT_ICON: 20,
     NETWORK: {
         chainId: "0x61",
-        rpcUrls: ["https://api.zan.top/node/v1/bsc/mainnet/ead93430e1204d7db8d12bfca10e6901","https://bsc-testnet-rpc.publicnode.com","https://bsc-testnet.blockpi.network/v1/rpc/public"],
+        rpcUrls: ["https://bsc-testnet.blockpi.network/v1/rpc/52574fb9651fc0df9184078861604e2a7bdff482","https://bsc-testnet-rpc.publicnode.com","https://bsc-testnet.blockpi.network/v1/rpc/public"],
         chainName: "BNB Smart Chain Testnet",
         nativeCurrency: {
           name: "tBNB",
@@ -26,7 +26,7 @@ export const env_SMARTCHAIN = {
     NETWORKS: [
         {
             chainId: "0x61",
-            rpcUrls: ["https://api.zan.top/node/v1/bsc/mainnet/ead93430e1204d7db8d12bfca10e6901","https://bsc-testnet-rpc.publicnode.com","https://bsc-testnet.blockpi.network/v1/rpc/public"],
+            rpcUrls: ["https://bsc-testnet.blockpi.network/v1/rpc/52574fb9651fc0df9184078861604e2a7bdff482","https://bsc-testnet-rpc.publicnode.com","https://bsc-testnet.blockpi.network/v1/rpc/public"],
             chainName: "BNB Smart Chain Testnet",
             nativeCurrency: {
               name: "tBNB",
