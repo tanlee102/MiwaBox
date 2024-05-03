@@ -211,58 +211,68 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
         try {
           const result = await contract.getVideos(isLast, _currentId, LENGTH_LIST_VIDEO);
+
+          console.log(result.length)
+
+          if(result?.length > 0){
   
-          let finalRe = [];
-          let firstItemData = null;
+            let finalRe = [];
+            let firstItemData = null;
 
-          result.forEach((item, index) => {
-            const newItem = {
-              id: ethers.toNumber(item.id),
-              thumbUrl: item.thumbUrl,
-              videoUrl: item.videoUrl,
-              username: item.username,
-              link: String(item.link).split(','),
-              // display: Boolean(item.display),
-              // timestamp: item.timestamp
-            };
+            result.forEach((item, index) => {
+              const newItem = {
+                id: ethers.toNumber(item.id),
+                thumbUrl: item.thumbUrl,
+                videoUrl: item.videoUrl,
+                username: item.username,
+                link: String(item.link).split(','),
+                // display: Boolean(item.display),
+                // timestamp: item.timestamp
+              };
 
-            finalRe.push(newItem);
+              finalRe.push(newItem);
 
-            if (index === result.length - 1) {
-              setCurGotId(newItem.id);
+              if (index === result.length - 1) {
+                setCurGotId(newItem.id);
+              }
+
+              if (newItem.id === viParam) {
+                firstItemData = newItem;
+              }
+            });
+
+
+            if(viParam || viParam == 0){
+              if(firstItemData == null){
+                firstItemData = await getFirstVideo(viParam);
+              }
+              finalRe.unshift(firstItemData);
+              setViParam(null);
             }
-
-            if (newItem.id === viParam) {
-              firstItemData = newItem;
-            }
-          });
-
-
-          if(viParam || viParam == 0){
-            if(firstItemData == null){
-              firstItemData = await getFirstVideo(viParam);
-            }
-            finalRe.unshift(firstItemData);
-            setViParam(null);
-          }
-  
-          if(isLast){
-            setData(finalRe);
-            setGridData([]);
-            setScrolDex(0);
-            setIsDisplayGrid(false);
-          }else{
-            let newList = [...data, ...finalRe]
-            setData(newList);
-            if(isVideoData){
-              if(isDisplayGrid == true) setGridData(newList);
+    
+            if(isLast){
+              setData(finalRe);
+              setGridData([]);
+              setScrolDex(0);
+              setIsDisplayGrid(false);
             }else{
-              setGridData(newList);
+              let newList = [...data, ...finalRe]
+              setData(newList);
+              if(isVideoData){
+                if(isDisplayGrid == true) setGridData(newList);
+              }else{
+                setGridData(newList);
+              }
             }
+    
+            setOnLoadData(false);
+            setIsScrollToBottomGrid(false);
+
+          }else{
+            setCurGotId(-1);
+            setOnLoadData(false);
+            setIsScrollToBottomGrid(false);
           }
-  
-          setOnLoadData(false);
-          setIsScrollToBottomGrid(false);
 
         } catch (error) {
 

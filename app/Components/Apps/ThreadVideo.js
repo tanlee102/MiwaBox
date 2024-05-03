@@ -204,7 +204,7 @@ const ThreadVideo = () => {
             {String(infoApp?.creatorAddress).toLowerCase() === String(account).toLowerCase() ?
             <>
             <span onClick={() => {deleteVideo(data[scrolDex])}} id='btn-add-video-thread'>
-                <svg viewBox="-3 -2 36 36" fill="none"><path stroke="#FFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22.5 4.742a13 13 0 11-13 0M16 3v10"/></svg>
+                <svg viewBox="-3 -2 36 36" fill="none"><path stroke="#FFFFF" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M22.5 4.742a13 13 0 11-13 0M16 3v10"/></svg>
             </span>
 
             <span onClick={() => {setDisplayCreateVideo(true)}} id='btn-add-video-thread'>
@@ -261,7 +261,7 @@ const ThreadVideo = () => {
                 <div key={index}>
                     {index == scrolDex || index == scrolDex - 1 || index == scrolDex - 2 || index == scrolDex + 1 || index == scrolDex + 2  ?
                         <div className='contain-plyr'>
-                            <DrivePlayer isPlay={index == 0 && index == scrolDex} index={String(item?.videoUrl)} />
+                            <DrivePlayer isPlay={index == scrolDex} index={String(item?.videoUrl)} />
                         </div>
                         : 
                         null

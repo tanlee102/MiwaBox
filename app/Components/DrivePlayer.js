@@ -6,7 +6,6 @@ const DrivePlayer = ({index,  isPlay=false}) => {
     const videoRef = useRef(null);
     const { videoDriveUrls, setVideoDriveUrls } = useContext(VideoThreadContext);
     const host_url = 'https://one.miwabox.live'
-    // const host_url = 'http://localhost:3000'
 
     const callPlay = async () => {
       if(isPlay){
@@ -34,7 +33,6 @@ const DrivePlayer = ({index,  isPlay=false}) => {
 
       if (driveUrl) {
 
-        console.log('has drive url')
         video.src = driveUrl.url
         callPlay();
 
@@ -73,7 +71,7 @@ const DrivePlayer = ({index,  isPlay=false}) => {
               <div className="loader-hozon"></div>
           </div>
         </div> : ""}
-        <video className='video-onedrive-player' playsinline controls loop ref={videoRef}></video>
+        <video className='video-onedrive-player' playsInline controls loop ref={videoRef}></video>
       </>
     )
 }
