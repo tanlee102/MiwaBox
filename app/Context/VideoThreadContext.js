@@ -141,6 +141,18 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         throw error;
       }      
     }
+
+    const deleteVideoBlock = async (id) => {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
+
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
+
+      const tx = await contractWithSigner.updateDisplayVideo(Number(id), false);
+      await tx.wait(); 
+    }
     
     const deleteVideo = async (infovideo) => {
       if(password.trim().length > 0){
@@ -149,20 +161,13 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
             await deleteImageDrive(infovideo.thumbUrl);
             await deleteVideoDrive(infovideo.videoUrl);
       
-            await window.ethereum.request({ method: 'eth_requestAccounts' });
-            await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
-      
-            const provider = new ethers.BrowserProvider(window.ethereum);
-            const signer = await provider.getSigner();
-            const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
-      
-            const tx = await contractWithSigner.updateDisplayVideo(Number(infovideo.id), false);
-            await tx.wait(); 
-      
-            setLoadCreateState(false);
+            await deleteVideoBlock(infovideo.id)
           } catch (error) {
-            console.log(error)
-            setLoadCreateState(false);
+            console.log(error);
+            
+            if (confirm("Error in delete, Do you want delete blockchain?!") == true) {
+              await deleteVideoBlock(infovideo.id)
+            }
           }
         }
       }else{
