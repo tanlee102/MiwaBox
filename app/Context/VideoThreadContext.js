@@ -71,7 +71,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
     const deleteVideoDrive = async (id) =>{
       const url = 'https://one.miwabox.live/drive/delete/'+ id;
-      axios.delete(url, {
+      axios.get(url, {
         headers: {
           'Content-Type': 'application/json'
         }
