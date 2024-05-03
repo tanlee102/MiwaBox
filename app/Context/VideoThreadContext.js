@@ -4,9 +4,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import { AppsConext } from './AppsContext';
 import { AccountContext } from './AccountContext';
 import { env_SMARTCHAIN } from '../env';
-import { ethers } from 'ethers';
-import { LENGTH_LIST_VIDEO, url_upload } from '../env_video';
+import { ethers, id } from 'ethers';
+import { LENGTH_LIST_VIDEO, url_image_domain } from '../env_video';
 import { WindowContext } from './WindowContext';
+import axios from 'axios';
 
 export const VideoThreadContext = createContext();
 
@@ -16,13 +17,10 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const { switchNetwork } = useContext(AccountContext);
     const { currentIndex } = useContext(WindowContext);
 
-    
     const [loadCreateState, setLoadCreateState] = useState(false);
 
-    const [url, setUrl] = useState('');
-    const [publicUrl, setPublicUrl] = useState('');
     const [username, setUsername] = useState('');
-    const [link, setLink] = useState('');
+    const [img, SetImg] = useState(null);
     const [file, SetFile] = useState(null);
     const [password, setPassword] = useState('');
 
@@ -31,18 +29,18 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const [onLoadData, setOnLoadData] = useState(false);
     const [data, setData] = useState([]);
     const [gridData, setGridData] = useState([]);
+    const [videoDriveUrls, setVideoDriveUrls] = useState([]);
     
-
     const [curGotId, setCurGotId] = useState(0);
     const [scrolDex, setScrolDex] = useState(null);
     const [isDisplayGrid, setIsDisplayGrid] = useState(false);
     const [isScrollToBottomGrid, setIsScrollToBottomGrid] = useState(false);
 
-  
 
 
 
-    const sendDataVideo = async (thumbnail) => {
+    const sendDataVideo = async (thumbnail, index) => {
+
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
         await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
@@ -51,44 +49,69 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         const signer = await provider.getSigner();
         const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
 
-        const tx = await contractWithSigner.sendVideo(thumbnail, publicUrl, username, link);
+        const tx = await contractWithSigner.sendVideo(thumbnail, index, username, ' , ');
         await tx.wait(); 
 
         setLoadCreateState(false);
       } catch (error) {
         console.log(error)
+        setLoadCreateState(false);
       }
     }
 
-
+    const deleteImageDrive = async (id) =>{
+      const url = url_image_domain + 'delete/file' + '?password=' + password + '&id=' + id;
+      axios.delete(url, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => console.log(response.data))
+      .catch(error => console.error('Error:', error));      
+    }
+    const deleteVideoDrive = async (id) =>{
+      const url = 'https://one.miwabox.live/drive/delete/'+ id + '?password=' + password;
+      axios.delete(url, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => console.log(response.data))
+      .catch(error => console.error('Error:', error));      
+    }
 
     const btnCreateVideo = async () => {
 
-      if(publicUrl.trim().length > 0 && username.trim().length > 0 && link.trim().length > 0){
+      if(password.trim().length > 0 && username.trim().length > 0){
+        setLoadCreateState(true);
 
         var formData = new FormData();
-        formData.append('image', file, 'miwabox_thumb_img.jpeg');
+        formData.append('image', img);
         formData.append('password', password);
-    
-        fetch(url_upload, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error('Request failed with status ' + response.status);
+        axios.post(url_image_domain+'api', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
             }
-        })
-        .then(data => {
-          sendDataVideo(data.id)
-        })
-        .catch(error => {
-          console.log(error)
-        });
+        }).then(res => {
 
-        setLoadCreateState(true);
+            var fileFormData = new FormData();
+            fileFormData.append('file', file);
+            
+            axios.post('http://localhost:3000/drive/upload?password='+password+'&type_pip=2&permission=1&folder='+username, fileFormData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+              sendDataVideo(res.data.id, response.data.index);
+            }).catch(error => {
+                console.log(error);
+                deleteImageDrive(res.data.id);
+                setLoadCreateState(false);
+            });
+
+        }).catch(error => {
+            console.log(error);
+        });
 
       }else{
         alert('Please fill in all the required information.');
@@ -96,6 +119,29 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
 
 
+    const deleteVideo = async (infovideo) =>{
+      console.log(infovideo)
+
+      deleteImageDrive(infovideo.thumbUrl)
+      deleteVideoDrive(infovideo.videoUrl)
+
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
+
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
+
+        const tx = await contractWithSigner.updateDisplayVideo(Number(idvideo), false);
+        await tx.wait(); 
+
+        setLoadCreateState(false);
+      } catch (error) {
+        console.log(error)
+        setLoadCreateState(false);
+      }
+    }
 
 
 
@@ -211,14 +257,6 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
 
 
-
-
-
-
-
-
-
-    
     useEffect(() => {
       if(infoApp && infoApp.appType == 2) getData(true, 0, true);
     }, [infoApp]);
@@ -252,9 +290,10 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     },[currentIndex]);
 
   return (
-    <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, loadCreateState, onLoadData, 
+    <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, deleteVideo, loadCreateState, onLoadData, 
                                             setViParam, data, gridData, scrolDex, setScrolDex, isDisplayGrid, setIsDisplayGrid, setIsScrollToBottomGrid, isScrollToBottomGrid,  
-                                            url, setUrl, publicUrl, setPublicUrl, username, setUsername, link, setLink, file, SetFile, password, setPassword
+                                            username, setUsername, img, SetImg, file, SetFile, password, setPassword,
+                                            videoDriveUrls, setVideoDriveUrls
                                         }}>
         {children}
     </VideoThreadContext.Provider>

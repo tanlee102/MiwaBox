@@ -363,3 +363,16 @@
     
     transform: rotate(180deg);
 }
+
+
+.video-drive-player{
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: black !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 7;
+}

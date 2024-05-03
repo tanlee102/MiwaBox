@@ -10,7 +10,7 @@ import { AppsConext } from '@/app/Context/AppsContext'
 import { AccountContext } from '@/app/Context/AccountContext'
 import { WindowContext } from '@/app/Context/WindowContext'
 
-import VideoPlayer from '../VideoPlayer';
+import DrivePlayer from '../DrivePlayer';
 
 import { useRouter } from 'next/navigation'
 import { url_image_domain } from '@/app/env_video'
@@ -24,7 +24,8 @@ const ThreadVideo = () => {
            data, gridData, onLoadData,
            scrolDex, setScrolDex, 
            isDisplayGrid, setIsDisplayGrid, 
-           setIsScrollToBottomGrid, isScrollToBottomGrid } = useContext(VideoThreadContext);
+           setIsScrollToBottomGrid, isScrollToBottomGrid, 
+           deleteVideo } = useContext(VideoThreadContext);
 
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
@@ -201,9 +202,15 @@ const ThreadVideo = () => {
             </span>
 
             {String(infoApp?.creatorAddress).toLowerCase() === String(account).toLowerCase() ?
+            <>
+            <span onClick={() => {deleteVideo(data[scrolDex])}} id='btn-add-video-thread'>
+                <svg viewBox="-3 -2 36 36" fill="none"><path stroke="#FFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22.5 4.742a13 13 0 11-13 0M16 3v10"/></svg>
+            </span>
+
             <span onClick={() => {setDisplayCreateVideo(true)}} id='btn-add-video-thread'>
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" strokeWidth="1.5"></circle><path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" strokeWidth="1.5" strokeLinecap="round"></path></svg>
             </span>
+            </>
             :""}
 
             <span className='non-select' onClick={() => {setIsDisplayGrid(!isDisplayGrid)}}>
@@ -252,9 +259,9 @@ const ThreadVideo = () => {
         <div className='video-thread' onClick={() => {setIsDisplayGrid(false)}}>
             {data?.map((item, index) => (
                 <div key={index}>
-                    {index == scrolDex || index == scrolDex - 1 || index == scrolDex + 1  ?
+                    {index == scrolDex || index == scrolDex - 1 || index == scrolDex - 2 || index == scrolDex + 1 || index == scrolDex + 2  ?
                         <div className='contain-plyr'>
-                            <VideoPlayer isMobile={isMobile} isPlay={index == 0 && index == scrolDex}  src={String(item?.videoUrl)} />
+                            <DrivePlayer isPlay={index == 0 && index == scrolDex} index={String(item?.videoUrl)} />
                         </div>
                         : 
                         null
