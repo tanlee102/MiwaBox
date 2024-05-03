@@ -59,18 +59,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
       }
     }
 
-    const deleteImageDrive = async (id) =>{
+    const deleteImageDrive = async (id) => {
       const url = url_image_domain + 'delete/file' + '?password=' + password + '&id=' + id;
-      axios.delete(url, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => console.log(response.data))
-      .catch(error => console.error('Error:', error));      
-    }
-    const deleteVideoDrive = async (id) =>{
-      const url = 'https://one.miwabox.live/drive/delete/'+ id;
       axios.get(url, {
         headers: {
           'Content-Type': 'application/json'
@@ -79,6 +69,15 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
       .then(response => console.log(response.data))
       .catch(error => console.error('Error:', error));      
     }
+    
+    const deleteVideoDrive = async (id) => {
+      const url = 'https://one.miwabox.live/drive/delete/'+ id + '?password=' + password;
+      axios.get(url, {
+      })
+      .then(response => console.log(response.data))
+      .catch(error => console.error('Error:', error));      
+    }
+    
 
     const btnCreateVideo = async () => {
 
