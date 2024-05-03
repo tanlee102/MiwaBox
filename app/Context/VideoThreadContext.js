@@ -55,33 +55,15 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         setLoadCreateState(false);
       } catch (error) {
         console.log(error)
+        await deleteImageDrive(thumbnail);
+        await deleteVideoDrive(index);
         setLoadCreateState(false);
       }
     }
 
-    const deleteImageDrive = async (id) => {
-      const url = url_image_domain + 'delete/file' + '?password=' + password + '&id=' + id;
-      axios.get(url, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => console.log(response.data))
-      .catch(error => console.error('Error:', error));      
-    }
-    
-    const deleteVideoDrive = async (id) => {
-      const url = 'https://one.miwabox.live/drive/delete/'+ id + '?password=' + password;
-      axios.get(url, {
-      })
-      .then(response => console.log(response.data))
-      .catch(error => console.error('Error:', error));      
-    }
-    
-
     const btnCreateVideo = async () => {
 
-      if(password.trim().length > 0 && username.trim().length > 0){
+      if(password.trim().length > 0 && username.trim().length > 0 && img && file){
         setLoadCreateState(true);
 
         var formData = new FormData();
@@ -118,29 +100,62 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
 
 
-    const deleteVideo = async (infovideo) =>{
-      console.log(infovideo)
 
-      deleteImageDrive(infovideo.thumbUrl)
-      deleteVideoDrive(infovideo.videoUrl)
 
+    const deleteImageDrive = async (id) => {
+      const url = url_image_domain + 'delete/file' + '?password=' + password + '&id=' + id;
       try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
-
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
-
-        const tx = await contractWithSigner.updateDisplayVideo(Number(infovideo.id), false);
-        await tx.wait(); 
-
-        setLoadCreateState(false);
+        const response = await axios.get(url, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log(response.data);
       } catch (error) {
-        console.log(error)
-        setLoadCreateState(false);
+        console.error('Error:', error);
+        throw error;
+      }      
+    }
+    
+    const deleteVideoDrive = async (id) => {
+      const url = 'https://one.miwabox.live/drive/delete/'+ id + '?password=' + password;
+      try {
+        const response = await axios.get(url);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error:', error);
+        throw error;
+      }      
+    }
+    
+    const deleteVideo = async (infovideo) => {
+      if(password.trim().length > 0){
+        if (confirm("You want delete?!") == true) {
+          try {
+            await deleteImageDrive(infovideo.thumbUrl);
+            await deleteVideoDrive(infovideo.videoUrl);
+      
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
+      
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            const signer = await provider.getSigner();
+            const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
+      
+            const tx = await contractWithSigner.updateDisplayVideo(Number(infovideo.id), false);
+            await tx.wait(); 
+      
+            setLoadCreateState(false);
+          } catch (error) {
+            console.log(error)
+            setLoadCreateState(false);
+          }
+        }
+      }else{
+        alert('Please input password!!')
       }
     }
+    
 
 
 
