@@ -52,6 +52,20 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         const tx = await contractWithSigner.sendVideo(thumbnail, index, username, ' , ');
         await tx.wait(); 
 
+        try {
+
+          axios.get('http://localhost:3000/facebook?password='+password+'&index='+index)
+          .then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.error(error);
+          });
+
+        } catch (error) {
+          console.log(error)
+        }
+
         setLoadCreateState(false);
       } catch (error) {
         console.log(error)
