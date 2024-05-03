@@ -133,7 +133,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         const signer = await provider.getSigner();
         const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
 
-        const tx = await contractWithSigner.updateDisplayVideo(Number(idvideo), false);
+        const tx = await contractWithSigner.updateDisplayVideo(Number(infovideo.id), false);
         await tx.wait(); 
 
         setLoadCreateState(false);
