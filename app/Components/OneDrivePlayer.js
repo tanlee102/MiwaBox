@@ -29,7 +29,7 @@ const OneDrivePlayer = ({src}) => {
             <div className="loader-hozon"></div>
         </div>
       </div>
-      : <video className='video-onedrive-player' src={videoSrc} controls></video>
+      : <video className='video-onedrive-player' src={videoSrc} controls playsInline></video>
   )
 }
 
