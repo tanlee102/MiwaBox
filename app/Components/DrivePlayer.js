@@ -61,7 +61,7 @@ const DrivePlayer = ({index,  isPlay=false}) => {
     
     return (
       <>
-        {videoRef.current?.src.length < 23 ?
+        {!videoRef.current?.src || videoRef.current?.src.length < 23 ?
         <div className='video-drive-player'>
           <div className='contain-loader-hozon'>
               <div className="loader-hozon"></div>
