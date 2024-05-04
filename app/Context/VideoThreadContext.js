@@ -4,8 +4,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import { AppsConext } from './AppsContext';
 import { AccountContext } from './AccountContext';
 import { env_SMARTCHAIN } from '../env';
-import { ethers, id } from 'ethers';
-import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain } from '../env_video';
+import { ethers } from 'ethers';
+import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_server } from '../env_video';
 import { WindowContext } from './WindowContext';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -39,7 +39,6 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
 
 
-
     const sendDataVideo = async (thumbnail, index) => {
 
       try {
@@ -54,37 +53,43 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         await tx.wait(); 
 
         try {
-
-          axios.get('http://localhost:3000/facebook?password='+password+'&index='+index)
+          axios.get(url_video_server+'facebook?password='+password+'&index='+index)
           .then(function (response) {
               console.log(response);
+              alert('Successful Video Upload.')
+              setLoadCreateState(false);
           })
           .catch(function (error) {
-              console.error(error);
+              console.log(error);
+              alert('Successful Video Upload, but Failed to Upload on Facebook.')
+              setLoadCreateState(false);
           });
-
         } catch (error) {
           console.log(error)
+          alert('Successful Video Upload, but Failed to Upload on Facebook.')
+          setLoadCreateState(false);
         }
 
-        setLoadCreateState(false);
       } catch (error) {
-        console.log(error)
         await deleteImageDrive(thumbnail);
         await deleteVideoDrive(index);
+
+        console.log(error)
+        alert('Upload Blockchain Error!!')
         setLoadCreateState(false);
       }
+
     }
 
     const btnCreateVideo = async () => {
 
       if(password.trim().length > 0 && username.trim().length > 0 && img && file){
-        
-        if(!Cookies.get('password')){
-          Cookies.set('password', password, { expires: 30, path: '/' });
-        }
 
         setLoadCreateState(true);
+        
+        if(!Cookies.get('password') || String(Cookies.get('password')) !== password){
+          Cookies.set('password', password, { expires: 30, path: '/' });
+        }
 
         var formData = new FormData();
         formData.append('image', img);
@@ -98,26 +103,33 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
             var fileFormData = new FormData();
             fileFormData.append('file', file);
             
-            axios.post('http://localhost:3000/drive/upload?password='+password+'&type_pip=2&permission=1&folder='+username, fileFormData, {
+            axios.post(url_video_server+'drive/upload?password='+password+'&type_pip=2&permission=1&folder='+username, fileFormData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response => {
-              sendDataVideo(res.data.id, response.data.index);
+
+                sendDataVideo(res.data.id, response.data.index);
+
             }).catch(error => {
-                console.log(error);
                 deleteImageDrive(res.data.id);
+
+                console.log(error);
+                alert('Upload Video Error!!')
                 setLoadCreateState(false);
             });
 
         }).catch(error => {
             console.log(error);
+            alert('Upload Image Error!!')
+            setLoadCreateState(false);
         });
 
       }else{
         alert('Please fill in all the required information.');
       }      
     }
+
 
 
 
@@ -132,7 +144,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         });
         console.log(response.data);
       } catch (error) {
-        console.error('Error:', error);
+        console.log('Error:', error);
         throw error;
       }      
     }
@@ -143,7 +155,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         const response = await axios.get(url);
         console.log(response.data);
       } catch (error) {
-        console.error('Error:', error);
+        console.log('Error:', error);
         throw error;
       }      
     }
@@ -170,8 +182,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
           try {
             await deleteImageDrive(infovideo.thumbUrl);
             await deleteVideoDrive(infovideo.videoUrl);
-      
-            await deleteVideoBlock(infovideo.id)
+            await deleteVideoBlock(infovideo.id);
           } catch (error) {
             console.log(error);
             
@@ -318,7 +329,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
 
     useEffect(() => {
-      if(Math.abs(data?.length - scrolDex) < 5) getData(false, curGotId - 1, true);
+      if(Math.abs(data?.length - scrolDex) < 5 && infoApp?.appType == 2) getData(false, curGotId - 1, true);
     }, [scrolDex]);
 
 

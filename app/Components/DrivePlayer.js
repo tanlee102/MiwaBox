@@ -32,12 +32,9 @@ const DrivePlayer = ({index,  isPlay=false}) => {
       const driveUrl = videoDriveUrls.find(obj => obj.index === index);
 
       if (driveUrl) {
-
         video.src = driveUrl.url
         callPlay();
-
       } else {
-
         fetch(url_video_domain+'drive/get/'+index+'/drive')
             .then(response => {
               if (response.status === 200) { // Check if status code is 200
@@ -52,15 +49,15 @@ const DrivePlayer = ({index,  isPlay=false}) => {
                   index: index,
                   url: url
                 }]);
-                video.src = url
-                callPlay()
+                if(url){
+                  video.src = url
+                  callPlay()
+                }
               }
             }).catch(error => {
               console.error(error);
             });
-
       }
-
     }, []);
     
     return (

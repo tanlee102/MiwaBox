@@ -25,7 +25,8 @@ const ThreadVideo = () => {
            scrolDex, setScrolDex, 
            isDisplayGrid, setIsDisplayGrid, 
            setIsScrollToBottomGrid, isScrollToBottomGrid, 
-           deleteVideo } = useContext(VideoThreadContext);
+           deleteVideo,
+           videoDriveUrls } = useContext(VideoThreadContext);
 
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
@@ -34,9 +35,6 @@ const ThreadVideo = () => {
     const preDex = useRef(0);
     const containerRef = useRef(null);
     const itemsRef = useRef(null);
-
-    const [link1, setLink1] = useState('');
-    const [link2, setLink2] = useState('');
 
 
     useLayoutEffect(() => {
@@ -87,7 +85,6 @@ const ThreadVideo = () => {
     
 
 
-
     const moveToIndex = (index) => {
         if(index >= 0 && index < data.length){
             let itemHeight = document.querySelector(".video-thread div").offsetHeight;
@@ -99,7 +96,7 @@ const ThreadVideo = () => {
                 
             containerRef.current.scrollTop = itemHeight*index;
             setScrolDex(index);
-            preDex.current = index
+            preDex.current = index;
 
             setIsDisplayGrid(false);
     
@@ -160,23 +157,11 @@ const ThreadVideo = () => {
 
 
 
-    useEffect(() => {
-        if(infoApp && infoApp?.appType == 2 && data.length > 0)
-            if(scrolDex || scrolDex == 0){
-                if(data[scrolDex]){
-                    let dataLink = data[scrolDex]?.link;
-                    if(dataLink){
-                        setLink1(dataLink[0]);
-                        setLink2(dataLink[dataLink.length - 1]); 
-                    }
-                }
-            }
-    }, [scrolDex, data])
-
-
-
-    const openNewWindow = (url) => {
-        window.open(url, '_blank')
+    const openDownloadWindow = (index) => {
+        const driveUrl = videoDriveUrls.find(obj => obj.index === index);
+        if(driveUrl?.url){
+            window.open(driveUrl.url, '_blank');
+        }
     }
 
 
@@ -193,9 +178,9 @@ const ThreadVideo = () => {
                 </svg>
             </span>
 
-            <span className='non-select' id='username-video-thread' onClick={() => {openNewWindow(link1)}}>@{data[scrolDex]?.username}</span>
+            <span className='non-select' id='username-video-thread'>@{data[scrolDex]?.username}</span>
 
-            <span onClick={() => {openNewWindow(link2)}} id='download-btn-video-thread'>
+            <span onClick={() => {openDownloadWindow(data[scrolDex]?.videoUrl)}} id='download-btn-video-thread'>
                 <svg viewBox="0 0 24 24" fill="none"><path d="M12.5 4V17M12.5 17L7 12.2105M12.5 17L18 12.2105" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M6 21H19" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </span>
 

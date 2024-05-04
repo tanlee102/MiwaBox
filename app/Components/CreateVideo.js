@@ -1,10 +1,13 @@
-import React, { useContext, useState } from 'react'
-import HLSVideoPlayer from './HLSVideoPlayer';
+import React, { useContext } from 'react'
 import { VideoThreadContext } from '../Context/VideoThreadContext';
+import { AppsConext } from '../Context/AppsContext';
+import { AccountContext } from '../Context/AccountContext';
 
 const CreateVideo = () => {
 
     const { username, setUsername, password, setPassword, file, SetFile, SetImg} = useContext(VideoThreadContext)
+    const {infoApp} = useContext(AppsConext);
+    const {account} = useContext(AccountContext);
     
     const puttingFile = (e) => {
         var file = e.target.files[0];
@@ -47,6 +50,8 @@ const CreateVideo = () => {
 
 
   return (
+    <>
+    {String(infoApp?.creatorAddress).toLowerCase() === String(account).toLowerCase() ?
     <div className='contain-create-video-thread'>
 
         <div>
@@ -77,6 +82,8 @@ const CreateVideo = () => {
         </div>
 
     </div>
+    : ""}
+    </>
   )
 }
 
