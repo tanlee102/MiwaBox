@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react'
+import React, { useContext, useRef, useEffect, useState } from 'react'
 import { VideoThreadContext } from '../Context/VideoThreadContext';
 import { url_video_domain } from '../env_video';
 
@@ -6,8 +6,10 @@ const DrivePlayer = ({index,  isPlay=false}) => {
    
     const videoRef = useRef(null);
     const { videoDriveUrls, setVideoDriveUrls } = useContext(VideoThreadContext);
+    const [isSrc, setIsSrc] = useState(false);
 
     const callPlay = async () => {
+      setIsSrc(true);
       if(isPlay){
         setTimeout(() => {
           const video = videoRef.current;
@@ -42,13 +44,13 @@ const DrivePlayer = ({index,  isPlay=false}) => {
             })
             .then(data => {
               const driveUrl = data?.driveUrl;
-              if (driveUrl) {
+              if (driveUrl && Array.isArray(driveUrl)) {
                 const url = (driveUrl[driveUrl.length - 1])
-                setVideoDriveUrls(prevArray => [...prevArray, {
-                  index: index,
-                  url: url
-                }]);
                 if(url){
+                  setVideoDriveUrls(prevArray => [...prevArray, {
+                    index: index,
+                    url: url
+                  }]);
                   videoRef.current.src = url
                   callPlay()
                 }
@@ -61,7 +63,7 @@ const DrivePlayer = ({index,  isPlay=false}) => {
     
     return (
       <>
-        {!videoRef.current?.src || videoRef.current?.src.length < 23 ?
+        { !isSrc ?
         <div className='video-drive-player'>
           <div className='contain-loader-hozon'>
               <div className="loader-hozon"></div>
