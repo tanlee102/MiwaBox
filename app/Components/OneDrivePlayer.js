@@ -11,7 +11,7 @@ const OneDrivePlayer = ({src}) => {
         return response.json();
       })
       .then(data => {
-        setVideoSrc(data?.webUrl);
+        setVideoSrc(data?.driveUrl);
       })
       .catch(error => {
         console.error('Error:', error);
