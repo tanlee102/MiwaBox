@@ -1,11 +1,11 @@
 import React, { useContext, useRef, useEffect } from 'react'
 import { VideoThreadContext } from '../Context/VideoThreadContext';
+import { url_video_domain } from '../env_video';
 
 const DrivePlayer = ({index,  isPlay=false}) => {
    
     const videoRef = useRef(null);
     const { videoDriveUrls, setVideoDriveUrls } = useContext(VideoThreadContext);
-    const host_url = 'https://one.miwabox.live'
 
     const callPlay = async () => {
       if(isPlay){
@@ -38,7 +38,7 @@ const DrivePlayer = ({index,  isPlay=false}) => {
 
       } else {
 
-        fetch(host_url+'/drive/get/'+index+'/drive')
+        fetch(url_video_domain+'drive/get/'+index+'/drive')
             .then(response => {
               if (response.status === 200) { // Check if status code is 200
                 return response.json();

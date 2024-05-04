@@ -5,9 +5,10 @@ import { AppsConext } from './AppsContext';
 import { AccountContext } from './AccountContext';
 import { env_SMARTCHAIN } from '../env';
 import { ethers, id } from 'ethers';
-import { LENGTH_LIST_VIDEO, url_image_domain } from '../env_video';
+import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain } from '../env_video';
 import { WindowContext } from './WindowContext';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export const VideoThreadContext = createContext();
 
@@ -22,7 +23,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const [username, setUsername] = useState('');
     const [img, SetImg] = useState(null);
     const [file, SetFile] = useState(null);
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState(Cookies.get('password') ? String(Cookies.get('password')) : '');
 
     const [viParam, setViParam] = useState(null);
 
@@ -78,6 +79,11 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const btnCreateVideo = async () => {
 
       if(password.trim().length > 0 && username.trim().length > 0 && img && file){
+        
+        if(!Cookies.get('password')){
+          Cookies.set('password', password, { expires: 30, path: '/' });
+        }
+
         setLoadCreateState(true);
 
         var formData = new FormData();
@@ -132,7 +138,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
     
     const deleteVideoDrive = async (id) => {
-      const url = 'https://one.miwabox.live/drive/delete/'+ id + '?password=' + password;
+      const url = url_video_domain+'drive/delete/'+ id + '?password=' + password;
       try {
         const response = await axios.get(url);
         console.log(response.data);
@@ -143,15 +149,19 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
 
     const deleteVideoBlock = async (id) => {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
-
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
-
-      const tx = await contractWithSigner.updateDisplayVideo(Number(id), false);
-      await tx.wait(); 
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
+  
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
+  
+        const tx = await contractWithSigner.updateDisplayVideo(Number(id), false);
+        await tx.wait();  
+      } catch (error) {
+        throw error
+      }
     }
     
     const deleteVideo = async (infovideo) => {
@@ -197,8 +207,6 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
           videoUrl: result.videoUrl,
           username: result.username,
           link: String(result.link).split(','),
-          // display: Boolean(result.display),
-          // timestamp: result.timestamp
         };
       }
       return result
@@ -217,8 +225,6 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         try {
           const result = await contract.getVideos(isLast, _currentId, LENGTH_LIST_VIDEO);
 
-          console.log(result.length)
-
           if(result?.length > 0){
   
             let finalRe = [];
@@ -231,8 +237,6 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
                 videoUrl: item.videoUrl,
                 username: item.username,
                 link: String(item.link).split(','),
-                // display: Boolean(item.display),
-                // timestamp: item.timestamp
               };
 
               finalRe.push(newItem);
@@ -301,7 +305,10 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
 
     useEffect(() => {
-      if(infoApp && infoApp.appType == 2) getData(true, 0, true);
+      if(infoApp && infoApp.appType == 2){
+        getData(true, 0, true);
+        setUsername(infoApp.title.toLowerCase().replace(/ /g, "_"))
+      }
     }, [infoApp]);
 
 

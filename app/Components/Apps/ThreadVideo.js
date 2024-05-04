@@ -35,7 +35,6 @@ const ThreadVideo = () => {
     const containerRef = useRef(null);
     const itemsRef = useRef(null);
 
-    const [username, setUsernam] = useState('');
     const [link1, setLink1] = useState('');
     const [link2, setLink2] = useState('');
 
@@ -165,7 +164,6 @@ const ThreadVideo = () => {
         if(infoApp && infoApp?.appType == 2 && data.length > 0)
             if(scrolDex || scrolDex == 0){
                 if(data[scrolDex]){
-                    setUsernam(data[scrolDex]?.username);
                     let dataLink = data[scrolDex]?.link;
                     if(dataLink){
                         setLink1(dataLink[0]);
@@ -195,7 +193,7 @@ const ThreadVideo = () => {
                 </svg>
             </span>
 
-            <span className='non-select' id='username-video-thread' onClick={() => {openNewWindow(link1)}}>@{username}</span>
+            <span className='non-select' id='username-video-thread' onClick={() => {openNewWindow(link1)}}>@{data[scrolDex]?.username}</span>
 
             <span onClick={() => {openNewWindow(link2)}} id='download-btn-video-thread'>
                 <svg viewBox="0 0 24 24" fill="none"><path d="M12.5 4V17M12.5 17L7 12.2105M12.5 17L18 12.2105" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M6 21H19" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
