@@ -28,11 +28,10 @@ const DrivePlayer = ({index,  isPlay=false}) => {
 
     useEffect(() => {
 
-      const video = videoRef.current;
       const driveUrl = videoDriveUrls.find(obj => obj.index === index);
 
       if (driveUrl) {
-        video.src = driveUrl.url
+        videoRef.current.src = driveUrl.url
         callPlay();
       } else {
         fetch(url_video_domain+'drive/get/'+index+'/drive')
@@ -50,7 +49,7 @@ const DrivePlayer = ({index,  isPlay=false}) => {
                   url: url
                 }]);
                 if(url){
-                  video.src = url
+                  videoRef.current.src = url
                   callPlay()
                 }
               }
@@ -62,7 +61,7 @@ const DrivePlayer = ({index,  isPlay=false}) => {
     
     return (
       <>
-        {!videoRef.current?.src ?
+        {videoRef.current?.src.length < 23 ?
         <div className='video-drive-player'>
           <div className='contain-loader-hozon'>
               <div className="loader-hozon"></div>
