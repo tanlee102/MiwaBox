@@ -8,6 +8,7 @@ body, main, html{
     position: relative;
     width: 100%;
     height: 100%;
+    height: 100dvh;
 }
 
 img, svg, button, ul, li, .non-select{
