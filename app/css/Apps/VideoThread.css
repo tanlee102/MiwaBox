@@ -173,8 +173,8 @@
 
 .video-thread{
     position: relative;
-    margin-top: 41px;
-    height: calc(100% - 41px);
+    margin-top: 40px;
+    height: calc(100% - 40px);
     width: 100%;
     background-color: black;
 
