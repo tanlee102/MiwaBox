@@ -198,6 +198,23 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     
 
 
+    const deleteVideoFB = async (infovideo) => {
+      if(password.trim().length > 0){
+        if (confirm("You want delete this video on facebook?!") == true) {
+          const url = url_video_domain+'drive/delete/'+ infovideo.videoUrl + '/fb?password=' + password;
+          try {
+            const response = await axios.get(url);
+            console.log(response.data);
+            alert(response.data.message)
+          } catch (error) {
+            console.log('Error:', error);
+            throw error;
+          }    
+        }
+      }else{
+        alert('Please input password!!')
+      }
+    }
 
 
 
@@ -351,7 +368,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     },[currentIndex]);
 
   return (
-    <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, deleteVideo, loadCreateState, onLoadData, 
+    <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, deleteVideo, deleteVideoFB, loadCreateState, onLoadData, 
                                             setViParam, data, gridData, scrolDex, setScrolDex, isDisplayGrid, setIsDisplayGrid, setIsScrollToBottomGrid, isScrollToBottomGrid,  
                                             username, setUsername, img, SetImg, file, SetFile, password, setPassword,
                                             videoDriveUrls, setVideoDriveUrls

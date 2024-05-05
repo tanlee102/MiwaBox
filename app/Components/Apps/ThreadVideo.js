@@ -25,7 +25,7 @@ const ThreadVideo = () => {
            scrolDex, setScrolDex, 
            isDisplayGrid, setIsDisplayGrid, 
            setIsScrollToBottomGrid, isScrollToBottomGrid, 
-           deleteVideo,
+           deleteVideo, deleteVideoFB,
            videoDriveUrls } = useContext(VideoThreadContext);
 
     const {infoApp} = useContext(AppsConext);
@@ -188,6 +188,10 @@ const ThreadVideo = () => {
             <>
             <span onClick={() => {deleteVideo(data[scrolDex])}} id='btn-add-video-thread'>
                 <svg viewBox="-3 -2 36 36" fill="none"><path stroke="#FFFFF" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M22.5 4.742a13 13 0 11-13 0M16 3v10"/></svg>
+            </span>
+
+            <span onClick={() => {deleteVideoFB(data[scrolDex])}} id='btn-add-video-thread'>
+                <svg viewBox="0 0 22 22"><path d="M15.7439414,9 L16.5,9 C18.9852814,9 21,11.0147186 21,13.5 C21,15.9852814 18.9852814,18 16.5,18 L6.5,18 C4.56700338,18 3,16.4329966 3,14.5 C3,12.736764 4.30385293,11.2780593 6,11.0354444 C6,8.23857625 8.23857625,6 11,6 L11.5,6 C13.4593282,6 15.1261868,7.25221144 15.7439414,9 L15.7439414,9 Z M15.9725356,10 C15.9906833,10.1641669 16,10.3309955 16,10.5 C16,10.7761424 15.7761424,11 15.5,11 C15.2238576,11 15,10.7761424 15,10.5 C15,8.56700338 13.4329966,7 11.5,7 L11,7 C8.790861,7 7,8.790861 7,11 L7,11.5 C7,11.7761424 6.77614237,12 6.5,12 C5.11928813,12 4,13.1192881 4,14.5 C4,15.8807119 5.11928813,17 6.5,17 L16.5,17 C18.4329966,17 20,15.4329966 20,13.5 C20,11.5670034 18.4329966,10 16.5,10 L15.9725356,10 L15.9725356,10 Z M9.5,13 C9.22385763,13 9,12.7761424 9,12.5 C9,12.2238576 9.22385763,12 9.5,12 L13.5,12 C13.7761424,12 14,12.2238576 14,12.5 C14,12.7761424 13.7761424,13 13.5,13 L9.5,13 Z"/></svg>
             </span>
 
             <span onClick={() => {setDisplayCreateVideo(true)}} id='btn-add-video-thread'>
