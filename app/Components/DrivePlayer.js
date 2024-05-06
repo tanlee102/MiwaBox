@@ -75,7 +75,7 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
     
     return (
       <>
-        { !isRound ?
+        { !isRound || !videoSrc ?
           <div className='video-drive-player'>
             <div className='contain-loader-hozon'>
                 <div className="loader-hozon"></div>
