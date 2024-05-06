@@ -70,7 +70,7 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
           video.pause();
         }
       }
-    }, [isPlay]);
+    }, [isPlay, videoSrc]);
 
     
     return (
