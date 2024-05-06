@@ -51,7 +51,7 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
 
     useEffect(() => {
       const video = videoRef.current;
-      if(video){
+      if(video && videoSrc){
         if(isPlay){
           setTimeout(() => {
             const playPromise = video.play();
