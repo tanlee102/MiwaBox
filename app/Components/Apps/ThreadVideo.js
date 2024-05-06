@@ -252,7 +252,7 @@ const ThreadVideo = () => {
                         {isInRange ?
                             <div className='contain-plyr'>
                                 <DrivePlayer isPlay={index == scrolDex} 
-                                            isRound={isRound} 
+                                            isRound={isRound || index == scrolDex + 2} 
                                             index={String(item?.videoUrl)} 
                                             cipherId={String(item.link[0])} />
                             </div>
