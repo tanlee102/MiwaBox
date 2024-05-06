@@ -24,6 +24,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const [img, SetImg] = useState(null);
     const [file, SetFile] = useState(null);
     const [password, setPassword] = useState(Cookies.get('password') ? String(Cookies.get('password')) : '');
+    const [isUploadFB, setIsUploadFB] = useState(true);
+    const [isUsingWorker, setIsUsingWorker] = useState(false);
 
     const [viParam, setViParam] = useState(null);
 
@@ -39,7 +41,9 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
 
 
-    const sendDataVideo = async (thumbnail, index) => {
+    const sendDataVideo = async (thumbnail, index, workerID) => {
+
+      console.log(workerID)
 
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -49,24 +53,29 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         const signer = await provider.getSigner();
         const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
 
-        const tx = await contractWithSigner.sendVideo(thumbnail, index, username, ' , ');
+        const tx = await contractWithSigner.sendVideo(thumbnail, index, username, (isUsingWorker) ? (workerID+' , ') : ' , ');
         await tx.wait(); 
 
-        try {
-          axios.get(url_video_server+'facebook?password='+password+'&index='+index)
-          .then(function (response) {
-              console.log(response);
-              alert('Successful Video Upload.')
-              setLoadCreateState(false);
-          })
-          .catch(function (error) {
-              console.log(error);
+        if(isUploadFB){
+            try {
+              axios.get(url_video_server+'facebook?password='+password+'&index='+index)
+              .then(function (response) {
+                  console.log(response);
+                  alert('Successful Video Upload.')
+                  setLoadCreateState(false);
+              })
+              .catch(function (error) {
+                  console.log(error);
+                  alert('Successful Video Upload, but Failed to Upload on Facebook.')
+                  setLoadCreateState(false);
+              });
+            } catch (error) {
+              console.log(error)
               alert('Successful Video Upload, but Failed to Upload on Facebook.')
               setLoadCreateState(false);
-          });
-        } catch (error) {
-          console.log(error)
-          alert('Successful Video Upload, but Failed to Upload on Facebook.')
+            }
+        }else{
+          alert("Successful Video Upload and Non-Upload to Facebook.")
           setLoadCreateState(false);
         }
 
@@ -109,7 +118,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
                 }
             }).then(response => {
 
-                sendDataVideo(res.data.id, response.data.index);
+                console.log(response)
+                sendDataVideo(res.data.id, response.data.index, response.data.workerID);
 
             }).catch(error => {
                 deleteImageDrive(res.data.id);
@@ -371,7 +381,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, deleteVideo, deleteVideoFB, loadCreateState, onLoadData, 
                                             setViParam, data, gridData, scrolDex, setScrolDex, isDisplayGrid, setIsDisplayGrid, setIsScrollToBottomGrid, isScrollToBottomGrid,  
                                             username, setUsername, img, SetImg, file, SetFile, password, setPassword,
-                                            videoDriveUrls, setVideoDriveUrls
+                                            videoDriveUrls, setVideoDriveUrls,
+                                            isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker
                                         }}>
         {children}
     </VideoThreadContext.Provider>

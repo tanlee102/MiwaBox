@@ -244,17 +244,24 @@ const ThreadVideo = () => {
         
         
         <div className='video-thread' onClick={() => {setIsDisplayGrid(false)}}>
-            {data?.map((item, index) => (
-                <div key={index}>
-                    {index == scrolDex || index == scrolDex - 1 || index == scrolDex - 2 || index == scrolDex + 1 || index == scrolDex + 2  ?
-                        <div className='contain-plyr'>
-                            <DrivePlayer isPlay={index == scrolDex} index={String(item?.videoUrl)} />
-                        </div>
-                        : 
-                        null
-                    }
-                </div>
-            ))}
+            {data?.map((item, index) => {
+                const isInRange = Math.abs(index - scrolDex) <= 3;
+                const isRound = Math.abs(index - scrolDex) <= 1;
+                return (
+                    <div key={index}>
+                        {isInRange ?
+                            <div className='contain-plyr'>
+                                <DrivePlayer isPlay={index == scrolDex} 
+                                            isRound={isRound} 
+                                            index={String(item?.videoUrl)} 
+                                            cipherId={String(item.link[0])} />
+                            </div>
+                            : 
+                            null
+                        }
+                    </div>
+                );
+            })}
         </div>
 
 

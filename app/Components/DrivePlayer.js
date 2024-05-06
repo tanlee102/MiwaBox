@@ -1,75 +1,89 @@
 import React, { useContext, useRef, useEffect, useState } from 'react'
 import { VideoThreadContext } from '../Context/VideoThreadContext';
-import { url_video_domain } from '../env_video';
+import { url_video_domain, url_video_worker } from '../env_video';
 
-const DrivePlayer = ({index,  isPlay=false}) => {
+const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
    
     const videoRef = useRef(null);
     const { videoDriveUrls, setVideoDriveUrls } = useContext(VideoThreadContext);
-    const [isSrc, setIsSrc] = useState(false);
+    const [videoSrc, setVideoSrc] = useState(null);
 
-    const callPlay = async () => {
-      setIsSrc(true);
-      if(isPlay){
-        setTimeout(() => {
-          const video = videoRef.current;
-          const playPromise = video.play();
-          if (playPromise !== undefined) {
-              playPromise
-                  .catch(error => {
-                      video.muted = true;
-                      video.play()
-                          .catch(error => {
-                              console.log('Replay failed: ', error.message);
-                          });
-                  });
-          }
-        }, 888);
-      }
+
+    const fetchVideoData = async (type) => {
+      fetch(type == 0 ? (url_video_worker+'?ciphertext='+cipherId) : (url_video_domain+'drive/get/'+index+'/drive'))
+          .then(response => {
+            if (response.status === 200) { // Check if status code is 200
+              return response.json();
+            }
+          })
+          .then(data => {
+            const driveUrl = ((type == 0) ? data : data?.driveUrl );
+            if (driveUrl && Array.isArray(driveUrl)) {
+              const url = (driveUrl[driveUrl.length - 1])
+              if(url){
+                setVideoDriveUrls(prevArray => [...prevArray, {
+                  index: index,
+                  url: url
+                }]);
+                setVideoSrc(url);
+              }
+            }
+          }).catch(error => {
+            console.error(error);
+            if(type == 0) fetchVideoData(1);
+          });
     }
 
+
     useEffect(() => {
-
       const driveUrl = videoDriveUrls.find(obj => obj.index === index);
-
       if (driveUrl) {
-        videoRef.current.src = driveUrl.url
-        callPlay();
+        setVideoSrc(driveUrl.url)
       } else {
-        fetch(url_video_domain+'drive/get/'+index+'/drive')
-            .then(response => {
-              if (response.status === 200) { // Check if status code is 200
-                return response.json();
-              }
-            })
-            .then(data => {
-              const driveUrl = data?.driveUrl;
-              if (driveUrl && Array.isArray(driveUrl)) {
-                const url = (driveUrl[driveUrl.length - 1])
-                if(url){
-                  setVideoDriveUrls(prevArray => [...prevArray, {
-                    index: index,
-                    url: url
-                  }]);
-                  videoRef.current.src = url
-                  callPlay()
-                }
-              }
-            }).catch(error => {
-              console.error(error);
-            });
+        if(String(cipherId.trim()).length > 13 ){
+          fetchVideoData(0);
+        }else{
+          fetchVideoData(1);
+        }
       }
     }, []);
+
+
+    useEffect(() => {
+      const video = videoRef.current;
+      if(video){
+        if(isPlay){
+          setTimeout(() => {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise
+                    .catch(error => {
+                        video.muted = true;
+                        video.play()
+                            .catch(error => {
+                                console.log('Replay failed: ', error.message);
+                            });
+                    });
+            }
+          }, 100);
+        }else{
+          video.pause();
+        }
+      }
+    }, [isPlay]);
+
     
     return (
       <>
-        { !isSrc ?
-        <div className='video-drive-player'>
-          <div className='contain-loader-hozon'>
-              <div className="loader-hozon"></div>
-          </div>
-        </div> : ""}
-        <video className='video-onedrive-player' playsInline controls loop ref={videoRef}></video>
+        { !isRound ?
+          <div className='video-drive-player'>
+            <div className='contain-loader-hozon'>
+                <div className="loader-hozon"></div>
+            </div>
+          </div> 
+        : 
+          <video className='video-onedrive-player' src={videoSrc} playsInline controls loop ref={videoRef}></video>
+        }
       </>
     )
 }

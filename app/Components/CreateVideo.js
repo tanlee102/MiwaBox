@@ -5,9 +5,11 @@ import { AccountContext } from '../Context/AccountContext';
 
 const CreateVideo = () => {
 
-    const { username, setUsername, password, setPassword, file, SetFile, SetImg} = useContext(VideoThreadContext)
+    const { username, setUsername, password, setPassword, file, SetFile, SetImg, 
+            isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker} = useContext(VideoThreadContext)
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
+  
     
     const puttingFile = (e) => {
         var file = e.target.files[0];
@@ -80,6 +82,16 @@ const CreateVideo = () => {
                     setPassword(event.target.value);
                 }} />
         </div>
+
+        <label>
+            <br/>
+            <input type="checkbox" checked={isUploadFB} onChange={() => {setIsUploadFB(!isUploadFB)}}/>Upload FB
+        </label>
+
+        <label>
+            <br/>
+            <input type="checkbox" checked={isUsingWorker} onChange={() => {setIsUsingWorker(!isUsingWorker)}}/>Using Worker
+        </label>
 
     </div>
     : ""}
