@@ -38,7 +38,7 @@ const ThreadChat = () => {
                         {item.type == 0 ? 
                             <p dangerouslySetInnerHTML={{ __html: sanitizeAndUrlify(item.value) }}></p>
                         : item.type == 1 ?
-                            <img loading='eager' onClick={() => {showImageViewer(item.value)}} src={item.value} />
+                            <img onClick={() => {showImageViewer(item.value)}}  src={item.value}  onError={(e) => {e.target.src = 'https://img.freepik.com/premium-vector/black-error-404-pixel-computer-app-illustration-symbol-web-site-page-vector_744955-1043.jpg';}}/>
                             : 
                             String(item.value).includes(".m3u8") ?
                                 <HLSVideoPlayer src={item.value} />
