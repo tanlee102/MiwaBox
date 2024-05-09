@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 
 import { AppsConext } from './AppsContext';
 import { AccountContext } from './AccountContext';
+import { WindowContext } from './WindowContext';
 
 import { env_SMARTCHAIN } from '../env';
 import { hashCurrentMessageIndex, hashMessage, hashPreScrollHeight } from '../global';
@@ -29,6 +30,7 @@ const ThreadProvider = ({ children }) => {
 
     const { rpcProvider } = useContext(AccountContext);
     const { infoApp, listMessage, setListMessage } = useContext(AppsConext);
+    const { currentIndex } = useContext(WindowContext);
 
     const [currentMsgsIndex, setCurrentMsgsIndex] = useState(0);
 
@@ -300,6 +302,11 @@ const ThreadProvider = ({ children }) => {
         }
     }
 
+    useEffect(() => {
+        setLoader(false);
+        setCurrentMsgsIndex(0);
+        setListMessage([]);
+    }, [currentIndex])
 
 
   return (
