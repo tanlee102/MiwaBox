@@ -8,6 +8,7 @@ import { AccountContext } from './AccountContext';
 
 import { env_SMARTCHAIN } from '../env';
 import { hashCurrentMessageIndex, hashMessage, hashPreScrollHeight } from '../global';
+import { nanoid } from 'nanoid';
 
 const TimeOutToBottomContainApp = (time) => {
     setTimeout(() => {
@@ -63,7 +64,7 @@ const ThreadProvider = ({ children }) => {
                     let listUserAddress = [];
                     for(let i = 0; i < msgs.length; i++){
                         remsgs.push({
-                            index: i + (ethers.toNumber(msgs[i].timestamp) & 0xFFFF),
+                            index: String(i + nanoid()),
                             sender: msgs[i].sender,
                             value: msgs[i].value,
                             type: ethers.toNumber(msgs[i].typ),
@@ -140,7 +141,7 @@ const ThreadProvider = ({ children }) => {
 
 
 
-    const getNextMessages = async () =>{
+    const getNextMessages = async () => {
 
         setLoadLatest(true);
         TimeOutToBottomContainApp(333);
