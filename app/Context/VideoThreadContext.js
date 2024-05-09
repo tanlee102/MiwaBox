@@ -112,7 +112,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
             var fileFormData = new FormData();
             fileFormData.append('file', file);
             
-            axios.post(url_video_server+'drive/upload?password='+password+'&type_pip=2&permission=1&folder='+username, fileFormData, {
+            axios.post(url_video_server+'drive/upload?password='+password+'&type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
