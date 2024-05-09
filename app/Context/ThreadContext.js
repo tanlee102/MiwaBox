@@ -245,6 +245,7 @@ const ThreadProvider = ({ children }) => {
                     setCurrentMsgsIndex(0);
                     setListMessage([]);
                     setFinished(true);
+                    setLoader(false);
                     return;
                 }
         
