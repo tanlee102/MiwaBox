@@ -14,7 +14,6 @@ import DrivePlayer from '../DrivePlayer';
 
 import { useRouter } from 'next/navigation'
 import { url_image_domain } from '@/app/env_video'
-import { nanoid } from 'nanoid';
 
 
 const ThreadVideo = () => {
@@ -216,7 +215,7 @@ const ThreadVideo = () => {
             <div ref={refGridContainer} className={`content-grid-video-thread ${isMobile ? 'mobile-content-grid-video-thread' : 'desktop-content-grid-video-thread'}`}>
                 <div className='grid-video-thread'>
                     {gridData?.map((item, index) => (
-                        <span key={index+nanoid()} className={scrolDex === index ? 'chose-played-video' : ''} onClick={() => {router.push('/?id='+currentIndex+'&vi='+item.id); moveToIndex(index) }}>
+                        <span key={index} className={scrolDex === index ? 'chose-played-video' : ''} onClick={() => {router.push('/?id='+currentIndex+'&vi='+item.id); moveToIndex(index) }}>
                             <img src={ url_image_domain + item?.thumbUrl + '.jpeg'} />
                         </span>
                     ))}
@@ -249,7 +248,7 @@ const ThreadVideo = () => {
                 const isInRange = Math.abs(index - scrolDex) <= 3;
                 const isRound = Math.abs(index - scrolDex) <= 1;
                 return (
-                    <div key={index+nanoid()}>
+                    <div key={index}>
                         {isInRange ?
                             <div className='contain-plyr'>
                                 <DrivePlayer isPlay={index == scrolDex} 
