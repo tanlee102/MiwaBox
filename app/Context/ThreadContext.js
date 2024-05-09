@@ -64,7 +64,7 @@ const ThreadProvider = ({ children }) => {
                     let listUserAddress = [];
                     for(let i = 0; i < msgs.length; i++){
                         remsgs.push({
-                            index: String(i + nanoid()),
+                            index: String(i + nanoid() + Math.random().toString(36).substring(2, 15)),
                             sender: msgs[i].sender,
                             value: msgs[i].value,
                             type: ethers.toNumber(msgs[i].typ),
