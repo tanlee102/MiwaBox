@@ -13,6 +13,7 @@
     "@vercel/analytics": "^1.2.2",
     "axios": "^1.6.8",
     "ethers": "^6.11.1",
+    "firebase": "^10.11.1",
     "hls.js": "^1.5.7",
     "js-cookie": "^3.0.5",
     "nanoid": "^5.0.7",
