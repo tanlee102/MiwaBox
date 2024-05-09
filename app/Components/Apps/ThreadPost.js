@@ -5,6 +5,7 @@ import { AppsConext } from '@/app/Context/AppsContext';
 import { AccountContext } from '@/app/Context/AccountContext';
 import { WindowContext } from '@/app/Context/WindowContext';
 import { sanitizeAndUrlify } from '@/app/helper/sanitizeAndUrlify';
+import { nanoid } from 'nanoid';
 
 const ThreadPost = () => {
 
@@ -26,12 +27,12 @@ const ThreadPost = () => {
           {listMessage?.map((item, index) => (
             <>
             {item.type === 0 ? 
-              <p  key={index} 
+              <p  key={index+nanoid()} 
                   className={`${item.bold ? 'ps-bold' : ''} ${item.center ? 'ps-center' : ''} ${item.head ? 'ps-head' : ''}`} 
                   dangerouslySetInnerHTML={{ __html: sanitizeAndUrlify(item.value) }} 
                   ></p>
             : 
-              <p key={index} className={`${item.bold ? 'ps-bold' : ''} ${item.center ? 'ps-center' : ''} ${item.head ? 'ps-head' : ''}`}>
+              <p key={index+nanoid()} className={`${item.bold ? 'ps-bold' : ''} ${item.center ? 'ps-center' : ''} ${item.head ? 'ps-head' : ''}`}>
                 {item.type === 1 && <img onClick={() => {showImageViewer(item.value)}} loading="lazy" src={item.value} />}
                 {item.type === 2 && <video src={item.value} controls />}
               </p>
