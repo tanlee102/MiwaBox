@@ -10,6 +10,7 @@ import { WindowContext } from '../Context/WindowContext';
 
 import data_suggestion_true from '../data/data_suggestion_true.json'
 import data_suggestion_false from '../data/data_suggestion_false.json'
+import { nanoid } from 'nanoid';
 
 const ListApp = () => {
 
@@ -137,7 +138,7 @@ const ListApp = () => {
 
     {items.map((item, index) => (
       ethers.toNumber(item?.id) > 0 ? 
-        <Link key={index} href={"/?id="+ethers.toNumber(item.id)}>
+        <Link key={index+nanoid()} href={"/?id="+ethers.toNumber(item.id)}>
           <ItemApp address={item.appAddress} title={ethers.decodeBytes32String(item.title)} index={ethers.toNumber(item.id)} appType={ethers.toNumber(item.appType)} isSelected={ethers.toNumber(item.id) === currentIndex} isBorder={index == Number(items.length - 1) || ethers.toNumber(items[index + 1]?.id) == 0} svgTag={
             <svg fill="#000000" viewBox="0 0 24 24"><circle id="primary" cx="12" cy="12" r="10"></circle><path id="secondary" d="M20.91,4.5,19.5,3.09a2,2,0,0,0-2.83,0L10.24,9.51a1,1,0,0,0-.29.73L10,13a1,1,0,0,0,1,1l2.78.05h0a1,1,0,0,0,.71-.29l6.42-6.43A2,2,0,0,0,20.91,4.5Z"></path></svg>}>
           </ItemApp>
