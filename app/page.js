@@ -20,7 +20,6 @@ import './css/Apps/InputThread.css'
 import './css/Apps/Welcome.css'
 import './css/Apps/Manage.css'
 
-
 import React, { useState } from "react";
 import dynamic from 'next/dynamic';
 import { MetaMaskProvider } from "@metamask/sdk-react";
@@ -30,7 +29,6 @@ import CenterBox from "./Components/LayoutBox/CenterBox";
 import LeftBox from "./Components/LayoutBox/LeftBox";
 import RightBox from "./Components/LayoutBox/RightBox";
 
-import Modal from "./Components/Dialog/Modal";
 import Create from "./Components/Create";
 import ButtonCreate from "./Components/ButtonCreate";
 import TitleCreate from "./Components/TitleCreate";
@@ -42,13 +40,14 @@ import InputProvider from "./Context/InputContext";
 import ThreadProvider from "./Context/ThreadContext";
 import WindowProvider from "./Context/WindowContext";
 
-import ImageViewer from "./Components/Dialog/ImageViewer";
-import NoticePopout from "./Components/NoticePopout";
 import VideoThreadProvider from './Context/VideoThreadContext';
 import CreateVideo from './Components/CreateVideo';
 import CreateVideoButton from './Components/CreateVideoButton';
 
+const Modal = dynamic(() => import('../app/Components/Dialog/Modal.js'), { ssr: false })
 const MiniProfile = dynamic(() => import('../app/Components/Dialog/MiniProfile.js'), { ssr: false })
+const NoticePopout = dynamic(() => import('../app/Components/NoticePopout.js'), { ssr: false })
+const ImageViewer = dynamic(() => import('../app/Components/Dialog/ImageViewer.js'), { ssr: false })
 
 
 export default function HomePage() {
