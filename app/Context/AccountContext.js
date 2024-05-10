@@ -168,6 +168,14 @@ const AccountProvider = ({ children, myUser, setMyUser, setDisplayMiniProfile })
         .then((result) => {
           const data_user = result.user
           const url = service_url+'?access_token='+data_user.accessToken;
+
+          const myuser = {
+            email: data_user?.email,
+            displayName: data_user?.displayName,
+            photoURL: data_user?.photoURL,
+          }
+          setMyUser(myuser);
+
           fetch(url)
             .then(response => {
               if (!response.ok) {
@@ -176,18 +184,13 @@ const AccountProvider = ({ children, myUser, setMyUser, setDisplayMiniProfile })
               return response.json();
             })
             .then(data => {
-              const myuser = {
-                email: data_user?.email,
-                displayName: data_user?.displayName,
-                photoURL: data_user?.photoURL,
-              }
               myuser['access_token'] = data.access_token
               setMyUser(myuser);
-  
               Cookies.set('myuser', JSON.stringify(myuser), { expires: 90, path: '/' });
             })
             .catch(error => {
-              alert("Error when creating token!")
+              setMyUser(null);
+              alert("Error when creating token!");
               console.error(`Fetch Error: ${error}`)
             });
         })
