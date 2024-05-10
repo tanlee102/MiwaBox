@@ -39,6 +39,10 @@
         width: calc(100% - 10px);
     }
 
+    .dialog-mini-profile > div{
+        width: calc(100% - 10px);
+    }
+
 }
 
 

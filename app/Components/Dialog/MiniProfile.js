@@ -14,7 +14,7 @@ const MiniProfile = ({isDisplay,setIsDisplay,user}) => {
   return (
     <>
     {user ?
-    <div className={isDisplay ? "dialog-confirm active-confirm" : "dialog-confirm"}>
+    <div className={isDisplay ? "dialog-mini-profile dialog-confirm active-confirm" : "dialog-confirm"}>
         <div>
             <div>
                 <header>
