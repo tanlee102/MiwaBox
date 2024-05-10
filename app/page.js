@@ -22,7 +22,9 @@ import './css/Apps/Manage.css'
 
 
 import React, { useState } from "react";
+import dynamic from 'next/dynamic';
 import { MetaMaskProvider } from "@metamask/sdk-react";
+import Cookies from 'js-cookie';
 
 import CenterBox from "./Components/LayoutBox/CenterBox";
 import LeftBox from "./Components/LayoutBox/LeftBox";
@@ -46,12 +48,17 @@ import VideoThreadProvider from './Context/VideoThreadContext';
 import CreateVideo from './Components/CreateVideo';
 import CreateVideoButton from './Components/CreateVideoButton';
 
+const MiniProfile = dynamic(() => import('../app/Components/Dialog/MiniProfile.js'), { ssr: false })
+
+
 export default function HomePage() {
 
   const host = typeof window !== "undefined" ? window.location.host : "miwabox.live";
   
   const [displayModalCreate, setDisplayModalCreate] = useState(false);
-  const [displayCreateVideo, setDisplayCreateVideo] = useState(false)
+  const [displayCreateVideo, setDisplayCreateVideo] = useState(false);
+  const [myUser, setMyUser] = useState(Cookies.get('myuser') ? JSON.parse(Cookies.get('myuser')) : null);
+  const [displayMiniProfile, setDisplayMiniProfile] = useState(false)
 
   return (
     <WindowProvider>
@@ -64,7 +71,7 @@ export default function HomePage() {
             },
         }}
       >
-        <AccountProvider>
+        <AccountProvider setMyUser={setMyUser} myUser={myUser} setDisplayMiniProfile={setDisplayMiniProfile}>
           <LayoutProvider>
             <AppsProvider>
               <InputProvider>
@@ -79,6 +86,7 @@ export default function HomePage() {
                       <Modal setDisplayModal={setDisplayCreateVideo} displayModal={displayCreateVideo} title={"Add Video"} body={<CreateVideo/>} footer={<CreateVideoButton/>} displayfooter={true}></Modal>
                       <ImageViewer></ImageViewer>
                       <NoticePopout/>
+                      <MiniProfile isDisplay={displayMiniProfile} setIsDisplay={setDisplayMiniProfile} user={myUser}></MiniProfile>
                   </VideoThreadProvider>
                 </ThreadProvider>
               </InputProvider>

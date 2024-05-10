@@ -22,3 +22,5 @@ export const iconAvatars = [
     'cute/turtle.png',
     'cute/twitter.png'
 ];
+
+export const service_url = 'https://nika-service.vercel.app/user'

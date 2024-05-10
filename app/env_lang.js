@@ -10,7 +10,8 @@ export const env_LANG = {
         add_url: ['Thêm URL', 'Nhập URL'],
         type_media: ['Hình ảnh', 'Video'],
         alert_msg: ['Hãy cài đặt Metamask hoặc Ví Ethereum.', 'Hãy nhập tiêu đề!', 'Hãy nhập URL', 'Đã xảy ra lỗi khi gửi tin nhắn!', 'Hãy nhập phương tiện.', 'Đã xảy ra lỗi khi gửi văn bản!', 'Phải ít hơn 32 byte.', 'Cập nhật người dùng thành công.', 'Thất bại trong việc cập nhật người dùng.'],
-        link_copied: 'Liên kết đã được sao chép!'
+        link_copied: 'Liên kết đã được sao chép!',
+        logout_google: 'Đăng xuất'
     },
     en: {
         placeholder_search: "Enter @ID",
@@ -24,6 +25,7 @@ export const env_LANG = {
         add_url: ['Add URL', 'Enter URL'],
         type_media: ['Image', 'Video'],
         alert_msg: ['Please install Metamask or ETH wallet.', 'Please enter a title!', 'Enter URL', 'An error occurred while sending the message!', 'Please enter the media.', 'An error occurred while sending the text!', 'Must be less than 32 bytes.', 'User update successful.', 'Failed to update user.'],
-        link_copied: 'Link Copied!'
+        link_copied: 'Link Copied!',
+        logout_google: 'Logout'
     }
 }

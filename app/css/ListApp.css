@@ -1,7 +1,7 @@
 .list-app{
     position: relative;
     width: 100%;
-    height: calc(100% - 180px);
+    height: calc(100% - 145px);
     margin-top: 5px;
     overflow: auto;
     border-top: 0.5px solid rgb(189, 189, 189);

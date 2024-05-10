@@ -82,8 +82,135 @@
 
 
 
+.search-app{
+    display: flex;
+    width: calc(100% - 10px);
+    padding: 3px 5px;
+    height: 26px;
+    margin-top: 5px; /* this can be change */
+}
+.search-app input{
+    width: calc(100% - 31px) !important;
+    padding: 0px 5px !important;
+    height: 100%;
+    background-color: rgba(245, 245, 245, 0.764);
+    border: 0.5px solid rgb(136, 136, 136);
+    background-color: none;
+    border-radius: 3px;
+    outline: none;
+    font-size: 0.9em;
+}
+.search-app input:focus{
+    border: 0.5px solid rgb(0, 0, 0);
+}
+.search-app span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 31px;
+    height: 100%;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.search-app span svg{
+    width: 100%;
+    height: 100%;
+    fill: black;
+}
 
-.chose-type-network{
+
+.dropdowns-left-box{
+    position: relative;
+    display: block;
+}
+.dropdowns-left-box .dropdown{
+    display: inline-block !important;
+    width: auto !important;
+    padding-right: 0px !important;
+}
+
+.connect-wallet{
+    position: sticky;
+    width: calc(100% - 10px);
+    height: auto;
+    background-color: rgb(253, 253, 253);
+    padding: 10px 5px;
+    border-top: 0.5px solid rgb(214, 214, 214);
+
+    display: flex;
+    flex-direction: row;
+}
+
+.connect-wallet > div:last-child{
+    position: relative;
+    width: calc(100% - 45px);
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: first baseline;
+}
+.connect-wallet > div > span:first-child{
+    height: 31px;
+    width: 31px;
+    padding: 2px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    border: 1px solid rgb(206, 206, 206);
+    cursor: pointer;
+}
+.connect-wallet > div > span > svg{
+    width: 100%;
+    height: 100%;
+}
+
+.connect-wallet > div > span:last-child{
+    margin-left: 5px;
+    font-weight: bold;
+    padding: 5px 10px;
+    background-color: rgb(238, 238, 238);
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto;
+    max-width: 155px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+
+.connect-wallet p{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 4px;
+    font-size: 0.7em;
+    font-weight: bold;
+    background-color: rgb(228, 228, 228);
+    border-bottom-left-radius: 4px;
+    z-index: 1;
+}
+
+
+#connect-google{
+    margin-right: 5px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+#connect-google > img{
+    width: 34px;
+    height: 34px;
+    margin-top: 0.5px;
+    border-radius: 50%;
+    border: 1px solid rgb(217, 217, 217);
+}
+
+
+
+/* .chose-type-network{
     display: flex;
     flex-direction: row;
     width: calc(100% - 10px);
@@ -126,108 +253,4 @@
 .chose-type-network > span:last-child svg{
     fill: none;
     stroke: black;
-}
-
-
-
-
-.search-app{
-    display: flex;
-    width: calc(100% - 10px);
-    padding: 3px 5px;
-    height: 26px;
-}
-.search-app input{
-    width: calc(100% - 31px) !important;
-    padding: 0px 5px !important;
-    height: 100%;
-    background-color: transparent;
-    border: 0.5px solid rgb(136, 136, 136);
-    background-color: none;
-    border-radius: 3px;
-    outline: none;
-    font-size: 0.9em;
-}
-.search-app span{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 31px;
-    height: 100%;
-    margin-left: 5px;
-    cursor: pointer;
-}
-.search-app span svg{
-    width: 100%;
-    height: 100%;
-    fill: black;
-}
-
-
-.dropdowns-left-box{
-    position: relative;
-    display: block;
-}
-.dropdowns-left-box .dropdown{
-    display: inline-block !important;
-    width: auto !important;
-    padding-right: 0px !important;
-}
-
-.connect-wallet{
-    position: sticky;
-    width: calc(100% - 10px);
-    height: auto;
-    background-color: rgb(253, 253, 253);
-    padding: 10px 5px;
-    border-top: 0.5px solid rgb(214, 214, 214);
-}
-
-.connect-wallet > div{
-    position: relative;
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: first baseline;
-}
-.connect-wallet > div > span:first-child{
-    height: 32px;
-    width: 32px;
-    padding: 2px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 50px;
-    border: 1px solid rgb(206, 206, 206);
-    cursor: pointer;
-}
-.connect-wallet > div > span > svg{
-    width: 100%;
-    height: 100%;
-}
-
-.connect-wallet > div > span:last-child{
-    margin-left: 5px;
-    font-weight: bold;
-    padding: 5px 10px;
-    background-color: rgb(238, 238, 238);
-    border-radius: 5px;
-    cursor: pointer;
-    max-width: 200px;
-    white-space: nowrap;
-    overflow:hidden !important;
-    text-overflow: ellipsis;
-}
-
-.connect-wallet p{
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 4px;
-    font-size: 0.7em;
-    font-weight: bold;
-    background-color: rgb(228, 228, 228);
-    border-bottom-left-radius: 4px;
-    z-index: 1;
-}
+} */
