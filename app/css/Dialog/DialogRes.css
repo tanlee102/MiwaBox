@@ -40,7 +40,7 @@
     }
 
     .dialog-mini-profile > div{
-        width: calc(100% - 15px);
+        width: calc(100% - 15px) !important;
     }
 
 }
