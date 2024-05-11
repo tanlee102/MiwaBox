@@ -1,0 +1,94 @@
+#thumb {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 4;
+   appearance: none;
+   background: none;
+   background-color: transparent;
+   outline: none;
+   cursor: pointer;
+   border: none;
+}
+
+#thumb::-moz-range-track, #thumb::-ms-track {
+   border: none;
+   background: transparent;
+   outline: none;
+   color: transparent;
+}
+
+/* For Chrome and Safari */
+#thumb::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   height: 8px;
+   width: 8px;
+   border-radius: 50%;
+   border: none;
+   background: transparent;
+}
+
+/* For Firefox */
+#thumb::-moz-range-thumb {
+   -moz-appearance: none;
+   height: 8px;
+   width: 8px;
+   border-radius: 50%;
+   border: none;
+   background: transparent;
+}
+
+/* For Internet Explorer/Edge */
+#thumb::-ms-thumb {
+   border: none;
+   height: 8px;
+   width: 8px;
+   border-radius: 50%;
+   background: transparent;
+}
+
+#thumb::-ms-fill-lower, #thumb::-ms-fill-upper {
+   background: transparent;
+}
+
+#thumb::-ms-tooltip {
+   display: none;
+}
+
+#progress {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   top: 50%;
+   transform: translateY(-50%);
+   left: 0;
+   width: 100%;
+   height: 7px;
+   z-index: 3;
+
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   border: none;
+   background-color: rgba(255, 255, 255, 0.201); /* Faded white background for Chrome, Safari, Opera */
+}
+
+#progress::-webkit-progress-bar {
+   background-color: rgba(255, 255, 255, 0.201); /* Faded white background for Chrome, Safari, Opera */
+}
+
+#progress::-moz-progress-bar {
+   background-color: whitesmoke; /* Firefox */
+}
+
+#progress::-ms-fill {
+   background-color: whitesmoke; /* IE */
+}
+
+#progress::-webkit-progress-value {
+   background-color: whitesmoke; /* Chrome, Safari, Opera */
+}

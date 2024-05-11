@@ -2,6 +2,8 @@ import React, { useContext, useRef, useEffect, useState } from 'react'
 import { VideoThreadContext } from '../Context/VideoThreadContext';
 import { url_video_domain, url_video_worker } from '../env_video';
 
+import MyPlayer from './Video/MyPlayer';
+
 const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
    
     const videoRef = useRef(null);
@@ -82,7 +84,7 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
             </div>
           </div> 
         : 
-          <video className='video-onedrive-player' src={videoSrc} playsInline controls loop ref={videoRef}></video>
+          <MyPlayer videoRef={videoRef} videoSrc={videoSrc}/>
         }
       </>
     )
