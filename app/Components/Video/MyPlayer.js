@@ -96,7 +96,7 @@ const MyPlayer = ({videoRef, videoSrc}) => {
             <div id="b-play" onClick={handlePlayPause}>
                 {!playing ? 
                     <div id="b-play-btn"> 
-                        <svg viewBox="-1.5 -5 135 135" x="0px" y="0px" fill="white" stroke="#000000" strokeWidth="0" >
+                        <svg viewBox="-1.5 -5 135 135" x="0px" y="0px" fill="white" stroke="#000000" stroke-width="0" >
                             <path d="M113.956,57.006l-97.4-56.2c-4-2.3-9,0.6-9,5.2v112.5c0,4.6,5,7.5,9,5.2l97.4-56.2 C117.956,65.105,117.956,59.306,113.956,57.006z"></path>
                         </svg>
                     </div>
@@ -110,13 +110,13 @@ const MyPlayer = ({videoRef, videoSrc}) => {
                     {!playing ? 
                     <div onClick={handlePlayPause} id="play-btn"> 
                         <svg width="100%" height="100%" viewBox="-1.5 -5 135 135" x="0px" y="0px" fill="white"
-                            stroke="#000000" strokeWidth="0"  >
+                            stroke="#000000" stroke-width="0"  >
                             <path d="M113.956,57.006l-97.4-56.2c-4-2.3-9,0.6-9,5.2v112.5c0,4.6,5,7.5,9,5.2l97.4-56.2 C117.956,65.105,117.956,59.306,113.956,57.006z"></path>
                         </svg>
                     </div>
                     :
                     <div onClick={handlePlayPause} id="pause-btn">
-                        <svg width="100%" height="100%" viewBox="-1.5 -1.5 32 32" x="0px" y="0px"  fill="white" stroke="#000000" strokeWidth="0">
+                        <svg width="100%" height="100%" viewBox="-1.5 -1.5 32 32" x="0px" y="0px"  fill="white" stroke="#000000" stroke-width="0">
                             <path d="M12.213,3v22.824c0,1.656-1.343,3-3,3H3.889c-1.658,0-3-1.344-3-3V3c0-1.656,1.342-3,3-3h5.324 C10.87,0,12.213,1.344,12.213,3z M24.935,0h-5.323c-1.658,0-3,1.344-3,3v22.824c0,1.656,1.342,3,3,3h5.323c1.658,0,3-1.344,3-3V3 C27.935,1.344,26.594,0,24.935,0z"></path> 
                         </svg>   
                     </div>
