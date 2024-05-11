@@ -89,13 +89,13 @@ const MyPlayer = ({videoRef, videoSrc}) => {
     
     
   return (
-    <div id='my-player-container'>
+    <div className='my-player-container'>
 
-        <div id="my-player">
+        <div className="my-player">
 
-            <div id="b-play" onClick={handlePlayPause}>
+            <div className="b-play" onClick={handlePlayPause}>
                 {!playing ? 
-                    <div id="b-play-btn"> 
+                    <div className="b-play-btn"> 
                         <svg viewBox="-1.5 -5 135 135" x="0px" y="0px" fill="white" stroke="#000000" stroke-width="0" >
                             <path d="M113.956,57.006l-97.4-56.2c-4-2.3-9,0.6-9,5.2v112.5c0,4.6,5,7.5,9,5.2l97.4-56.2 C117.956,65.105,117.956,59.306,113.956,57.006z"></path>
                         </svg>
@@ -104,27 +104,27 @@ const MyPlayer = ({videoRef, videoSrc}) => {
                 }
             </div>
 
-            <div id='s-play'>
-                <div id='m-play'>
+            <div className='s-play'>
+                <div className='m-play'>
 
                     {!playing ? 
-                    <div onClick={handlePlayPause} id="play-btn"> 
+                    <div onClick={handlePlayPause} className="play-btn"> 
                         <svg width="100%" height="100%" viewBox="-1.5 -5 135 135" x="0px" y="0px" fill="white"
                             stroke="#000000" stroke-width="0"  >
                             <path d="M113.956,57.006l-97.4-56.2c-4-2.3-9,0.6-9,5.2v112.5c0,4.6,5,7.5,9,5.2l97.4-56.2 C117.956,65.105,117.956,59.306,113.956,57.006z"></path>
                         </svg>
                     </div>
                     :
-                    <div onClick={handlePlayPause} id="pause-btn">
+                    <div onClick={handlePlayPause} className="pause-btn">
                         <svg width="100%" height="100%" viewBox="-1.5 -1.5 32 32" x="0px" y="0px"  fill="white" stroke="#000000" stroke-width="0">
                             <path d="M12.213,3v22.824c0,1.656-1.343,3-3,3H3.889c-1.658,0-3-1.344-3-3V3c0-1.656,1.342-3,3-3h5.324 C10.87,0,12.213,1.344,12.213,3z M24.935,0h-5.323c-1.658,0-3,1.344-3,3v22.824c0,1.656,1.342,3,3,3h5.323c1.658,0,3-1.344,3-3V3 C27.935,1.344,26.594,0,24.935,0z"></path> 
                         </svg>   
                     </div>
                     }
 
-                    <div id='time-seek-bar' className='non-select'>{formatTime(currentTime)}</div>
+                    <div className='time-seek-bar non-select'>{formatTime(currentTime)}</div>
 
-                    <div id="volume-btn" onClick={handleVolume}>
+                    <div className="volume-btn" onClick={handleVolume}>
                         {!mute ?
                             <svg  viewBox="0 0 24 24" fill="none"><path d="M12.1657 2.14424C12.8728 2.50021 13 3.27314 13 3.7446V20.2561C13 20.7286 12.8717 21.4998 12.1656 21.8554C11.416 22.2331 10.7175 21.8081 10.3623 21.4891L4.95001 16.6248H3.00001C1.89544 16.6248 1.00001 15.7293 1.00001 14.6248L1 9.43717C1 8.3326 1.89543 7.43717 3 7.43717H4.94661L10.3623 2.51158C10.7163 2.19354 11.4151 1.76635 12.1657 2.14424ZM11 4.63507L6.00618 9.17696C5.82209 9.34439 5.58219 9.43717 5.33334 9.43717H3L3.00001 14.6248H5.33334C5.58015 14.6248 5.81823 14.716 6.00179 14.881L11 19.3731V4.63507Z" fill="#000000"/><path d="M16.0368 4.73124C16.1852 4.19927 16.7368 3.88837 17.2688 4.03681C20.6116 4.9696 23 8.22106 23 12C23 15.779 20.6116 19.0304 17.2688 19.9632C16.7368 20.1117 16.1852 19.8007 16.0368 19.2688C15.8884 18.7368 16.1993 18.1852 16.7312 18.0368C19.1391 17.3649 21 14.9567 21 12C21 9.04332 19.1391 6.63512 16.7312 5.96321C16.1993 5.81477 15.8884 5.2632 16.0368 4.73124Z" fill="#000000"/><path d="M16.2865 8.04192C15.7573 7.88372 15.2001 8.18443 15.0419 8.71357C14.8837 9.24271 15.1844 9.79992 15.7136 9.95812C16.3702 10.1544 17 10.9209 17 12C17 13.0791 16.3702 13.8456 15.7136 14.0419C15.1844 14.2001 14.8837 14.7573 15.0419 15.2865C15.2001 15.8156 15.7573 16.1163 16.2865 15.9581C17.9301 15.4667 19 13.8076 19 12C19 10.1924 17.9301 8.53333 16.2865 8.04192Z" fill="#000000"/></svg>
                             :
@@ -132,7 +132,7 @@ const MyPlayer = ({videoRef, videoSrc}) => {
                         }
                     </div>
 
-                    <div id="expand-btn" onClick={toggleFullScreen}>
+                    <div className="expand-btn" onClick={toggleFullScreen}>
                         <svg viewBox="1.6 1.5 15 15" fill="white">
                             <path d="M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z"/>
                         </svg>
@@ -140,16 +140,16 @@ const MyPlayer = ({videoRef, videoSrc}) => {
 
                 </div>
 
-                <div id="seek-bar">
-                    <input id="thumb" type="range" value={progress} max="100" step="0.1" onChange={handleSeekChange} onMouseDown={handleSeekMouseDown} onMouseUp={handleSeekMouseUp} />
-                    <progress id="progress" value={progress} max="100"></progress>
+                <div className="seek-bar">
+                    <input className="thumb" type="range" value={progress} max="100" step="0.1" onChange={handleSeekChange} onMouseDown={handleSeekMouseDown} onMouseUp={handleSeekMouseUp} />
+                    <progress className="progress" value={progress} max="100"></progress>
                 </div>
 
             </div>
 
         </div>
 
-        <video id="myVideo" controls={false} src={videoSrc} playsInline loop ref={videoRef}></video>
+        <video className="myVideo" controls={false} src={videoSrc} playsInline loop ref={videoRef}></video>
 
     </div>
   )

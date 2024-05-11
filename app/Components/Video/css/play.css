@@ -1,4 +1,4 @@
-#thumb {
+.thumb {
    position: absolute;
    margin: 0;
    padding: 0;
@@ -15,7 +15,7 @@
    border: none;
 }
 
-#thumb::-moz-range-track, #thumb::-ms-track {
+.thumb::-moz-range-track, .thumb::-ms-track {
    border: none;
    background: transparent;
    outline: none;
@@ -23,7 +23,7 @@
 }
 
 /* For Chrome and Safari */
-#thumb::-webkit-slider-thumb {
+.thumb::-webkit-slider-thumb {
    -webkit-appearance: none;
    height: 8px;
    width: 8px;
@@ -33,7 +33,7 @@
 }
 
 /* For Firefox */
-#thumb::-moz-range-thumb {
+.thumb::-moz-range-thumb {
    -moz-appearance: none;
    height: 8px;
    width: 8px;
@@ -43,7 +43,7 @@
 }
 
 /* For Internet Explorer/Edge */
-#thumb::-ms-thumb {
+.thumb::-ms-thumb {
    border: none;
    height: 8px;
    width: 8px;
@@ -51,15 +51,15 @@
    background: transparent;
 }
 
-#thumb::-ms-fill-lower, #thumb::-ms-fill-upper {
+.thumb::-ms-fill-lower, .thumb::-ms-fill-upper {
    background: transparent;
 }
 
-#thumb::-ms-tooltip {
+.thumb::-ms-tooltip {
    display: none;
 }
 
-#progress {
+.progress {
    position: absolute;
    margin: 0;
    padding: 0;
@@ -77,18 +77,18 @@
    background-color: rgba(255, 255, 255, 0.201); /* Faded white background for Chrome, Safari, Opera */
 }
 
-#progress::-webkit-progress-bar {
+.progress::-webkit-progress-bar {
    background-color: rgba(255, 255, 255, 0.201); /* Faded white background for Chrome, Safari, Opera */
 }
 
-#progress::-moz-progress-bar {
+.progress::-moz-progress-bar {
    background-color: whitesmoke; /* Firefox */
 }
 
-#progress::-ms-fill {
+.progress::-ms-fill {
    background-color: whitesmoke; /* IE */
 }
 
-#progress::-webkit-progress-value {
+.progress::-webkit-progress-value {
    background-color: whitesmoke; /* Chrome, Safari, Opera */
 }
