@@ -250,10 +250,10 @@ const ThreadVideo = () => {
                 return (
                     <div key={index}>
                         {isInRange ?
-                                <DrivePlayer isPlay={index == scrolDex} 
-                                            isRound={isRound || index == scrolDex + 2} 
-                                            index={String(item?.videoUrl)} 
-                                            cipherId={String(item.link[0])} />
+                            <DrivePlayer isPlay={index == scrolDex} 
+                                        isRound={isRound || index == scrolDex + 2} 
+                                        index={String(item?.videoUrl)} 
+                                        cipherId={String(item.link[0])} />
                             : 
                             null
                         }
