@@ -6,12 +6,9 @@ const MyPlayer = ({videoRef, videoSrc}) => {
 
 
     const [playing, setPlaying] = useState(true);
-
     const [progress, setProgress] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
-
     const [currentTime, setCurrentTime] = useState(0);
-
     const [mute, setMute] = useState(videoRef.current ? videoRef.current.mute : false);
 
 
@@ -25,10 +22,22 @@ const MyPlayer = ({videoRef, videoSrc}) => {
     }, [playing, videoRef]);
 
     useEffect(() => {
-        if (videoRef.current) {
-            setPlaying(!videoRef.current.paused)
+        const video = videoRef?.current;
+        const handlePlayPauseEvent = () => {
+            setPlaying(!video.paused);
+        };
+        if (video) {
+            video.addEventListener('play', handlePlayPauseEvent);
+            video.addEventListener('pause', handlePlayPauseEvent);
         }
-    }, [videoRef?.current?.paused])
+        return () => {
+            if (video) {
+                video.removeEventListener('play', handlePlayPauseEvent);
+                video.removeEventListener('pause', handlePlayPauseEvent);
+            }
+        };
+    }, [videoRef]);
+    
 
 
     const handleVolume = useCallback(() => {
@@ -39,7 +48,7 @@ const MyPlayer = ({videoRef, videoSrc}) => {
     }, [videoRef]);
 
     useEffect(() => {
-        if (videoRef.current) {
+        if (videoRef?.current) {
             setMute(videoRef.current.muted);
         }
     }, [videoRef?.current?.muted])
