@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import './css/main.css'
-import './css/play.css'
 
 const MyPlayer = ({videoRef, videoSrc}) => {
-
 
     const [playing, setPlaying] = useState(true);
     const [progress, setProgress] = useState(0);

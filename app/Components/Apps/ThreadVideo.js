@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from 
 
 import '../../css/Apps/VideoThread.css'
 import '../../css/Apps/VideoThreadRes.css'
+import '../Video/css/main.css'
 
 import { VideoThreadContext } from '@/app/Context/VideoThreadContext'
 import { AppsConext } from '@/app/Context/AppsContext'
