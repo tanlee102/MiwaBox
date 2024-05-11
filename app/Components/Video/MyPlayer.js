@@ -122,7 +122,7 @@ const MyPlayer = ({videoRef, videoSrc}) => {
                     </div>
                     }
 
-                    <div id='time-seek-bar'>{formatTime(currentTime)}</div>
+                    <div id='time-seek-bar' className='non-select'>{formatTime(currentTime)}</div>
 
                     <div id="volume-btn" onClick={handleVolume}>
                         {!mute ?
