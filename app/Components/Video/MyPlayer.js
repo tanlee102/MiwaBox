@@ -93,7 +93,7 @@ const MyPlayer = ({videoRef, videoSrc}) => {
 
         <div className="my-player">
 
-            <div className="b-play" onClick={handlePlayPause}>
+            <div className="b-play non-select" onClick={handlePlayPause}>
                 {!playing ? 
                     <div className="b-play-btn"> 
                         <svg viewBox="-1.5 -5 135 135" x="0px" y="0px" fill="white" stroke="#000000" stroke-width="0" >
@@ -104,7 +104,7 @@ const MyPlayer = ({videoRef, videoSrc}) => {
                 }
             </div>
 
-            <div className='s-play'>
+            <div className='s-play non-select'>
                 <div className='m-play'>
 
                     {!playing ? 
