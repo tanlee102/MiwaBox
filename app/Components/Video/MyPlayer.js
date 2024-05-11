@@ -24,6 +24,12 @@ const MyPlayer = ({videoRef, videoSrc}) => {
         setPlaying(!playing);
     }, [playing, videoRef]);
 
+    useEffect(() => {
+        if (videoRef.current) {
+            setPlaying(!videoRef.current.paused)
+        }
+    }, [videoRef?.current?.paused])
+
 
     const handleVolume = useCallback(() => {
         if (videoRef.current) {
