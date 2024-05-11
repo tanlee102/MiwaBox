@@ -15,6 +15,7 @@ import DrivePlayer from '../DrivePlayer';
 
 import { useRouter } from 'next/navigation'
 import { url_image_domain } from '@/app/env_video'
+import FileSaver from 'file-saver';
 
 
 const ThreadVideo = () => {
@@ -158,10 +159,14 @@ const ThreadVideo = () => {
 
 
 
-    const openDownloadWindow = (index) => {
+    const openDownloadWindow = async (index) => {
         const driveUrl = videoDriveUrls.find(obj => obj.index === index);
         if(driveUrl?.url){
-            window.open(driveUrl.url, '_blank');
+            try {
+                FileSaver.saveAs(driveUrl.url, "my_video_download.mp4");
+            } catch (error) {
+                window.open(driveUrl.url, '_blank');
+            }
         }
     }
 
