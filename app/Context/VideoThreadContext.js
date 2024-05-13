@@ -5,7 +5,7 @@ import { AppsConext } from './AppsContext';
 import { AccountContext } from './AccountContext';
 import { env_SMARTCHAIN } from '../env';
 import { ethers } from 'ethers';
-import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_server } from '../env_video';
+import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_server, url_video_upload_worker } from '../env_video';
 import { WindowContext } from './WindowContext';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -58,7 +58,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
         if(isUploadFB){
             try {
-              axios.get(url_video_server+'facebook?password='+password+'&index='+index)
+              axios.get(url_video_domain+'facebook?password='+password+'&index='+index)
               .then(function (response) {
                   console.log(response);
                   alert('Successful Video Upload.')
@@ -111,8 +111,9 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
             var fileFormData = new FormData();
             fileFormData.append('file', file);
-            
-            axios.post(url_video_server+'drive/upload?password='+password+'&type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
+
+            // url_video_server+'drive/upload
+            axios.post(url_video_upload_worker+'?password='+password+'&type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
