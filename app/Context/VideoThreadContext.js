@@ -47,7 +47,10 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
-        await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
+
+        const myNetWork = env_SMARTCHAIN.NETWORKS[infoApp.idNetwork];
+        if(myNetWork.chainName === "BNB Smart Chain Testnet") myNetWork.rpcUrls.shift();
+        await switchNetwork(myNetWork);
 
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
@@ -174,7 +177,10 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const deleteVideoBlock = async (id) => {
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
-        await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
+
+        const myNetWork = env_SMARTCHAIN.NETWORKS[infoApp.idNetwork];
+        if(myNetWork.chainName === "BNB Smart Chain Testnet") myNetWork.rpcUrls.shift();
+        await switchNetwork(myNetWork);
   
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
