@@ -100,45 +100,40 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
         var formData = new FormData();
         formData.append('image', img);
-        
-        fetch(url_image_domain+'api', {
-            method: 'PUT',
+        axios.put(url_image_domain+'api', formData, {
             headers: {
-                'Authorization': 'Bearer ' + myUser.access_token,
-            },
-            body: formData
-        }).then(response => response.json())
-        .then(res => {
-        
+              'Content-Type': 'multipart/form-data',
+              'mytoken': 'Bearer ' + myUser.access_token,
+            }
+        }).then(res => {
+
             var fileFormData = new FormData();
             fileFormData.append('file', file);
-        
-            fetch(url_video_upload_worker+'?password=xindunghacktoi&type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, {
-                method: 'POST',
+
+            // url_video_server+'drive/upload
+            axios.post(url_video_upload_worker+'?password=xindunghacktoi&type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + myUser.access_token
-                },
-                body: fileFormData
-            }).then(response => response.json())
-            .then(response => {
-        
-                console.log(response);
+                }
+            }).then(response => {
+
+                console.log(response)
                 sendDataVideo(res.data.id, response.data.index, response.data.workerID);
-        
+
             }).catch(error => {
                 deleteImageDrive(res.data.id);
-        
+
                 console.log(error);
-                alert('Upload Video Error!!');
+                alert('Upload Video Error!!')
                 setLoadCreateState(false);
             });
-        
+
         }).catch(error => {
             console.log(error);
-            alert('Upload Image Error!!');
+            alert('Upload Image Error!!')
             setLoadCreateState(false);
         });
-        
 
       }else{
         alert('Please fill in all the required information.');
