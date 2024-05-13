@@ -100,7 +100,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
         var formData = new FormData();
         formData.append('image', img);
-        axios.post(url_image_domain+'api', formData, {
+        axios.put(url_image_domain+'api', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               'Authorization': 'Bearer ' + myUser.access_token,
