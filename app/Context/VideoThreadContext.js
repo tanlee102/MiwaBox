@@ -103,7 +103,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         axios.put(url_image_domain+'api', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
-              'mytoken': 'Bearer ' + myUser.access_token,
+              'MyToken': 'Bearer ' + myUser.access_token,
             }
         }).then(res => {
 
