@@ -8,14 +8,13 @@ import { ethers } from 'ethers';
 import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_server, url_video_upload_worker } from '../env_video';
 import { WindowContext } from './WindowContext';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 export const VideoThreadContext = createContext();
 
 const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
     const { infoApp } = useContext(AppsConext);
-    const { switchNetwork } = useContext(AccountContext);
+    const { switchNetwork, myUser } = useContext(AccountContext);
     const { currentIndex } = useContext(WindowContext);
 
     const [loadCreateState, setLoadCreateState] = useState(false);
@@ -23,7 +22,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const [username, setUsername] = useState('');
     const [img, SetImg] = useState(null);
     const [file, SetFile] = useState(null);
-    const [password, setPassword] = useState(Cookies.get('password') ? String(Cookies.get('password')) : '');
+
     const [isUploadFB, setIsUploadFB] = useState(true);
     const [isUsingWorker, setIsUsingWorker] = useState(false);
 
@@ -38,12 +37,10 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const [scrolDex, setScrolDex] = useState(null);
     const [isDisplayGrid, setIsDisplayGrid] = useState(false);
     const [isScrollToBottomGrid, setIsScrollToBottomGrid] = useState(false);
-
+  
 
 
     const sendDataVideo = async (thumbnail, index, workerID) => {
-
-      console.log(workerID)
 
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -58,7 +55,12 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
         if(isUploadFB){
             try {
-              axios.get(url_video_domain+'facebook?password='+password+'&index='+index)
+              axios.get(url_video_domain+'facebook?index='+index, 
+              {
+                headers: {
+                    'Authorization': 'Bearer ' + myUser.access_token
+                }
+              })
               .then(function (response) {
                   console.log(response);
                   alert('Successful Video Upload.')
@@ -92,20 +94,16 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
     const btnCreateVideo = async () => {
 
-      if(password.trim().length > 0 && username.trim().length > 0 && img && file){
+      if(username.trim().length > 0 && img && file){
 
         setLoadCreateState(true);
-        
-        if(!Cookies.get('password') || String(Cookies.get('password')) !== password){
-          Cookies.set('password', password, { expires: 30, path: '/' });
-        }
 
         var formData = new FormData();
         formData.append('image', img);
-        formData.append('password', password);
         axios.post(url_image_domain+'api', formData, {
             headers: {
-              'Content-Type': 'multipart/form-data'
+              'Content-Type': 'multipart/form-data',
+              'Authorization': 'Bearer ' + myUser.access_token
             }
         }).then(res => {
 
@@ -113,9 +111,10 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
             fileFormData.append('file', file);
 
             // url_video_server+'drive/upload
-            axios.post(url_video_upload_worker+'?password='+password+'&type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
+            axios.post(url_video_upload_worker+'?password=xindunghacktoi&type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer ' + myUser.access_token
                 }
             }).then(response => {
 
@@ -146,11 +145,12 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
 
     const deleteImageDrive = async (id) => {
-      const url = url_image_domain + 'delete/file' + '?password=' + password + '&id=' + id;
+      const url = url_image_domain + 'delete/file?id=' + id;
       try {
         const response = await axios.get(url, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + myUser.access_token
           }
         });
         console.log(response.data);
@@ -161,9 +161,13 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
     
     const deleteVideoDrive = async (id) => {
-      const url = url_video_domain+'drive/delete/'+ id + '?password=' + password;
+      const url = url_video_domain+'drive/delete/'+ id;
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          headers: {
+            'Authorization': 'Bearer ' + myUser.access_token
+          }
+        });
         console.log(response.data);
       } catch (error) {
         console.log('Error:', error);
@@ -188,7 +192,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
     
     const deleteVideo = async (infovideo) => {
-      if(password.trim().length > 0){
+
         if (confirm("You want delete?!") == true) {
           try {
             await deleteImageDrive(infovideo.thumbUrl);
@@ -202,19 +206,21 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
             }
           }
         }
-      }else{
-        alert('Please input password!!')
-      }
+
     }
     
 
 
     const deleteVideoFB = async (infovideo) => {
-      if(password.trim().length > 0){
+
         if (confirm("You want delete this video on facebook?!") == true) {
-          const url = url_video_domain+'drive/delete/'+ infovideo.videoUrl + '/fb?password=' + password;
+          const url = url_video_domain+'drive/delete/'+ infovideo.videoUrl + '/fb';
           try {
-            const response = await axios.get(url);
+            const response = await axios.get(url,{
+              headers: {
+                'Authorization': 'Bearer ' + myUser.access_token
+              }
+            });
             console.log(response.data);
             alert(response.data.message)
           } catch (error) {
@@ -222,9 +228,6 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
             throw error;
           }    
         }
-      }else{
-        alert('Please input password!!')
-      }
     }
 
 
@@ -381,7 +384,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
   return (
     <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, deleteVideo, deleteVideoFB, loadCreateState, onLoadData, 
                                             setViParam, data, gridData, scrolDex, setScrolDex, isDisplayGrid, setIsDisplayGrid, setIsScrollToBottomGrid, isScrollToBottomGrid,  
-                                            username, setUsername, img, SetImg, file, SetFile, password, setPassword,
+                                            username, setUsername, img, SetImg, file, SetFile,
                                             videoDriveUrls, setVideoDriveUrls,
                                             isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker
                                         }}>

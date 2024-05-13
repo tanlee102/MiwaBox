@@ -5,7 +5,7 @@ import { AccountContext } from '../Context/AccountContext';
 
 const CreateVideo = () => {
 
-    const { username, setUsername, password, setPassword, file, SetFile, SetImg, 
+    const { username, setUsername, file, SetFile, SetImg, 
             isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker} = useContext(VideoThreadContext)
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
@@ -73,13 +73,6 @@ const CreateVideo = () => {
             <input value={username} type='text' placeholder='Username'
                 onChange={(event) => {
                     setUsername(event.target.value);
-                }} />
-        </div>
-
-        <div>
-            <input value={password} type='text' placeholder='Password'
-                onChange={(event) => {
-                    setPassword(event.target.value);
                 }} />
         </div>
 
