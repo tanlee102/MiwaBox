@@ -58,7 +58,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
               axios.post(url_video_domain+'file/upload/facebook?index='+index, 
               {
                 headers: {
-                    'Authorization': 'Bearer ' + myUser.access_token
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + myUser.access_token
                 }
               })
               .then(function (response) {
