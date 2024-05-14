@@ -12,7 +12,7 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
 
 
     const fetchVideoData = async (type) => {
-      fetch(type == 0 ? (url_video_worker+'?ciphertext='+cipherId) : (url_video_domain+'drive/get/'+index+'/drive'))
+      fetch(type == 0 ? (url_video_worker+'?ciphertext='+cipherId) : (url_video_domain+'file/get/'+index+'/drive'))
           .then(response => {
             if (response.status === 200) { // Check if status code is 200
               return response.json();
