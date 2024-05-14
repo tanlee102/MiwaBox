@@ -9,7 +9,7 @@ import { AccountContext } from './AccountContext';
 import { WindowContext } from './WindowContext';
 
 import { env_SMARTCHAIN } from '../env';
-import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_upload_worker } from '../env_video';
+import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_upload_local, url_video_upload_worker } from '../env_video';
 
 export const VideoThreadContext = createContext();
 
@@ -93,7 +93,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     
           const fileFormData = new FormData();
           fileFormData.append('file', file);
-          const response = await axios.post(`${url_video_upload_worker}?type_pip=2&permission=1&folder=${username}&thumbId=${res.data.id}`, fileFormData, {
+          const isUsingLocal = file.size / (1024*1024) > 100;
+          const response = await axios.post(`${isUsingLocal ? url_video_upload_local : url_video_upload_worker}?type_pip=2&permission=1&folder=${username}&thumbId=${res.data.id}`, fileFormData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               'Authorization': `Bearer ${myUser.access_token}`
