@@ -55,7 +55,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
         if(isUploadFB){
             try {
-              axios.get(url_video_domain+'facebook?index='+index, 
+              axios.post(url_video_domain+'file/upload/facebook?index='+index, 
               {
                 headers: {
                     'Authorization': 'Bearer ' + myUser.access_token
@@ -111,7 +111,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
             fileFormData.append('file', file);
 
             // url_video_server+'drive/upload
-            axios.post(url_video_upload_worker+'?password=xindunghacktoi&type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
+            axios.post(url_video_upload_worker+'?type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + myUser.access_token
@@ -161,9 +161,9 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
     
     const deleteVideoDrive = async (id) => {
-      const url = url_video_domain+'drive/delete/'+ id;
+      const url = url_video_domain+'file/delete/'+ id;
       try {
-        const response = await axios.get(url, {
+        const response = await axios.delete(url, {
           headers: {
             'Authorization': 'Bearer ' + myUser.access_token
           }
@@ -214,9 +214,9 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const deleteVideoFB = async (infovideo) => {
 
         if (confirm("You want delete this video on facebook?!") == true) {
-          const url = url_video_domain+'drive/delete/'+ infovideo.videoUrl + '/fb';
+          const url = url_video_domain+'file/delete/'+ infovideo.videoUrl + '/fb';
           try {
-            const response = await axios.get(url,{
+            const response = await axios.delete(url,{
               headers: {
                 'Authorization': 'Bearer ' + myUser.access_token
               }
