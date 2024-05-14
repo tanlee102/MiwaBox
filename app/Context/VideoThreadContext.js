@@ -68,6 +68,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         } else {
           alert("Successful Video Upload and Non-Upload to Facebook.");
         }
+        setLoadCreateState(false);
       } catch (error) {
         await Promise.all([deleteImageDrive(thumbnail), deleteVideoDrive(index)]);
         alert('Upload Blockchain Error!!');
@@ -174,9 +175,13 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
             await deleteImageDrive(infovideo.thumbUrl);
             await deleteVideoDrive(infovideo.videoUrl);
             await deleteVideoBlock(infovideo.id);
+            
+            alert("Delete video successful.")
           } catch (error) {            
             if (confirm("Error in delete, Do you want delete blockchain?!") == true) {
               await deleteVideoBlock(infovideo.id)
+
+              alert("Delete video successful.")
             }
           }
         }
