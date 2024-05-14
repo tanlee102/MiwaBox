@@ -147,7 +147,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const deleteImageDrive = async (id) => {
       const url = url_image_domain + 'delete/file?id=' + id;
       try {
-        const response = await axios.get(url, {
+        const response = await axios.delete(url, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + myUser.access_token
