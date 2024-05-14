@@ -1,13 +1,15 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import axios from 'axios';
+
 import { AppsConext } from './AppsContext';
 import { AccountContext } from './AccountContext';
-import { env_SMARTCHAIN } from '../env';
-import { ethers } from 'ethers';
-import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_server, url_video_upload_worker } from '../env_video';
 import { WindowContext } from './WindowContext';
-import axios from 'axios';
+
+import { env_SMARTCHAIN } from '../env';
+import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_upload_worker } from '../env_video';
 
 export const VideoThreadContext = createContext();
 
@@ -39,9 +41,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const [isScrollToBottomGrid, setIsScrollToBottomGrid] = useState(false);
   
 
-
     const sendDataVideo = async (thumbnail, index, workerID) => {
-
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
         await switchNetwork(env_SMARTCHAIN.NETWORKS[infoApp.idNetwork]);
@@ -54,128 +54,104 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         await tx.wait(); 
 
         if(isUploadFB){
-            try {
-              axios.post(url_video_domain+'file/upload/facebook?index='+index, {},
-              {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + myUser.access_token
-                }
-              })
-              .then(function (response) {
-                  console.log(response);
-                  alert('Successful Video Upload.')
-                  setLoadCreateState(false);
-              })
-              .catch(function (error) {
-                  console.log(error);
-                  alert('Successful Video Upload, but Failed to Upload on Facebook.')
-                  setLoadCreateState(false);
-              });
-            } catch (error) {
-              console.log(error)
-              alert('Successful Video Upload, but Failed to Upload on Facebook.')
-              setLoadCreateState(false);
-            }
-        }else{
-          alert("Successful Video Upload and Non-Upload to Facebook.")
-          setLoadCreateState(false);
+          try {
+            await axios.post(`${url_video_domain}file/upload/facebook?index=${index}`, {}, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${myUser.access_token}`
+              }
+            });
+            alert('Successful Video Upload.');
+          } catch (error) {
+            alert('Successful Video Upload, but Failed to Upload on Facebook.');
+          }
+        } else {
+          alert("Successful Video Upload and Non-Upload to Facebook.");
         }
-
       } catch (error) {
-        await deleteImageDrive(thumbnail);
-        await deleteVideoDrive(index);
-
-        console.log(error)
-        alert('Upload Blockchain Error!!')
+        await Promise.all([deleteImageDrive(thumbnail), deleteVideoDrive(index)]);
+        alert('Upload Blockchain Error!!');
+      } finally {
         setLoadCreateState(false);
       }
-
     }
-
+    
     const btnCreateVideo = async () => {
-
-      if(username.trim().length > 0 && img && file){
-
+      if (username.trim().length > 0 && img && file) {
         setLoadCreateState(true);
-
-        var formData = new FormData();
-        formData.append('image', img);
-        axios.put(url_image_domain+'upload', formData, {
+    
+        try {
+          const formData = new FormData();
+          formData.append('image', img);
+          const res = await axios.put(`${url_image_domain}upload`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
-              'Authorization': 'Bearer ' + myUser.access_token
+              'Authorization': `Bearer ${myUser.access_token}`
             }
-        }).then(res => {
-
-            var fileFormData = new FormData();
-            fileFormData.append('file', file);
-
-            // url_video_server+'drive/upload
-            axios.post(url_video_upload_worker+'?type_pip=2&permission=1&folder='+username+'&thumbId='+res.data.id, fileFormData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + myUser.access_token
-                }
-            }).then(response => {
-
-                console.log(response)
-                sendDataVideo(res.data.id, response.data.index, response.data.workerID);
-
-            }).catch(error => {
-                deleteImageDrive(res.data.id);
-
-                console.log(error);
-                alert('Upload Video Error!!')
-                setLoadCreateState(false);
-            });
-
-        }).catch(error => {
-            console.log(error);
-            alert('Upload Image Error!!')
-            setLoadCreateState(false);
-        });
-
-      }else{
+          });
+    
+          const fileFormData = new FormData();
+          fileFormData.append('file', file);
+          const response = await axios.post(`${url_video_upload_worker}?type_pip=2&permission=1&folder=${username}&thumbId=${res.data.id}`, fileFormData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${myUser.access_token}`
+            }
+          });
+    
+          console.log(response);
+          sendDataVideo(res.data.id, response.data.index, response.data.workerID);
+        } catch (error) {
+          console.log(error);
+          alert('Upload Error!!');
+          setLoadCreateState(false);
+        }
+      } else {
         alert('Please fill in all the required information.');
-      }      
+      }
     }
-
-
-
 
 
     const deleteImageDrive = async (id) => {
       const url = url_image_domain + 'delete/file?id=' + id;
       try {
-        const response = await axios.delete(url, {
+        await axios.delete(url, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + myUser.access_token
           }
         });
-        console.log(response.data);
       } catch (error) {
-        console.log('Error:', error);
         throw error;
       }      
     }
-    
     const deleteVideoDrive = async (id) => {
       const url = url_video_domain+'file/delete/'+ id;
       try {
-        const response = await axios.delete(url, {
+        await axios.delete(url, {
           headers: {
             'Authorization': 'Bearer ' + myUser.access_token
           }
         });
-        console.log(response.data);
       } catch (error) {
-        console.log('Error:', error);
         throw error;
       }      
     }
-
+    const deleteVideoFB = async (infovideo) => {
+      if (confirm("You want delete this video on facebook?!") == true) {
+        const url = url_video_domain+'file/delete/'+ infovideo.videoUrl + '/fb';
+        try {
+          const response = await axios.delete(url,{
+            headers: {
+              'Authorization': 'Bearer ' + myUser.access_token
+            }
+          });
+          alert(response.data.message)
+        } catch (error) {
+          throw error;
+        }    
+      }
+    }
     const deleteVideoBlock = async (id) => {
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -193,45 +169,18 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
     
     const deleteVideo = async (infovideo) => {
-
-        if (confirm("You want delete?!") == true) {
+        if (confirm("You want delete this video?!") == true) {
           try {
             await deleteImageDrive(infovideo.thumbUrl);
             await deleteVideoDrive(infovideo.videoUrl);
             await deleteVideoBlock(infovideo.id);
-          } catch (error) {
-            console.log(error);
-            
+          } catch (error) {            
             if (confirm("Error in delete, Do you want delete blockchain?!") == true) {
               await deleteVideoBlock(infovideo.id)
             }
           }
         }
-
     }
-    
-
-
-    const deleteVideoFB = async (infovideo) => {
-
-        if (confirm("You want delete this video on facebook?!") == true) {
-          const url = url_video_domain+'file/delete/'+ infovideo.videoUrl + '/fb';
-          try {
-            const response = await axios.delete(url,{
-              headers: {
-                'Authorization': 'Bearer ' + myUser.access_token
-              }
-            });
-            console.log(response.data);
-            alert(response.data.message)
-          } catch (error) {
-            console.log('Error:', error);
-            throw error;
-          }    
-        }
-    }
-
-
 
 
 
