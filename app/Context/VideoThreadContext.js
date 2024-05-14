@@ -55,7 +55,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
         if(isUploadFB){
             try {
-              axios.post(url_video_domain+'file/upload/facebook?index='+index, 
+              axios.post(url_video_domain+'file/upload/facebook?index='+index, {},
               {
                 headers: {
                   'Content-Type': 'application/json',
