@@ -31,6 +31,14 @@
     }
 }
 
+@media (min-width: 1920px) {
+    .text-chat-thread > img, .text-chat-thread > video{
+        max-width: 490px;
+        min-height: 300px;
+        max-height: 540px;
+    }
+}
+
 
 .text-chat-thread .video-onedrive-player{
     width: 450px !important;

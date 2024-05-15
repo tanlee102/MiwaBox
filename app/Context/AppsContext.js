@@ -141,14 +141,17 @@ const AppsProvider = ({ children }) => {
           idNetwork: 0,
           appType: -1,
         }
-        if(currentIndex == 99){
-          objtmp.title = env_LANG[language].infoApps[2]
-        }
+        // if(currentIndex == 99){
+        //   objtmp.title = env_LANG[language].infoApps[2]
+        // }
         if(currentIndex == 999){
           objtmp.title = env_LANG[language].infoApps[0]
         }
         if(currentIndex == 777){
           objtmp.title = env_LANG[language].infoApps[1]
+        }
+        if(currentIndex == 888){
+          objtmp.title = 'Video Page'
         }
         setInfoApp(objtmp);
 

@@ -15,6 +15,7 @@ import { WindowContext } from "@/app/Context/WindowContext";
 import { AppsConext } from "@/app/Context/AppsContext";
 import { ThreadContext } from "@/app/Context/ThreadContext";
 import { hashPreScrollHeight } from "@/app/global";
+import VideoPage from "@/app/videos/Component/VideoPage";
 
 const CenterBox = ({}) => {
 
@@ -109,19 +110,23 @@ const CenterBox = ({}) => {
         )}
 
 
-        <div ref={containAppRef} onScroll={handleScroll} className={`contain-app ${isMobile ? 'mobile-contain-app' : 'desktop-contain-app'}  ${infoApp?.appType == 2 ? 'full-contain-app' : ''}`}>
+        <div  ref={containAppRef} 
+              onScroll={handleScroll} 
+              className={`contain-app ${isMobile ? 'mobile-contain-app' : 'desktop-contain-app'} ${infoApp?.appType == 2 ? 'full-contain-app' : ''}`}>
 
             {infoApp?.appType == 0 ? <ThreadChat /> : "" }
 
             {infoApp?.appType == 1 ? <ThreadPost /> : "" }
 
             {infoApp?.appType == 2 ? <ThreadVideo /> : "" }
-
-            {infoApp?.id == 99 ? <Manage /> : "" }
             
             {infoApp?.id == 999 ? <Account /> : "" }
 
             {infoApp?.id == 777 ? <Welcome /> : "" }
+
+            {infoApp?.id == 888 ? <VideoPage /> : "" }
+
+            {/* {infoApp?.id == 99 ? <Manage /> : "" } */}
 
         </div>
 
