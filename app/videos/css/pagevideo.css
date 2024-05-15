@@ -18,3 +18,19 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+#my-video-page-container{
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 530px;
+    float: left;
+    display: block;
+    background-color: black;
+}
+
+#my-video-page-container video{
+    float: left;
+    height: 100%;
+    width: 100%;
+}

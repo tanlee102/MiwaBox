@@ -91,7 +91,7 @@ const Menu = () => {
     }, []);
 
 
-    const scrollAmount = 100; // Change this to the amount you want to scroll
+    const scrollAmount = 200; // Change this to the amount you want to scroll
 
     const handleLeftClick = () => {
         const hzBar = hzBarRef.current;
