@@ -86,26 +86,30 @@
        -moz-user-select: none; 
         -ms-user-select: none; 
             user-select: none; 
-
-
+            
 }
 
 .hz-bar span{
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(232, 232, 232);
     cursor: pointer;
-    border-radius: 5px;
-    font-size: 1.1em;
+    border-radius: 7px;
+    font-size: 0.9em;
+    font-weight: bold;
     padding: 0px 10px;
 
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    height: 35px;
+    height: 30px;
 
     margin-right: 5px;
     margin-left: 5px;
 }
+.hz-bar span:first-child{
+    margin-left: 8px;
+}
 .hz-bar span:last-child{
+    margin-right: 8px;
 }
 
 .hz-bar::-webkit-scrollbar {
