@@ -140,7 +140,7 @@ html:has(.video-thread){
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
-    grid-gap: 10px;
+    grid-gap: 5px;
     z-index: 102;
 }
 
@@ -154,20 +154,25 @@ html:has(.video-thread){
     background-color: rgb(73, 73, 73);
 }
 
-.grid-video-thread span img{
+.grid-video-thread span div{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.grid-video-thread span div img{
     position: relative;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-
-.grid-video-thread  .chose-played-video{
+.grid-video-thread .chose-played-video div{
+    width: calc(100% - 4px) !important;
+    height: calc(100% - 4px) !important;
     border: 2px solid rgb(149, 186, 255);
 }
-
-.grid-video-thread  .chose-played-video img{
-    opacity: 0.5;
+.grid-video-thread .chose-played-video div img{
+    opacity: 0.4;
 }
 
 

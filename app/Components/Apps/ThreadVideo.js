@@ -217,7 +217,9 @@ const ThreadVideo = () => {
                 <div className='grid-video-thread'>
                     {gridData?.map((item, index) => (
                         <span key={index} className={scrolDex === index ? 'chose-played-video' : ''} onClick={() => {router.push('/?id='+currentIndex+'&vi='+item.id); moveToIndex(index) }}>
-                            <img src={ url_image_domain + item?.thumbUrl + '.jpeg'} />
+                            <div>
+                                <img src={ url_image_domain + item?.thumbUrl + '.jpeg'} />
+                            </div>
                         </span>
                     ))}
                 </div>
