@@ -141,7 +141,6 @@ html:has(.video-thread){
     grid-template-columns: repeat(3, 1fr);
 
     grid-gap: 5px;
-    z-index: 102;
 }
 
 .grid-video-thread span{
@@ -331,7 +330,7 @@ html:has(.video-thread){
 
 .step-video-thread-button{
     position: absolute;
-    z-index: 1000;
+    z-index: 8;
     top: 50%;
     transform: translateY(-50%);
     right: 5px;
