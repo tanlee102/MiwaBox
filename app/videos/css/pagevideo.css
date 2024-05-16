@@ -133,3 +133,12 @@
     height: 15px;
     margin-right: 5px;
 }
+
+#info-video-page-container > p{
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(220, 220, 220);
+}
