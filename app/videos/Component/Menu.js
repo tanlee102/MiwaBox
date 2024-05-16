@@ -16,7 +16,7 @@ const Menu = () => {
 
     const [selectedItem, setSelectedItem] = useState(0);
     const [data, setData] = useState([
-        "beautiful_girls", "one_piece_videos", "anime_videos", "beautiful_girls", "one_piece_videos", "anime_videos", "beautiful_girls", "one_piece_videos", "anime_videos", 
+        "beautiful_girls", "one_piece_videos", "anime_videos", 
     ])
 
     const handleScroll = () => {
