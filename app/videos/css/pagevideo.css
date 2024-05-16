@@ -41,6 +41,11 @@
     max-width: 1100px;
     height: auto;
 }
+#home-video-page{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
 
 
 #my-info-video-page-container{
