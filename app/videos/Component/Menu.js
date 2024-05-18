@@ -6,6 +6,7 @@ import '../css/menu.css';
 import { VideoPageContext } from '../Context/VideoPageContext';
 import { useRouter } from 'next/navigation';
 import { WindowContext } from '@/app/Context/WindowContext';
+import { list_menu_video_page } from '@/app/env_video';
 
 const Menu = () => {
 
@@ -19,9 +20,7 @@ const Menu = () => {
     const router = useRouter();
 
     const [selectedItem, setSelectedItem] = useState(null);
-    const [data, setData] = useState([
-        "beautiful_girls", "one_piece_videos", "anime_videos", 
-    ])
+    const [data, setData] = useState(list_menu_video_page)
 
     const {currentIndex} = useContext(WindowContext);
     const {folder} = useContext(VideoPageContext);
