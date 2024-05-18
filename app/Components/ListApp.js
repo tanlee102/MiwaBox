@@ -127,7 +127,16 @@ const ListApp = () => {
       </>
     : ""}
 
-    {![99, 777, 999].includes(currentIndex) && infoApp ?
+    {currentIndex == 888 ?
+      <>
+      <ItemApp title={infoApp?.title} index={infoApp?.id} isBorder={true} isPin={true} isSelected={true} svgTag={
+        <img src = "/icon/item/videopage.png"/>}>
+      </ItemApp>
+      <div className='split-list-item-app'>EXPLORE</div>
+      </>
+    : ""}
+
+    {![99, 777, 999, 888].includes(currentIndex) && infoApp ?
       <>
       <ItemApp address={infoApp?.appAddress} title={infoApp?.title} index={infoApp?.id} appType={infoApp?.appType} isSelected={true} isPin={true} isBorder={true} svgTag={
         <svg fill="#000000" viewBox="0 0 24 24"><circle id="primary" cx="12" cy="12" r="10"></circle><path id="secondary" d="M20.91,4.5,19.5,3.09a2,2,0,0,0-2.83,0L10.24,9.51a1,1,0,0,0-.29.73L10,13a1,1,0,0,0,1,1l2.78.05h0a1,1,0,0,0,.71-.29l6.42-6.43A2,2,0,0,0,20.91,4.5Z"></path></svg>}>
