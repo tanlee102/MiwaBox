@@ -43,6 +43,7 @@ import WindowProvider from "./Context/WindowContext";
 import VideoThreadProvider from './Context/VideoThreadContext';
 import CreateVideo from './Components/CreateVideo';
 import CreateVideoButton from './Components/CreateVideoButton';
+import VideoPageProvider from './videos/Context/VideoPageContext';
 
 const Modal = dynamic(() => import('../app/Components/Dialog/Modal.js'), { ssr: false })
 const MiniProfile = dynamic(() => import('../app/Components/Dialog/MiniProfile.js'), { ssr: false })
@@ -76,16 +77,18 @@ export default function HomePage() {
               <InputProvider>
                 <ThreadProvider>
                   <VideoThreadProvider setDisplayCreateVideo={setDisplayCreateVideo}>
-                      <div className="box-container">
-                          <LeftBox setDisplayModalCreate={setDisplayModalCreate}></LeftBox>
-                          <CenterBox></CenterBox>
-                          <RightBox></RightBox>
-                      </div>
-                      <Modal setDisplayModal={setDisplayModalCreate} displayModal={displayModalCreate} title={<TitleCreate/>} body={<Create/>} footer={<ButtonCreate/>} displayfooter={true}></Modal>
-                      <Modal setDisplayModal={setDisplayCreateVideo} displayModal={displayCreateVideo} title={"Add Video"} body={<CreateVideo/>} footer={<CreateVideoButton/>} displayfooter={true}></Modal>
-                      <ImageViewer></ImageViewer>
-                      <NoticePopout/>
-                      <MiniProfile isDisplay={displayMiniProfile} setIsDisplay={setDisplayMiniProfile} user={myUser}></MiniProfile>
+                    <VideoPageProvider>
+                        <div className="box-container">
+                            <LeftBox setDisplayModalCreate={setDisplayModalCreate}></LeftBox>
+                            <CenterBox></CenterBox>
+                            <RightBox></RightBox>
+                        </div>
+                        <Modal setDisplayModal={setDisplayModalCreate} displayModal={displayModalCreate} title={<TitleCreate/>} body={<Create/>} footer={<ButtonCreate/>} displayfooter={true}></Modal>
+                        <Modal setDisplayModal={setDisplayCreateVideo} displayModal={displayCreateVideo} title={"Add Video"} body={<CreateVideo/>} footer={<CreateVideoButton/>} displayfooter={true}></Modal>
+                        <ImageViewer></ImageViewer>
+                        <NoticePopout/>
+                        <MiniProfile isDisplay={displayMiniProfile} setIsDisplay={setDisplayMiniProfile} user={myUser}></MiniProfile>
+                    </VideoPageProvider>
                   </VideoThreadProvider>
                 </ThreadProvider>
               </InputProvider>

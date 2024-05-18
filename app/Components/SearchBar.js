@@ -5,6 +5,7 @@ import { env_SMARTCHAIN } from '../env';
 import { WindowContext } from '../Context/WindowContext';
 import { env_LANG } from '../env_lang';
 import { VideoThreadContext } from '../Context/VideoThreadContext';
+import { VideoPageContext } from '../videos/Context/VideoPageContext';
 
 const SearchBar = ({closeLeft}) => {
 
@@ -12,7 +13,8 @@ const SearchBar = ({closeLeft}) => {
     const searchParams = useSearchParams();
 
     const {setViParam} = useContext(VideoThreadContext);
-    const { currentIndex, setCurrentIndex, language } = useContext(WindowContext);
+    const {setFolder, setVid} = useContext(VideoPageContext);
+    const {currentIndex, setCurrentIndex, language} = useContext(WindowContext);
     const [idSearch, setIdSearch] = useState('');
 
     useEffect(() => {
@@ -26,14 +28,31 @@ const SearchBar = ({closeLeft}) => {
 
 
     useEffect(() => {
-
       if(searchParams.get('vi')){
         setViParam(Number(searchParams.get('vi')))
       }else{
         setViParam(null);
       }
-
     }, [searchParams.get('vi')]);
+
+
+    useEffect(() => {
+      if(searchParams.get('folder')){
+        setFolder(String(searchParams.get('folder')))
+      }else{
+        setFolder(null);
+      }
+    }, [searchParams.get('folder')]);
+
+
+    useEffect(() => {
+      if(searchParams.get('vid')){
+        setVid(String(searchParams.get('vid')));
+      }else{
+        setVid(null);
+      }
+    }, [searchParams.get('vid')]);
+
 
     
   return (

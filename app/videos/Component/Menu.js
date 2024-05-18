@@ -1,8 +1,11 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { capitalizeWords } from '../helper/capitalize';
 import '../css/menu.css';
+import { VideoPageContext } from '../Context/VideoPageContext';
+import { useRouter } from 'next/navigation';
+import { WindowContext } from '@/app/Context/WindowContext';
 
 const Menu = () => {
 
@@ -13,11 +16,20 @@ const Menu = () => {
 
     const leftButtonRef = useRef(null);
     const rightButtonRef = useRef(null);
+    const router = useRouter();
 
-    const [selectedItem, setSelectedItem] = useState(0);
+    const [selectedItem, setSelectedItem] = useState(null);
     const [data, setData] = useState([
         "beautiful_girls", "one_piece_videos", "anime_videos", 
     ])
+
+    const {currentIndex} = useContext(WindowContext);
+    const {folder} = useContext(VideoPageContext);
+    useEffect(() => {
+        if(folder){
+            setSelectedItem(data.indexOf(folder))
+        }
+    }, [folder])
 
     const handleScroll = () => {
         const hzBar = hzBarRef.current;
@@ -53,7 +65,8 @@ const Menu = () => {
             if (countScroll < 10) {
                 e.preventDefault();
                 if (e.target.tagName === 'SPAN') {
-                    setSelectedItem(Number(e.target.getAttribute('data-set')))
+                    // setSelectedItem())
+                    router.push('/?id='+currentIndex+'&folder='+data[Number(e.target.getAttribute('data-set'))]) ;
                 }
                 setCountScroll(0);
             } else {
@@ -103,7 +116,7 @@ const Menu = () => {
 
     
   return (
-        <div className="hz-bar-contain">
+        <div className="hz-bar-contain non-select">
             <div className="hz-bar" ref={hzBarRef}>
                 <div className="hz-bar-zs">
                     {data.map((item, index) => (

@@ -100,7 +100,6 @@
 #my-suggested-video-container{
     float: left;
     width: calc(100% - 10px);
-    height: 700px;
     padding: 5px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
