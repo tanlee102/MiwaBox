@@ -5,6 +5,7 @@ export const url_video_domain = 'https://one.miwabox.live/';
 export const url_video_upload_local = 'http://localhost:3000/file/';
 export const url_video_upload_worker = 'https://drive.caculus103.workers.dev/';
 export const url_video_worker = 'https://vorker.miwabox.live/';
+export const url_host_domain_video_page = 'https://sugvideo.vercel.app/'
 export const list_menu_video_page = [
     "beautiful_girls", "one_piece_videos", "anime_videos", 
 ]

@@ -7,12 +7,12 @@ import HomeVideoPage from './HomeVideoPage'
 import MyVideoPage from './MyVideoPage'
 
 import { VideoPageContext } from '../Context/VideoPageContext'
-import { LENGTH_LIST_VIDEO_PAGE } from '@/app/env_video'
+import { LENGTH_LIST_VIDEO_PAGE, url_host_domain_video_page } from '@/app/env_video'
 import Cookies from 'js-cookie'
 
 
 async function getListVideo(id,folder) {
-      const res = await fetch('https://sugvideo.vercel.app/api/list?curId='+id+'&folder='+folder)
+      const res = await fetch(url_host_domain_video_page+'api/list?curId='+id+'&folder='+folder)
       if (!res.ok) {
         throw new Error('Failed to fetch data')
       }
@@ -69,7 +69,7 @@ const VideoPage = () => {
             setSugData([])
             setVideoSrc("")
 
-            fetch('https://sugvideo.vercel.app/api/item?index='+vid)
+            fetch(url_host_domain_video_page+'api/item?index='+vid)
             .then(response => {if (response.status === 200) return response.json();})
             .then(data => {
                   if(data && data?.folder){
@@ -84,7 +84,7 @@ const VideoPage = () => {
                               }
                         }
         
-                        fetch('https://sugvideo.vercel.app/api/suggestion?folder='+data?.folder+'&_idItem='+data?._id+(abe ? '&abe='+encodeURIComponent(abe) : ""))
+                        fetch(url_host_domain_video_page+'api/suggestion?folder='+data?.folder+'&_idItem='+data?._id+(abe ? '&abe='+encodeURIComponent(abe) : ""))
                         .then(response => {if (response.status === 200) {return response.json();}})
                         .then(da => {
                               if(da?.myItemSet){
