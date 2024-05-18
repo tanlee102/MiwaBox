@@ -24,7 +24,7 @@ const VideoPage = () => {
       const {vid, setFolder} = useContext(VideoPageContext);
       
       const [loadState, setLoadState] = useState(false);
-      const [displayLoadMore, setDisplayLoadMore] = useState(true);
+      const [displayLoadMore, setDisplayLoadMore] = useState(false);
 
       const [listVideo, setListVideo] = useState([]);
       const [curID, setCurID] = useState("s");
