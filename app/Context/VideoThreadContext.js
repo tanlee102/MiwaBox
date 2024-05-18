@@ -90,19 +90,24 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
               'Authorization': `Bearer ${myUser.access_token}`
             }
           });
-    
-          const fileFormData = new FormData();
-          fileFormData.append('file', file);
-          const isUsingLocal = file.size / (1024*1024) > 100;
-          const response = await axios.post(`${isUsingLocal ? url_video_upload_local : url_video_upload_worker}?type_pip=2&permission=1&folder=${username}&thumbId=${res.data.id}`, fileFormData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'Authorization': `Bearer ${myUser.access_token}`
+
+            try {
+              const fileFormData = new FormData();
+              fileFormData.append('file', file);
+              const isUsingLocal = file.size / (1024*1024) > 100;
+              const response = await axios.post(`${isUsingLocal ? url_video_upload_local : url_video_upload_worker}?type_pip=2&permission=1&folder=${username}&thumbId=${res.data.id}`, fileFormData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  'Authorization': `Bearer ${myUser.access_token}`
+                }
+              });
+        
+              sendDataVideo(res.data.id, response.data.index, response.data.workerID);        
+            } catch (error) {
+              await deleteImageDrive(res.data.id);
+              throw error;
             }
-          });
-    
-          console.log(response);
-          sendDataVideo(res.data.id, response.data.index, response.data.workerID);
+      
         } catch (error) {
           console.log(error);
           alert('Upload Error!!');
