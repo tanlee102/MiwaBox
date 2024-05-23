@@ -77,19 +77,23 @@
     text-align: center;
 }
 .list-launching-app a{
-  cursor: pointer;
+  cursor: pointer !important;
+  display: inline-block;
 }
 .list-launching-app span{
     cursor: pointer !important;
     display: inline-block;
     margin: 5px;
     width: 100px;
-    height: auto;
+    height: 71px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid rgb(139, 139, 139);
 }
 
 .list-launching-app span img{
     float: left;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
