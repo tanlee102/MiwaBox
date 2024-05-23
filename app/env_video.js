@@ -7,6 +7,3 @@ export const url_video_upload_worker = 'https://drive.caculus103.workers.dev/';
 export const url_video_worker = 'https://vorker.miwabox.live/';
 export const url_host_domain_video_page = 'https://video.miwabox.live/'
 export const url_download_video_page = 'https://download.miwabox.live/';
-export const list_menu_video_page = [
-    "beautiful_girls", "one_piece_videos", "anime_videos", 
-]

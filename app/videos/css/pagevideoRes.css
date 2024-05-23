@@ -3,12 +3,18 @@
     .item-suggested-video{
         height: 145px;
     }
+    .my-folder-video-container{
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
 }
 
 /* Styles for screens between 481px and 767px (Small) */
 @media (min-width: 480px) and (max-width: 767px) {
     .item-suggested-video{
         height: 180px;
+    }
+    .my-folder-video-container{
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 

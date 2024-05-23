@@ -40,7 +40,7 @@ const SearchBar = ({closeLeft}) => {
       if(searchParams.get('folder')){
         setFolder(String(searchParams.get('folder')))
       }else{
-        setFolder(null);
+        setFolder("home");
       }
     }, [searchParams.get('folder')]);
 

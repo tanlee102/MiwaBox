@@ -6,9 +6,8 @@ import '../css/menu.css';
 import { VideoPageContext } from '../Context/VideoPageContext';
 import { useRouter } from 'next/navigation';
 import { WindowContext } from '@/app/Context/WindowContext';
-import { list_menu_video_page } from '@/app/env_video';
 
-const Menu = () => {
+const Menu = ({data}) => {
 
     const hzBarRef = useRef(null);
     const [countScroll, setCountScroll] = useState(0);
@@ -20,15 +19,14 @@ const Menu = () => {
     const router = useRouter();
 
     const [selectedItem, setSelectedItem] = useState(null);
-    const [data, setData] = useState(list_menu_video_page)
 
     const {currentIndex} = useContext(WindowContext);
     const {folder} = useContext(VideoPageContext);
     useEffect(() => {
-        if(folder){
-            setSelectedItem(data.indexOf(folder))
+        if(folder && data){
+            setSelectedItem(data.indexOf(folder.toLowerCase()))
         }
-    }, [folder])
+    }, [data ,folder])
 
     const handleScroll = () => {
         const hzBar = hzBarRef.current;

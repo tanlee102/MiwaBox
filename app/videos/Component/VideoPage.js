@@ -5,14 +5,22 @@ import '../css/pagevideoRes.css'
 import Menu from './Menu'
 import HomeVideoPage from './HomeVideoPage'
 import MyVideoPage from './MyVideoPage'
+import HomeVideo from './HomeVideo'
 
 import { VideoPageContext } from '../Context/VideoPageContext'
 import { LENGTH_LIST_VIDEO_PAGE, url_host_domain_video_page } from '@/app/env_video'
 import Cookies from 'js-cookie'
 
-
 async function getListVideo(id,folder) {
       const res = await fetch(url_host_domain_video_page+'api/list?curId='+id+'&folder='+folder)
+      if (!res.ok) {
+        throw new Error('Failed to fetch data')
+      }
+      return res.json();
+}
+
+async function getListFolder() {
+      const res = await fetch(url_host_domain_video_page+'api/folder')
       if (!res.ok) {
         throw new Error('Failed to fetch data')
       }
@@ -26,6 +34,8 @@ const VideoPage = () => {
       const [loadState, setLoadState] = useState(false);
       const [displayLoadMore, setDisplayLoadMore] = useState(false);
 
+      const [listFolder, setListFolder] = useState([]);
+      const [folderNames, setFolderNames] = useState([]);
       const [listVideo, setListVideo] = useState([]);
       const [curID, setCurID] = useState("s");
       const {folder} = useContext(VideoPageContext);
@@ -105,14 +115,28 @@ const VideoPage = () => {
       }
 
       useEffect(() => {
-            fetchVideoAndSuggestion();
+            if(vid) fetchVideoAndSuggestion();
       }, [vid])
 
+
+
+      const fetchListFolder = async () => {
+            const dataFolder = await getListFolder();
+            const filteredData = dataFolder.filter(item => item.name !== "public");
+            const names = filteredData.map(item => item.name);
+            console.log(names)
+            names.unshift('home')
+            setFolderNames(names);
+            setListFolder(filteredData)
+      }
+      useEffect(() =>{
+            fetchListFolder();
+      },[])
 
       return (
             <div id='page-video-container'>
                   <div id='menu-video-page'>
-                        <Menu></Menu>
+                        <Menu data={folderNames}></Menu>
                   </div>
                   {vid ? 
                   <MyVideoPage      sugData={sugData}
@@ -120,12 +144,20 @@ const VideoPage = () => {
                                     videoSrc={videoSrc}
                                     /> 
                   : 
-                  <HomeVideoPage    data={listVideo} 
-                                    displayLoadMore={displayLoadMore} 
-                                    loadState={loadState} 
-                                    setLoadState={setLoadState} 
-                                    fetchData={fetchListVideo}
-                                    />}
+                  <> {
+                        (folder !== 'home' && folder !== 'Home') || vid !== null ?
+                              <HomeVideoPage    data={listVideo} 
+                                                displayLoadMore={displayLoadMore} 
+                                                loadState={loadState} 
+                                                setLoadState={setLoadState} 
+                                                fetchData={fetchListVideo}
+                              /> : 
+                              <HomeVideo    
+                                    data={listFolder} 
+                              />
+                  }
+                  </>
+                  }
             </div>
       )
 }

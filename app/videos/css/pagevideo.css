@@ -138,6 +138,10 @@
     margin-right: 5px;
 }
 
+.item-folder-video-name{
+    top: 35px !important;
+}
+
 #info-video-page-container > p{
     width: 100%;
     margin-top: 15px;
