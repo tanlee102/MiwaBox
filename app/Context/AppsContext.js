@@ -7,6 +7,9 @@ import { AccountContext } from './AccountContext';
 import { WindowContext } from './WindowContext';
 import { env_LANG } from '../env_lang';
 
+import data_suggestion_true from '../data/data_suggestion_true.json'
+import data_suggestion_false from '../data/data_suggestion_false.json'
+
 export const AppsConext = createContext();
 
 function delay(ms) {
@@ -29,10 +32,114 @@ const AppsProvider = ({ children }) => {
     const [infoApp, setInfoApp] = useState(null); //This very important!!!
     const [displayApp, setDisplayApp] = useState(false);
 
+    const [listMessage, setListMessage] = useState([]);
+
+
     const [orderListApp, setOrderListApp] = useState(2);
     const [orderPrivacy, setOrderPrivacy] = useState(1);
 
-    const [listMessage, setListMessage] = useState([]);
+    const [items, setItems] = useState([]);
+
+    const [loadIndex, setLoadIndex] = useState(-1);
+    const [loadState, setLoadState] = useState(items.length > 0 ? false : true);
+    const [displayLoader, setDisplayLoader] = useState(true);
+
+    async function getListApp(index, reset){
+      try {
+        const contract = await rpcProvider();
+
+        let apps = [];
+        try {
+          apps = await contract.getApps(orderListApp == 0 ? true : false, Boolean(orderPrivacy), index, env_SMARTCHAIN.DEFAULT_LENGTH_LIST_APP); 
+          if(reset) setItems(apps);
+          else setItems([...items, ...apps]);
+  
+          if(ethers.toNumber(apps[apps.length - 1].id) == 0){
+            setDisplayLoader(false);
+          }else{
+            let ins = 1;
+            while(ethers.toNumber(apps[apps.length - ins].id) == 0){
+              ins = ins + 1;
+            }
+            setLoadIndex(ethers.toNumber(apps[apps.length - ins].id))
+          }
+        } catch (error) {
+          setDisplayLoader(false);
+        }
+
+        setLoadState(false);
+      } catch (error) {
+        console.log(error);
+        setItems([]);
+      }
+    }
+
+    
+    async function FirstLoad(){
+      if(orderListApp <= 1){
+        setItems([]);
+        setDisplayLoader(true);
+        setLoadState(true);
+        
+        try {
+          
+          const contract = await rpcProvider();
+          let currentId = Number(ethers.toNumber(await contract.currentId())) - 1;
+          let initialId = Number(ethers.toNumber(await contract.initialId()));
+          
+          getListApp(orderListApp == 0 ? initialId : currentId, true);
+
+        } catch (error) {
+          console.log(error);
+        }
+
+      }else if(orderListApp == 2){
+        if(orderPrivacy){
+          setItems(data_suggestion_true);
+        }else{
+          setItems(data_suggestion_false);
+        }
+        setDisplayLoader(false);
+      }else{
+        setDisplayLoader(false);
+        setItems([]);
+      }
+    }
+
+    useEffect(() => {
+      FirstLoad();
+    }, []);
+
+    useEffect(() => {
+      FirstLoad();
+    },[orderListApp, orderPrivacy]);
+
+    const LoadMoreBtn = () => {
+      getListApp(orderListApp ? loadIndex-1 : loadIndex+1, false);
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     async function deployContract() {
@@ -224,7 +331,8 @@ const AppsProvider = ({ children }) => {
         setLoadCreateState, loadCreateState, infoSM,
         setOrderListApp, orderListApp, orderPrivacy, setOrderPrivacy,
         infoApp, listMessage, setListMessage,
-        displayApp, setDisplayApp, changeDisplayApp
+        displayApp, setDisplayApp, changeDisplayApp,
+        items, loadState, setLoadState, displayLoader, LoadMoreBtn
     }}>
         {children}
     </AppsConext.Provider>
