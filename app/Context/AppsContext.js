@@ -74,7 +74,6 @@ const AppsProvider = ({ children }) => {
       }
     }
 
-    
     async function FirstLoad(){
       if(orderListApp <= 1){
         setItems([]);
@@ -117,25 +116,6 @@ const AppsProvider = ({ children }) => {
     const LoadMoreBtn = () => {
       getListApp(orderListApp ? loadIndex-1 : loadIndex+1, false);
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
