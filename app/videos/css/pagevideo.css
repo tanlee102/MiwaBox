@@ -85,6 +85,13 @@
     height: 20px;
     margin-right: 5px;
 }
+#my-title-video-page{
+    width: calc(100% - 12px);
+    margin: 10px 6px 5px 6px;
+    font-size: 1.4em;
+    text-align: left;
+    font-weight: bold;
+}
 
 
 #label-suggested-video-container{
@@ -136,6 +143,12 @@
     width: 15px;
     height: 15px;
     margin-right: 5px;
+}
+.title-item-suggested-video{
+    bottom: 10px !important;
+    top: auto !important;
+    line-height: 1.4em;
+    margin-right: 10px;
 }
 
 .item-folder-video-name{

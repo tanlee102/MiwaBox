@@ -21,10 +21,12 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
     const [loadCreateState, setLoadCreateState] = useState(false);
 
+    const [title, setTitle] = useState('');
     const [username, setUsername] = useState('');
     const [img, SetImg] = useState(null);
     const [file, SetFile] = useState(null);
 
+    const [isDarkDrive, setIsDarkDive] = useState(false);
     const [isUploadFB, setIsUploadFB] = useState(true);
     const [isUsingWorker, setIsUsingWorker] = useState(false);
 
@@ -95,7 +97,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
               const fileFormData = new FormData();
               fileFormData.append('file', file);
               const isUsingLocal = file.size / (1024*1024) > 100;
-              const response = await axios.post(`${isUsingLocal ? url_video_upload_local : url_video_upload_worker}?type_pip=2&permission=1&folder=${username}&thumbId=${res.data.id}`, fileFormData, {
+              const response = await axios.post(`${isUsingLocal ? url_video_upload_local : url_video_upload_worker}?type_pip=${isDarkDrive ? '3' : '2'}&permission=1&folder=${username}&thumbId=${res.data.id}${title.trim() !== ''? '&title='+encodeURIComponent(title.trim()) : ''}`, fileFormData, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                   'Authorization': `Bearer ${myUser.access_token}`
@@ -345,9 +347,9 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
   return (
     <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, deleteVideo, deleteVideoFB, loadCreateState, onLoadData, 
                                             setViParam, data, gridData, scrolDex, setScrolDex, isDisplayGrid, setIsDisplayGrid, setIsScrollToBottomGrid, isScrollToBottomGrid,  
-                                            username, setUsername, img, SetImg, file, SetFile,
+                                            username, setUsername, img, SetImg, file, SetFile, title, setTitle,
                                             videoDriveUrls, setVideoDriveUrls,
-                                            isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker
+                                            isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker, isDarkDrive, setIsDarkDive
                                         }}>
         {children}
     </VideoThreadContext.Provider>

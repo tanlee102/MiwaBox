@@ -5,8 +5,8 @@ import { AccountContext } from '../Context/AccountContext';
 
 const CreateVideo = () => {
 
-    const { username, setUsername, file, SetFile, SetImg, 
-            isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker} = useContext(VideoThreadContext)
+    const { username, setUsername, file, SetFile, SetImg, title, setTitle,
+            isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker, isDarkDrive, setIsDarkDive} = useContext(VideoThreadContext)
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
   
@@ -75,6 +75,18 @@ const CreateVideo = () => {
                     setUsername(event.target.value);
                 }} />
         </div>
+
+        <div>
+            <input value={title} type='text' placeholder='Title'
+                onChange={(event) => {
+                    setTitle(event.target.value);
+                }} />
+        </div>
+
+        <label>
+            <br/>
+            <input type="checkbox" checked={isDarkDrive} onChange={() => {setIsDarkDive(!isDarkDrive)}}/>Dark GDrive
+        </label>
 
         <label>
             <br/>
