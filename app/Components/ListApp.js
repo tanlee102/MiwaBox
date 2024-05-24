@@ -1,14 +1,10 @@
 import { ethers } from 'ethers';
 import Link from 'next/link';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import LoadMore from './LoadMore';
 import { AppsConext } from '../Context/AppsContext';
-import { AccountContext } from '../Context/AccountContext';
-import { env_SMARTCHAIN } from '../env';
 import ItemApp from './ItemApp';
 import { WindowContext } from '../Context/WindowContext';
-
-import { nanoid } from 'nanoid';
 
 const ListApp = () => {
 
