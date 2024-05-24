@@ -1,8 +1,6 @@
 import { url_image_domain } from '@/app/env_video'
-import { nanoid } from 'nanoid'
 import React, { useContext } from 'react'
 import { VideoPageContext } from '../Context/VideoPageContext'
-import { useRouter } from 'next/navigation'
 import { WindowContext } from '@/app/Context/WindowContext'
 import Link from 'next/link'
 
