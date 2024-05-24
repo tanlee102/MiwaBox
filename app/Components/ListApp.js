@@ -18,7 +18,7 @@ const ListApp = () => {
   
     const iconItems = {
       999: "/icon/item/management.png",
-      99: "/icon/item/app-drawer.png",
+      // 99: "/icon/item/app-drawer.png",
       777: "/icon/item/home.png",
       888: "/icon/item/videopage.png"
     };
