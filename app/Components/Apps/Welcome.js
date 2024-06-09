@@ -32,16 +32,21 @@ const Welcome = () => {
         <div className='contain-list-launching-app'>
             <p>Suggested Sites</p>
             <div className='list-launching-app non-select'>
+            <Link href={"/?id=888"}>
+                <span>
+                    <img src='/icon/apps/playbutton.png' />
+                </span>
+            </Link>
             <Link href={"/enlang"}>
                 <span>
                     <img src='/icon/apps/5000_0.png' />
                 </span>
             </Link>
-            <Link href={"/?id=888"}>
+            <a href={"https://cuongonepiece.netlify.app/"}>
                 <span>
-                    <img src='https://t4.ftcdn.net/jpg/06/20/18/63/360_F_620186329_8mjJMsPcZQm5dSgVlMoZM0qQocHL7AZC.jpg' />
+                    <img src='/icon/apps/oplogo.png' />
                 </span>
-            </Link>
+            </a>
       
             </div>
         </div>
