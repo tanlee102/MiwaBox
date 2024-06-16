@@ -64,7 +64,9 @@ const VideoPage = () => {
             }
       }
       useEffect(() => {
-            fetchListVideo(true)
+            if (String(folder).toLowerCase() !== "home") {
+                  fetchListVideo(true);
+            }
       }, [folder])
 
 
