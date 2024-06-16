@@ -29,4 +29,4 @@ export const link_words_today = 'https://api.npoint.io/3e10cdfd4df6702283db'
 
 export const defaultTime = 3
 
-export const prefix_url_audio = "https://singular-croquembouche-855837.netlify.app/"
+export const prefix_url_audio = "https://enaudio.netlify.app/"
