@@ -23,4 +23,4 @@ export const iconAvatars = [
     'cute/twitter.png'
 ];
 
-export const service_url = 'https://nika-service.vercel.app/user'
+export const service_url = 'https://miwabox-service.vercel.app/user'
