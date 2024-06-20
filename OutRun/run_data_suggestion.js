@@ -71,7 +71,7 @@ const main = async () => {
 
     await getApps(initialId);
 
-    let priorityList = [1021, 1020, 1000, 1019, 1007, 1031, 1004, 1022];
+    let priorityList = [1021, 1020, 1000, 1019, 1007, 1031, 1004];
     let result = [];
     
     for (let priorityId of priorityList) {
