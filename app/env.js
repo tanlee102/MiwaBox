@@ -8,7 +8,7 @@ export const env_SMARTCHAIN = {
     NETWORK: {
         chainId: "0x61",
         rpcUrls: [
-          // "https://data-seed-prebsc-1-s1.binance.org:8545",
+          "https://data-seed-prebsc-1-s1.binance.org:8545",
           "https://bsc-testnet-rpc.publicnode.com","https://bsc-testnet.blockpi.network/v1/rpc/public"],
         chainName: "BNB Smart Chain Testnet",
         nativeCurrency: {
@@ -29,7 +29,7 @@ export const env_SMARTCHAIN = {
         {
             chainId: "0x61",
             rpcUrls: [
-              // "https://data-seed-prebsc-1-s1.binance.org:8545",
+              "https://data-seed-prebsc-1-s1.binance.org:8545",
               "https://bsc-testnet-rpc.publicnode.com","https://bsc-testnet.blockpi.network/v1/rpc/public"],
             chainName: "BNB Smart Chain Testnet",
             nativeCurrency: {
