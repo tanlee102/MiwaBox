@@ -97,10 +97,3 @@ const RightBox = ({}) => {
 }
 
 export default RightBox
-
-
-            
-            {/* <div className='intro-infoApp'>
-              <p>Nhật ký là bản ghi chép với các mục riêng biệt được sắp xếp theo ngày dùng để thuật lại những gì đã diễn ra trong suốt một ngày hoặc giai đoạn khác nhau.
-              </p>
-            </div> */}

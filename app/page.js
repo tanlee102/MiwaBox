@@ -18,7 +18,7 @@ import './css/Apps/ThreadChatRes.css'
 import './css/Apps/ThreadPost.css'
 import './css/Apps/InputThread.css'
 import './css/Apps/Welcome.css'
-import './css/Apps/Manage.css'
+import './css/Apps/SyncVideo.css'
 
 import React, { useState } from "react";
 import dynamic from 'next/dynamic';

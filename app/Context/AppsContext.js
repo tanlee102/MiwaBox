@@ -240,6 +240,9 @@ const AppsProvider = ({ children }) => {
         if(currentIndex == 888){
           objtmp.title = 'Video Page'
         }
+        if(currentIndex == 678){
+          objtmp.title = env_LANG[language].infoApps[2]
+        }
         setInfoApp(objtmp);
 
       }else{

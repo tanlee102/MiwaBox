@@ -18,7 +18,7 @@ export const env_LANG = {
         dropdown_type: ['Private', 'Public'],
         dropdown_sorting: ['Oldest', 'Newest', 'Popular'],
         right_bar: ['Information', '', 'Share', 'Contract', 'Chain', 'Creator', 'Date'],
-        infoApps: ['Account', 'Welcome','Manage'],
+        infoApps: ['Account', 'Welcome','Sync Video'],
         add_sm: ['Create Contract', 'Select Network', 'Title', 'Category', 'Message', 'Post', 'Privacy', 'Create Contract',
                 'Switch Network', 'Deploy Contract', 'Create Contract Successful', 'Switch', 'Publish Contract to Application', 'Publish Successful to Application',
                 'Get Contract Information', 'Name', 'Address', 'Creator', 'Privacy', 'Type', 'Network', 'View contract', 'Create Contract Failed'],

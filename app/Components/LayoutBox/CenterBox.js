@@ -6,7 +6,6 @@ import WrapHeaderBox from "./WrapHeaderBox";
 import Account from "../Apps/Account";
 import ThreadPost from "../Apps/ThreadPost";
 import ThreadChat from "../Apps/ThreadChat";
-import Manage from "../Apps/Manage";
 import Welcome from "../Apps/Welcome";
 import ThreadVideo from "../Apps/ThreadVideo";
 
@@ -16,6 +15,7 @@ import { AppsConext } from "@/app/Context/AppsContext";
 import { ThreadContext } from "@/app/Context/ThreadContext";
 import { hashPreScrollHeight } from "@/app/global";
 import VideoPage from "@/app/videos/Component/VideoPage";
+import SyncVideo from "../Apps/SyncVideo";
 
 const CenterBox = ({}) => {
 
@@ -126,7 +126,7 @@ const CenterBox = ({}) => {
 
             {infoApp?.id == 888 ? <VideoPage /> : "" }
 
-            {/* {infoApp?.id == 99 ? <Manage /> : "" } */}
+            {infoApp?.id == 678 ? <SyncVideo /> : "" }
 
         </div>
 
