@@ -42,11 +42,12 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
       if (driveUrl) {
         setVideoSrc(driveUrl.url)
       } else {
-        if(String(cipherId.trim()).length > 13 ){
-          fetchVideoData(0);
-        }else{
-          fetchVideoData(1);
-        }
+        fetchVideoData(1);
+        // if(String(cipherId.trim()).length > 13 ){
+        //   fetchVideoData(0);
+        // }else{
+        //   fetchVideoData(1);
+        // }
       }
     }, []);
 
