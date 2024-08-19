@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import ListSuggestVideo from './ListSuggestVideo'
 import { WindowContext } from '@/app/Context/WindowContext'
 import { url_download_video_page } from '@/app/env_video'
