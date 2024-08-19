@@ -32,7 +32,7 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
             }
           }).catch(error => {
             console.error(error);
-            if(type == 0) fetchVideoData(1);
+            // if(type == 0) fetchVideoData(1);
           });
     }
 
