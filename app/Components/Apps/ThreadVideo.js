@@ -179,7 +179,7 @@ const ThreadVideo = () => {
                 </svg>
             </span>
 
-            <span className='non-select' id='username-video-thread'>@{data[scrolDex]?.username}</span>
+            <span onClick={() => {router.push('/?id=888&folder='+data[scrolDex]?.username)}} className='non-select' id='username-video-thread'>@{data[scrolDex]?.username}</span>
 
             <span onClick={() => {openDownloadWindow(data[scrolDex]?.videoUrl)}} id='download-btn-video-thread'>
                 <svg viewBox="0 0 24 24" fill="none"><path d="M12.5 4V17M12.5 17L7 12.2105M12.5 17L18 12.2105" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M6 21H19" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
