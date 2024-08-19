@@ -42,7 +42,6 @@ const DrivePlayer = ({index, isPlay=false, isRound=false, isFrist=false}) => {
       if (driveUrl) {
         setVideoSrc(driveUrl.url)
       } else {
-        fetchVideoData(1);
         if(isFrist){
           fetchVideoData(0);
         }else{
