@@ -1,10 +1,10 @@
 import React, { useContext, useRef, useEffect, useState } from 'react'
 import { VideoThreadContext } from '../Context/VideoThreadContext';
-import { url_video_domain, url_video_worker } from '../env_video';
+import { url_host_domain_video_page, url_video_domain } from '../env_video';
 
 import MyPlayer from './Video/MyPlayer';
 
-const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
+const DrivePlayer = ({index, isPlay=false, isRound=false, isFrist=false}) => {
    
     const videoRef = useRef(null);
     const { videoDriveUrls, setVideoDriveUrls } = useContext(VideoThreadContext);
@@ -12,7 +12,7 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
 
 
     const fetchVideoData = async (type) => {
-      fetch(type == 0 ? (url_video_worker+'?ciphertext='+encodeURIComponent(cipherId)) : (url_video_domain+'file/get/'+index+'/drive'))
+      fetch(type == 0 ? (url_host_domain_video_page+'api/item?index='+index) : (url_video_domain+'file/get/'+index+'/drive'))
           .then(response => {
             if (response.status === 200) { // Check if status code is 200
               return response.json();
@@ -32,7 +32,7 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
             }
           }).catch(error => {
             console.error(error);
-            // if(type == 0) fetchVideoData(1);
+            if(type == 0) fetchVideoData(1);
           });
     }
 
@@ -43,11 +43,11 @@ const DrivePlayer = ({index, cipherId, isPlay=false, isRound=false}) => {
         setVideoSrc(driveUrl.url)
       } else {
         fetchVideoData(1);
-        // if(String(cipherId.trim()).length > 13 ){
-        //   fetchVideoData(0);
-        // }else{
-        //   fetchVideoData(1);
-        // }
+        if(isFrist){
+          fetchVideoData(0);
+        }else{
+          fetchVideoData(1);
+        }
       }
     }, []);
 
