@@ -252,7 +252,7 @@ const ThreadVideo = () => {
         
         <div className='video-thread' onClick={() => {setIsDisplayGrid(false)}}>
             {data?.map((item, index) => {
-                const isInRange = Math.abs(index - scrolDex) <= 3;
+                const isInRange = Math.abs(index - scrolDex) <= 4;
                 const isRound = Math.abs(index - scrolDex) <= 1;
                 return (
                     <div key={index}>
@@ -260,7 +260,7 @@ const ThreadVideo = () => {
                             <DrivePlayer
                                         isFrist={index == 0} 
                                         isPlay={index == scrolDex} 
-                                        isRound={isRound || index == scrolDex + 2} 
+                                        isRound={isRound || index == scrolDex + 2 || index == scrolDex + 3} 
                                         index={String(item?.videoUrl)} 
                                         // cipherId={String(item.link[0])}
                                         />
