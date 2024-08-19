@@ -6,11 +6,19 @@ import { url_download_video_page } from '@/app/env_video'
 const MyVideoPage = ({myData, sugData, videoSrc}) => {
 
   const {setNotice_pop_state} = useContext(WindowContext)
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    if (videoSrc && videoRef.current && String(videoSrc).length > 13) {
+      videoRef.current.load();  // Reload the video with the new src
+      videoRef.current.play();  // Autoplay the video
+    }
+  }, [videoSrc])  // Trigger effect when videoSrc changes
 
   return (
     <>
         <div id='my-video-page-container'>
-            <video src={videoSrc} controls playsInline></video>
+            <video ref={videoRef} src={videoSrc} controls playsInline></video>
         </div>
 
         <div id='info-video-page-container'>     
