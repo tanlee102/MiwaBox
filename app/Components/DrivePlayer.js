@@ -19,7 +19,7 @@ const DrivePlayer = ({index, isPlay=false, isRound=false, isFrist=false}) => {
             }
           })
           .then(data => {
-            const driveUrl = ((type == 0) ? data : data?.driveUrl );
+            const driveUrl = data?.driveUrl;
             if (driveUrl && Array.isArray(driveUrl)) {
               const url = (driveUrl[driveUrl.length - 1])
               if(url){
