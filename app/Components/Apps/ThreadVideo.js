@@ -60,6 +60,7 @@ const ThreadVideo = () => {
                                 video.muted = true;
                             } else {
                                 video.muted = false;
+                                video.muted = false;
                                 const playPromise = video.play();
                                 if (playPromise !== undefined) {
                                     playPromise.catch(error => {
