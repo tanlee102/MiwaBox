@@ -50,30 +50,30 @@ const ThreadVideo = () => {
                 const currentIndexVideo = Math.round(Number(containerRef.current.scrollTop) / itemHeight);
                 setScrolDex(currentIndexVideo);
     
-                if(preDex.current != currentIndexVideo){
-    
-                    const previousVideo = itemsRef?.current[preDex.current]?.querySelector("video");
-                    if (previousVideo && !previousVideo?.paused) {
-                        previousVideo.pause();
-                    }
-    
-                    const currentVideo = itemsRef?.current[currentIndexVideo]?.querySelector("video");
-                    if (currentVideo && currentVideo?.paused) {
-                        currentVideo.muted = false;
-                        const playPromise = currentVideo.play();
-                        if (playPromise !== undefined) {
-                            playPromise
-                                .catch(error => {
-                                    currentVideo.muted = true;
-                                    currentVideo.play()
-                                        .catch(error => {
-                                            console.log('Replay failed: ', error.message);
+                if (preDex.current !== currentIndexVideo) {
+                    // Mute and pause all videos
+                    Array.from(itemsRef.current).forEach((item, index) => {
+                        const video = item.querySelector("video");
+                        if (video) {
+                            if (index !== currentIndexVideo) {
+                                video.pause();
+                                video.muted = true;
+                            } else {
+                                video.muted = false;
+                                const playPromise = video.play();
+                                if (playPromise !== undefined) {
+                                    playPromise.catch(error => {
+                                        video.muted = true;
+                                        video.play().catch(err => {
+                                            console.log('Replay failed: ', err.message);
                                         });
-                                });
+                                    });
+                                }
+                            }
                         }
-                    }
+                    });
     
-                    preDex.current = currentIndexVideo    
+                    preDex.current = currentIndexVideo;
                 }
             };
     
