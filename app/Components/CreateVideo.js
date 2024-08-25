@@ -18,6 +18,14 @@ const CreateVideo = () => {
         videoPlayer.src = url;
 
         SetFile(file);
+
+        if(Number(file.size) <= 14000000){
+            setIsUsingProxy(true);
+            setIsUploadFB(false);
+        }else{
+            setIsUsingProxy(false);
+            setIsUploadFB(false);
+        }
     }
 
     const createThumbnail = () => {
