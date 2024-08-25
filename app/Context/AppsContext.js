@@ -251,9 +251,12 @@ const AppsProvider = ({ children }) => {
         let app = await contract.getApp(currentIndex);
   
         if(ethers.decodeBytes32String(app.title) !== "" && ethers.toNumber(app.id) != 0){
+          const title = ethers.decodeBytes32String(app.title);
+          const convertedTitle = title.toLowerCase().replace(/\s+/g, '_');
           setInfoApp({
             id: ethers.toNumber(app.id),
-            title: ethers.decodeBytes32String(app.title),
+            title: title,
+            name: convertedTitle,
             appAddress: app.appAddress,
             creatorAddress: app.creatorAddress,
             idNetwork: ethers.toNumber(app.idNetwork),

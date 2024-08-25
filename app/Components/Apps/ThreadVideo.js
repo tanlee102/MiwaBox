@@ -194,7 +194,7 @@ const ThreadVideo = () => {
                 </svg>
             </span>
 
-            <span onClick={() => {router.push('/?id=888&folder='+data[scrolDex]?.username)}} className='non-select' id='username-video-thread'>@{data[scrolDex]?.username}</span>
+            <span onClick={() => {router.push('/?id=888&folder='+infoApp?.name)}} className='non-select' id='username-video-thread'>@{infoApp?.name}</span>
 
             <span id='icon-source-video-thread'>
                 {typeUrlVideo == 1 && <img src = "/icon/source/drive.svg" alt="My Source"/>}
