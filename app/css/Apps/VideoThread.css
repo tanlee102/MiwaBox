@@ -47,6 +47,26 @@ html:has(.video-thread){
     margin-left: 10px;
 }
 
+#icon-source-video-thread{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;  
+    height: 100%;
+    text-align: center;
+
+    cursor: pointer;
+    color: white !important;
+    margin-left: 15px;
+}
+#icon-source-video-thread img{
+    margin-top: 2px;
+    width: 18px;
+    height: 18px;
+    object-fit: cover;
+}
+
 
 #download-btn-video-thread{
     position: relative;

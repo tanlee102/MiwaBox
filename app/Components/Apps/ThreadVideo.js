@@ -159,15 +159,29 @@ const ThreadVideo = () => {
 
 
 
-    const openDownloadWindow = async (index) => {
-        const driveUrl = videoDriveUrls.find(obj => obj.index === index);
-        if(driveUrl?.url){
-            window.open(driveUrl.url, '_blank');
+    const [currentObjectUrl, setCurrentObjectUrl] = useState(null);
+    const [typeUrlVideo, setTypeUrlVideo] = useState(0); 
+
+    const openDownloadWindow = async () => {
+        if(currentObjectUrl?.url){
+            window.open(currentObjectUrl.url, '_blank');
         }
     }
-
-
-
+    const setTypeVideoFun = () => {
+        if (videoDriveUrls.length > 0 && scrolDex !== undefined) {
+            const driveUrl = videoDriveUrls.find(obj => obj.index === data[scrolDex]?.videoUrl);
+            if (driveUrl) {
+                setCurrentObjectUrl(driveUrl);
+                setTypeUrlVideo(driveUrl?.type_video);
+            }else{
+                setCurrentObjectUrl(null);
+            }
+        }
+    }
+    useEffect(() => {
+        setTypeVideoFun();
+    }, [scrolDex, videoDriveUrls, data])
+    
   return (
     <div className='video-thread-container'>
 
@@ -182,7 +196,13 @@ const ThreadVideo = () => {
 
             <span onClick={() => {router.push('/?id=888&folder='+data[scrolDex]?.username)}} className='non-select' id='username-video-thread'>@{data[scrolDex]?.username}</span>
 
-            <span onClick={() => {openDownloadWindow(data[scrolDex]?.videoUrl)}} id='download-btn-video-thread'>
+            <span id='icon-source-video-thread'>
+                {typeUrlVideo == 1 && <img src = "/icon/source/drive.svg" alt="My Source"/>}
+                {typeUrlVideo == 2 && <img src = "/icon/source/facebook.svg" alt="My Source"/>}
+                {typeUrlVideo == 0 && <img src = "/icon/source/pie.svg" alt="My Source"/>}
+            </span>
+
+            <span onClick={() => {openDownloadWindow()}} id='download-btn-video-thread'>
                 <svg viewBox="0 0 24 24" fill="none"><path d="M12.5 4V17M12.5 17L7 12.2105M12.5 17L18 12.2105" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M6 21H19" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </span>
 

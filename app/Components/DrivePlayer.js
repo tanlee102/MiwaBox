@@ -25,7 +25,8 @@ const DrivePlayer = ({index, isPlay=false, isRound=false, isFrist=false}) => {
               if(url){
                 setVideoDriveUrls(prevArray => [...prevArray, {
                   index: index,
-                  url: url
+                  url: url,
+                  type_video: data?.type_video
                 }]);
                 setVideoSrc(url);
               }
