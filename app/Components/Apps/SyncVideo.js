@@ -18,11 +18,11 @@ const SyncVideo = () => {
 		  console.log(response.data); // Do something with the response data
 		  if(response?.data?.length > 0) {
 			    startLoading(); // Start syncing videos
+		  }else{
+			setState(false);
 		  }
 		} catch (error) {
 		  console.error('Error fetching data:', error);
-		} finally {
-		  setState(false);
 		}
 	};
 
