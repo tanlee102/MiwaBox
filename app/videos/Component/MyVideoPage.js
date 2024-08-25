@@ -74,6 +74,11 @@ const MyVideoPage = ({myData, sugData, videoSrc}) => {
                 {String(env_SMARTCHAIN.ADMIN_ADDRESS).toLowerCase() === String(account).toLowerCase() ?
                   <span onClick={() => {deleteMyVideoFile()}}><svg viewBox="-1 -2 35 35" fill="none"><path stroke="black" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M22.5 4.742a13 13 0 11-13 0M16 3v10"/></svg>Delete</span>
                 : ""}
+                <span id='my-icon-source-video-page'>
+                  {myData?.type_video == 1 && <img src = "/icon/source/drive.svg" alt="My Source"/>}
+                  {myData?.type_video == 2 && <img src = "/icon/source/facebook.svg" alt="My Source"/>}
+                  {myData?.type_video == 0 && <img src = "/icon/source/pie.svg" alt="My Source"/>}
+                </span>
               </div>
             
             <div id='label-suggested-video-container'>
