@@ -5,6 +5,7 @@ export const env_SMARTCHAIN = {
     DEFAULT_IDNDEX: 777,
     INITIAL_INDEX: 1000,
     TOTAL_CURRENT_ICON: 20,
+    ADMIN_ADDRESS: '0x2fffca2f69343480258b9149610bd1e2e4a2415a',
     NETWORK: {
         chainId: "0x61",
         rpcUrls: [

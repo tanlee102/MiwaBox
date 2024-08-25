@@ -56,17 +56,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         await tx.wait(); 
 
         if(isUploadFB){
-          try {
-            await axios.post(`${url_video_domain}file/upload/facebook?index=${index}`, {}, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${myUser.access_token}`
-              }
-            });
-            alert('Successful Video Upload.');
-          } catch (error) {
-            alert('Successful Video Upload, but Failed to Upload on Facebook.');
-          }
+          await uploadVideoFB(index);
         } else {
           alert("Successful Video Upload and Non-Upload to Facebook.");
         }
@@ -76,6 +66,22 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         alert('Upload Blockchain Error!!');
       } finally {
         setLoadCreateState(false);
+      }
+    }
+
+    const uploadVideoFB = async (index) => {
+      if (confirm("You want upload this video on facebook?!") == true) {
+      try {
+        await axios.post(`${url_video_domain}file/upload/facebook?index=${index}`, {}, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${myUser.access_token}`
+          }
+        });
+        alert('Successful Video (FB) Upload.');
+      } catch (error) {
+        alert('Successful Video Upload, but Failed to Upload on Facebook.');
+      }
       }
     }
     
@@ -176,12 +182,20 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         throw error
       }
     }
+
+    const deleteVideoData = async (thumbId, videoId) => {
+      try {
+        await deleteImageDrive(thumbId);
+        await deleteVideoDrive(videoId); 
+      } catch (error) {
+        throw error;
+      }
+    }
     
     const deleteVideo = async (infovideo) => {
         if (confirm("You want delete this video?!") == true) {
           try {
-            await deleteImageDrive(infovideo.thumbUrl);
-            await deleteVideoDrive(infovideo.videoUrl);
+            await deleteVideoData(infovideo.thumbUrl, infovideo.videoUrl)
             await deleteVideoBlock(infovideo.id);
             
             alert("Delete video successful.")
@@ -345,7 +359,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     },[currentIndex]);
 
   return (
-    <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, deleteVideo, deleteVideoFB, loadCreateState, onLoadData, 
+    <VideoThreadContext.Provider  value={{  setDisplayCreateVideo, btnCreateVideo, uploadVideoFB, deleteVideo, deleteVideoData, deleteVideoFB, loadCreateState, onLoadData, 
                                             setViParam, data, gridData, scrolDex, setScrolDex, isDisplayGrid, setIsDisplayGrid, setIsScrollToBottomGrid, isScrollToBottomGrid,  
                                             username, setUsername, img, SetImg, file, SetFile, title, setTitle,
                                             videoDriveUrls, setVideoDriveUrls,
