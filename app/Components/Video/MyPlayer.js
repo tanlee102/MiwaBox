@@ -98,12 +98,48 @@ const MyPlayer = ({videoRef, videoSrc}) => {
             }
         }
     }, [videoRef]);
+
+
+
+
+
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleWaiting = useCallback(() => {
+        setIsLoading(true);
+    }, []);
+
+    const handlePlaying = useCallback(() => {
+        setIsLoading(false);
+    }, []);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (video) {
+            video.addEventListener('waiting', handleWaiting);
+            video.addEventListener('playing', handlePlaying);
+        }
+
+        return () => {
+            if (video) {
+            video.removeEventListener('waiting', handleWaiting);
+            video.removeEventListener('playing', handlePlaying);
+            }
+        };
+    }, [videoRef, handleWaiting, handlePlaying]);
     
     
   return (
     <div className='my-player-container'>
 
         <div className="my-player">
+
+            {isLoading && (
+                <div className="loading-indicator-my-player">
+                    <div className="spinner-my-player"></div>
+                </div>
+            )}
 
             <div className="b-play non-select" onClick={handlePlayPause}>
                 {!playing ? 
