@@ -6,7 +6,7 @@ import { AccountContext } from '../Context/AccountContext';
 const CreateVideo = () => {
 
     const { username, setUsername, file, SetFile, SetImg, title, setTitle,
-            isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker, isDarkDrive, setIsDarkDive} = useContext(VideoThreadContext)
+            isUploadFB, setIsUploadFB, isUsingProxy, setIsUsingProxy} = useContext(VideoThreadContext)
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
   
@@ -85,17 +85,12 @@ const CreateVideo = () => {
 
         <label>
             <br/>
-            <input type="checkbox" checked={isDarkDrive} onChange={() => {setIsDarkDive(!isDarkDrive)}}/>Dark GDrive
+            <input type="checkbox" checked={isUploadFB} onChange={() => {setIsUploadFB(!isUploadFB); setIsUsingProxy(false)}}/>Upload FB
         </label>
 
         <label>
             <br/>
-            <input type="checkbox" checked={isUploadFB} onChange={() => {setIsUploadFB(!isUploadFB)}}/>Upload FB
-        </label>
-
-        <label>
-            <br/>
-            <input type="checkbox" checked={isUsingWorker} onChange={() => {setIsUsingWorker(!isUsingWorker)}}/>Using Worker
+            <input type="checkbox" checked={isUsingProxy} onChange={() => {setIsUsingProxy(!isUsingProxy); setIsUploadFB(false)}}/>Using Proxy
         </label>
 
     </div>

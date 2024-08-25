@@ -26,9 +26,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const [img, SetImg] = useState(null);
     const [file, SetFile] = useState(null);
 
-    const [isDarkDrive, setIsDarkDive] = useState(false);
-    const [isUploadFB, setIsUploadFB] = useState(true);
-    const [isUsingWorker, setIsUsingWorker] = useState(false);
+    const [isUsingProxy, setIsUsingProxy] = useState(false);
+    const [isUploadFB, setIsUploadFB] = useState(false);
 
     const [viParam, setViParam] = useState(null);
 
@@ -52,11 +51,11 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
         const signer = await provider.getSigner();
         const contractWithSigner = new ethers.Contract(infoApp.appAddress, env_SMARTCHAIN.APP_CONTRACTS.video.abi, signer);
 
-        const tx = await contractWithSigner.sendVideo(thumbnail, index, username, (isUsingWorker) ? (workerID+' , ') : ' , ');
+        const tx = await contractWithSigner.sendVideo(thumbnail, index, username, (workerID+' , '));
         await tx.wait(); 
 
         if(isUploadFB){
-          await uploadVideoFB(index);
+          await implementUploadVideoFB(index);
         } else {
           alert("Successful Video Upload and Non-Upload to Facebook.");
         }
@@ -69,8 +68,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
       }
     }
 
-    const uploadVideoFB = async (index) => {
-      if (confirm("You want upload this video on facebook?!") == true) {
+    const implementUploadVideoFB = async (index) => {
       try {
         await axios.post(`${url_video_domain}file/upload/facebook?index=${index}`, {}, {
           headers: {
@@ -82,6 +80,11 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
       } catch (error) {
         alert('Successful Video Upload, but Failed to Upload on Facebook.');
       }
+    }
+
+    const uploadVideoFB = async (index) => {
+      if (confirm("You want upload this video on facebook?!") == true) {
+          await implementUploadVideoFB(index);
       }
     }
     
@@ -103,7 +106,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
               const fileFormData = new FormData();
               fileFormData.append('file', file);
               const isUsingLocal = file.size / (1024*1024) > 100;
-              const response = await axios.post(`${isUsingLocal ? url_video_upload_local : url_video_upload_worker}?type_pip=${isDarkDrive ? '3' : '2'}&permission=1&folder=${username}&thumbId=${res.data.id}${title.trim() !== ''? '&title='+encodeURIComponent(title.trim()) : ''}`, fileFormData, {
+              const response = await axios.post(`${isUsingLocal ? url_video_upload_local : url_video_upload_worker}?type_pip=2&permission=1&folder=${username}&thumbId=${res.data.id}${title.trim() !== ''? '&title='+encodeURIComponent(title.trim()) : ''}${isUsingProxy ? '&state=1' : ''}`, fileFormData, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                   'Authorization': `Bearer ${myUser.access_token}`
@@ -363,7 +366,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
                                             setViParam, data, gridData, scrolDex, setScrolDex, isDisplayGrid, setIsDisplayGrid, setIsScrollToBottomGrid, isScrollToBottomGrid,  
                                             username, setUsername, img, SetImg, file, SetFile, title, setTitle,
                                             videoDriveUrls, setVideoDriveUrls,
-                                            isUploadFB, setIsUploadFB, isUsingWorker, setIsUsingWorker, isDarkDrive, setIsDarkDive
+                                            isUploadFB, setIsUploadFB,
+                                            isUsingProxy, setIsUsingProxy
                                         }}>
         {children}
     </VideoThreadContext.Provider>
