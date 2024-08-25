@@ -19,7 +19,7 @@ const CreateVideo = () => {
 
         SetFile(file);
 
-        if(Number(file.size) <= 14000000){
+        if(Number(file.size) <= 10000000){
             setIsUsingProxy(true);
             setIsUploadFB(false);
         }else{
