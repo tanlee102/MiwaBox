@@ -23,11 +23,14 @@ const DrivePlayer = ({index, isPlay=false, isRound=false, isFrist=false}) => {
             if (driveUrl && Array.isArray(driveUrl)) {
               const url = (driveUrl[driveUrl.length - 1])
               if(url){
-                setVideoDriveUrls(prevArray => [...prevArray, {
-                  index: index,
-                  url: url,
-                  type_video: data?.type_video
-                }]);
+                setVideoDriveUrls(prevMap => {
+                  const newMap = new Map(prevMap);
+                  newMap.set(index, {
+                      url: url,
+                      type_video: data?.type_video
+                  });
+                  return newMap;
+                });
                 setVideoSrc(url);
               }
             }
@@ -39,7 +42,7 @@ const DrivePlayer = ({index, isPlay=false, isRound=false, isFrist=false}) => {
 
 
     useEffect(() => {
-      const driveUrl = videoDriveUrls.find(obj => obj.index === index);
+      const driveUrl = videoDriveUrls.get(index);
       if (driveUrl) {
         setVideoSrc(driveUrl.url)
       } else {

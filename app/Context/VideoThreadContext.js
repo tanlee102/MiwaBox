@@ -34,7 +34,8 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     const [onLoadData, setOnLoadData] = useState(false);
     const [data, setData] = useState([]);
     const [gridData, setGridData] = useState([]);
-    const [videoDriveUrls, setVideoDriveUrls] = useState([]);
+
+    const [videoDriveUrls, setVideoDriveUrls] = useState(new Map());
     
     const [curGotId, setCurGotId] = useState(0);
     const [scrolDex, setScrolDex] = useState(null);

@@ -168,14 +168,12 @@ const ThreadVideo = () => {
         }
     }
     const setTypeVideoFun = () => {
-        if (videoDriveUrls.length > 0 && scrolDex !== undefined) {
-            const driveUrl = videoDriveUrls.find(obj => obj.index === data[scrolDex]?.videoUrl);
-            if (driveUrl) {
-                setCurrentObjectUrl(driveUrl);
-                setTypeUrlVideo(driveUrl?.type_video);
-            }else{
-                setCurrentObjectUrl(null);
-            }
+        const driveUrl = videoDriveUrls.get(data[scrolDex]?.videoUrl);
+        if (driveUrl) {
+            setCurrentObjectUrl(driveUrl);
+            setTypeUrlVideo(driveUrl?.type_video);
+        }else{
+            setCurrentObjectUrl(null);
         }
     }
     useEffect(() => {
