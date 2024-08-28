@@ -169,13 +169,6 @@ const AccountProvider = ({ children, myUser, setMyUser, setDisplayMiniProfile })
           const data_user = result.user
           const url = service_url+'?access_token='+data_user.accessToken;
 
-          const myuser = {
-            email: data_user?.email,
-            displayName: data_user?.displayName,
-            photoURL: data_user?.photoURL,
-          }
-          setMyUser(myuser);
-
           fetch(url)
             .then(response => {
               if (!response.ok) {
@@ -184,9 +177,8 @@ const AccountProvider = ({ children, myUser, setMyUser, setDisplayMiniProfile })
               return response.json();
             })
             .then(data => {
-              myuser['access_token'] = data.access_token
-              setMyUser(myuser);
-              Cookies.set('myuser', JSON.stringify(myuser), { expires: 90, path: '/' });
+              setMyUser(data);
+              Cookies.set('myuser', JSON.stringify(data), { expires: 30, path: '/' });
             })
             .catch(error => {
               setMyUser(null);
