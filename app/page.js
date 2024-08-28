@@ -47,6 +47,7 @@ import VideoPageProvider from './videos/Context/VideoPageContext';
 
 const Modal = dynamic(() => import('../app/Components/Dialog/Modal.js'), { ssr: false })
 const MiniProfile = dynamic(() => import('../app/Components/Dialog/MiniProfile.js'), { ssr: false })
+const EditUserName = dynamic(() => import('../app/Components/Dialog/EditUserName.js'), { ssr: false })
 const NoticePopout = dynamic(() => import('../app/Components/NoticePopout.js'), { ssr: false })
 const ImageViewer = dynamic(() => import('../app/Components/Dialog/ImageViewer.js'), { ssr: false })
 
@@ -58,7 +59,8 @@ export default function HomePage() {
   const [displayModalCreate, setDisplayModalCreate] = useState(false);
   const [displayCreateVideo, setDisplayCreateVideo] = useState(false);
   const [myUser, setMyUser] = useState(Cookies.get('myuser') ? JSON.parse(Cookies.get('myuser')) : null);
-  const [displayMiniProfile, setDisplayMiniProfile] = useState(false)
+  const [displayMiniProfile, setDisplayMiniProfile] = useState(false);
+  const [displayEditUsername, setDisplayEditUsername] = useState(false);
 
   return (
     <WindowProvider>
@@ -87,7 +89,8 @@ export default function HomePage() {
                         <Modal setDisplayModal={setDisplayCreateVideo} displayModal={displayCreateVideo} title={"Add Video"} body={<CreateVideo/>} footer={<CreateVideoButton/>} displayfooter={true}></Modal>
                         <ImageViewer></ImageViewer>
                         <NoticePopout/>
-                        <MiniProfile isDisplay={displayMiniProfile} setIsDisplay={setDisplayMiniProfile} user={myUser}></MiniProfile>
+                        <MiniProfile setDisplayEditUsername={setDisplayEditUsername} isDisplay={displayMiniProfile} setIsDisplay={setDisplayMiniProfile} user={myUser}></MiniProfile>
+                        <EditUserName isDisplay={displayEditUsername} setIsDisplay={setDisplayEditUsername} setDisplayMiniProfile={setDisplayMiniProfile}></EditUserName>
                     </VideoPageProvider>
                   </VideoThreadProvider>
                 </ThreadProvider>

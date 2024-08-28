@@ -326,12 +326,22 @@
     margin-top: 5px;
 }
 
-.mini-profile-dialog div:nth-child(2){
+#button-display-edit-username{
     position: relative;
     font-size: 1.5em;
     font-weight: bold;
     margin-top: 5px;
     margin-bottom: 5px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+#button-display-edit-username svg{
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    margin-left: 4px;
+    cursor: pointer;
 }
 .mini-profile-dialog span{
     position: relative;
@@ -343,4 +353,27 @@
     border-radius: 4px;
     font-size: 0.9em;
     cursor: pointer !important;
+}
+
+
+
+
+.dialog-user-name span{
+    display: block;
+    font-size: 12px;
+    color: coral;
+    margin-top: 10px;
+}
+
+.dialog-user-name input{
+    width: calc(100% - 7px - 6px);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 4px 5px;
+    display: flex;
+    font-size: 16px;
+}
+
+.dialog-user-name input:focus{
+    border-color: cornflowerblue;
 }
