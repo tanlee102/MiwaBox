@@ -133,6 +133,7 @@ html:has(.video-thread){
     padding-bottom: 10px;
     background-color: transparent;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .desktop-content-grid-video-thread::-webkit-scrollbar {
