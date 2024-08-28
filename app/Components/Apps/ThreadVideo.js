@@ -14,7 +14,8 @@ import { WindowContext } from '@/app/Context/WindowContext'
 import DrivePlayer from '../DrivePlayer';
 
 import { useRouter } from 'next/navigation'
-import { url_image_domain } from '@/app/env_video'
+import StepVideoThread from '../StepVideoThread';
+import GridVideoThread from '../GridVideoThread';
 
 
 const ThreadVideo = () => {
@@ -22,94 +23,79 @@ const ThreadVideo = () => {
     const router = useRouter();
 
     const {setDisplayCreateVideo, 
-           data, gridData, onLoadData,
+           data,
            scrolDex, setScrolDex, 
            isDisplayGrid, setIsDisplayGrid, 
-           setIsScrollToBottomGrid, isScrollToBottomGrid, 
            deleteVideo, deleteVideoFB, uploadVideoFB,
            videoDriveUrls } = useContext(VideoThreadContext);
 
     const {infoApp} = useContext(AppsConext);
     const {account} = useContext(AccountContext);
-    const {currentIndex, showLeft, completeOpenLeft} = useContext(WindowContext);
+    const {showLeft, completeOpenLeft} = useContext(WindowContext);
 
     const preDex = useRef(0);
     const containerRef = useRef(null);
     const itemsRef = useRef(null);
 
 
+    const muteAndPauseVideos = (currentIndexVideo) => {
+        Array.from(itemsRef.current).forEach((item, index) => {
+            const video = item.querySelector("video");
+            if (video) {
+                if (index !== currentIndexVideo) {
+                    video.pause();
+                    video.muted = true;
+                } else {
+                    video.muted = false;
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(() => {
+                            video.muted = true;
+                            video.play().catch(err => console.log('Replay failed: ', err.message));
+                        });
+                    }
+                }
+            }
+        });
+    };
+      
+
+
     useLayoutEffect(() => {
-        if(data.length > 0){
+        if (data.length > 0) {
             containerRef.current = document.querySelector(".video-thread");
             itemsRef.current = containerRef.current.children;
-            
-            const onScroll = function(e) {
+        
+            const onScroll = (e) => {
                 e.preventDefault();
-
                 const itemHeight = document.querySelector(".video-thread div").offsetHeight;
-                const currentIndexVideo = Math.round(Number(containerRef.current.scrollTop) / itemHeight);
+                const currentIndexVideo = Math.round(containerRef.current.scrollTop / itemHeight);
                 setScrolDex(currentIndexVideo);
-    
+        
                 if (preDex.current !== currentIndexVideo) {
-                    // Mute and pause all videos
-                    Array.from(itemsRef.current).forEach((item, index) => {
-                        const video = item.querySelector("video");
-                        if (video) {
-                            if (index !== currentIndexVideo) {
-                                video.pause();
-                                video.muted = true;
-                            } else {
-                                video.muted = false;
-                                video.muted = false;
-                                const playPromise = video.play();
-                                if (playPromise !== undefined) {
-                                    playPromise.catch(error => {
-                                        video.muted = true;
-                                        video.play().catch(err => {
-                                            console.log('Replay failed: ', err.message);
-                                        });
-                                    });
-                                }
-                            }
-                        }
-                    });
-    
+                    muteAndPauseVideos(currentIndexVideo);
                     preDex.current = currentIndexVideo;
                 }
             };
-    
+        
             containerRef.current.addEventListener("scroll", onScroll);
-            return () => {
-                containerRef.current.removeEventListener("scroll", onScroll);
-            }
+            return () => containerRef.current.removeEventListener("scroll", onScroll);
         }
     }, [data]);
+      
     
-
-
     const moveToIndex = (index) => {
-        if(index >= 0 && index < data.length){
-            let itemHeight = document.querySelector(".video-thread div").offsetHeight;
-
-            let previousVideo = itemsRef.current[preDex.current]?.querySelector("video");
-            if (previousVideo) {
-                previousVideo.pause();
-            }
-                
-            containerRef.current.scrollTop = itemHeight*index;
+        if (index >= 0 && index < data.length) {
+            const itemHeight = document.querySelector(".video-thread div").offsetHeight;
+            containerRef.current.scrollTop = itemHeight * index;
+        
             setScrolDex(index);
             preDex.current = index;
-
             setIsDisplayGrid(false);
-    
-            setTimeout(() => {
-                let currentVideo = itemsRef.current[index]?.querySelector("video");
-                if (currentVideo) {
-                    currentVideo.play();
-                }
-            }, 888);
+        
+            setTimeout(() => muteAndPauseVideos(index), 100);
         }
-    }
+    };
 
 
 
@@ -122,40 +108,6 @@ const ThreadVideo = () => {
         }
     },[isDisplayGrid]);
 
-
-
-    const refGridContainer = useRef();
-    const isScrollToBottomGridRef = useRef(isScrollToBottomGrid);
-
-    useEffect(() => {
-        isScrollToBottomGridRef.current = isScrollToBottomGrid;
-    }, [isScrollToBottomGrid]);
-    
-    useEffect(() => {
-        if(infoApp && infoApp.appType == 2){
-            const handleScroll = () => {
-                const { scrollHeight, scrollTop, clientHeight } = refGridContainer.current;
-                const bottom = scrollHeight - scrollTop;
-                if (bottom <= clientHeight + 50) {
-                    setIsScrollToBottomGrid(!isScrollToBottomGridRef.current);
-                }
-            };
-            refGridContainer?.current?.addEventListener('scroll', handleScroll);
-            return () => refGridContainer?.current?.removeEventListener('scroll', handleScroll);
-        }
-    }, [infoApp]);
-    
-    
-
-
-    const [isMobile, setIsMobile] = useState(true);
-    useLayoutEffect(() => {
-        const checkDeviceType = () => {
-            const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone|.*Tablet.*|.*Touch/i.test(navigator.userAgent);
-            setIsMobile(isMobileDevice);
-        };
-        checkDeviceType();
-    }, []);
 
 
 
@@ -239,40 +191,9 @@ const ThreadVideo = () => {
 
         </div>
 
+        <GridVideoThread moveToIndex={moveToIndex}/>
 
-        <div className="contain-grid-video-thread" style={{ transform: isDisplayGrid === false ? "translateX(100%)" : "translateX(0)" }}>
-            <div ref={refGridContainer} className={`content-grid-video-thread ${isMobile ? 'mobile-content-grid-video-thread' : 'desktop-content-grid-video-thread'}`}>
-                <div className='grid-video-thread'>
-                    {gridData?.map((item, index) => (
-                        <span key={index} className={scrolDex === index ? 'chose-played-video' : ''} onClick={() => {router.push('/?id='+currentIndex+'&vi='+item.id); moveToIndex(index) }}>
-                            <div>
-                                <img src={ url_image_domain + item?.thumbUrl + '.jpeg'} />
-                            </div>
-                        </span>
-                    ))}
-                </div>
-
-                <div style={{display: onLoadData ? "flex" : "none"}} className='contain-loader-hozon'>
-                    <div className="loader-hozon"></div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <div className='step-video-thread-button non-select'>
-            <div onClick={() => {moveToIndex(scrolDex - 1)}}>
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M17 15L12 10L7 15" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-            </div>
-            <div onClick={() => {moveToIndex(scrolDex + 1)}}>
-            <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M17 15L12 10L7 15" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-            </div>
-        </div>
-        
+        <StepVideoThread moveToIndex={moveToIndex} scrolDex={scrolDex}/>
         
         <div className='video-thread' onClick={() => {setIsDisplayGrid(false)}}>
             {data?.map((item, index) => {
@@ -286,7 +207,6 @@ const ThreadVideo = () => {
                                         isPlay={index == scrolDex} 
                                         isRound={isRound || index == scrolDex + 2 || index == scrolDex + 3} 
                                         index={String(item?.videoUrl)} 
-                                        // cipherId={String(item.link[0])}
                                         />
                             : 
                             null
