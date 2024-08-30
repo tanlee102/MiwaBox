@@ -27,7 +27,7 @@ const Welcome = () => {
             </div>
         </div>
 
-        <div className='welcome-text'>The groundbreaking media platform powered by blockchain technology. We harness the power of blockchain to provide decentralized communication, offering you the advantages of transparency and immutability.</div>
+        <div className='welcome-text'>A media platform that blends blockchain technology with reliable storage for public videos, images, and posts. We provide decentralized communication with the added benefits of transparency and secure access.</div>
        
         <div className='contain-list-launching-app'>
             <p>Suggested Sites</p>
