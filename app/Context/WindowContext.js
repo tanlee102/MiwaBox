@@ -1,8 +1,9 @@
 "use client";
 
-import React, { createContext, useEffect, useLayoutEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { env_SMARTCHAIN } from '../env';
 import Cookies from 'js-cookie';
+import { RootLayoutContext } from './RootLayoutContext';
 
 export const WindowContext = createContext();
 
@@ -15,7 +16,7 @@ const WindowProvider = ({ children }) => {
   const [completeCloseRight, setCompleteCloseRight] = useState(null);
   const [completeOpenLeft, setCompleteOpenLeft] = useState(null);
 
-  const [language, setLanguage] = useState('en');
+  const {language, setLanguage} = useContext(RootLayoutContext);
   const [notice_pop_state, setNotice_pop_state] = useState(false);
 
   const [windowWidth, setWindowWidth] = useState(null);
@@ -98,18 +99,7 @@ const WindowProvider = ({ children }) => {
       setUrlImageViewer(url);
       setDisplayImageViewer(true);
   }
-
-  useEffect(() => {
-    const cookieLang = Cookies.get('mylang');
-    if (cookieLang) {
-      setLanguage(cookieLang);
-    } else {
-      const lang = navigator.language || navigator.userLanguage;
-      const isVietnamese = lang.toLowerCase().startsWith('vi');
-      setLanguage(isVietnamese ? 'vi' : 'en');
-    }
-  }, []);
-
+  
   return (
     <WindowContext.Provider value={{currentIndex, setCurrentIndex,
                                     closeLeft, closeRight,

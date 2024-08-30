@@ -1,4 +1,5 @@
 import NextTopLoader from 'nextjs-toploader';
+import RootLayoutProvider from './Context/RootLayoutContext';
 
 import './css/globalRes.css'
 import './css/global.css'
@@ -11,7 +12,6 @@ import './css/Dialog/ModalRes.css'
 import './css/DropDown.css'
 import './css/LoadMore.css'
 import './css/ImageViewer.css'
-
 
 export const metadata = {
   title: "MiwaBox",
@@ -36,7 +36,9 @@ export default function RootLayout({ children }) {
             color="rgb(112, 174, 255)"
             speed={999}
           />
-          <main>{children}</main>
+            <RootLayoutProvider>
+              <main>{children}</main>
+            </RootLayoutProvider>
         </body>
     </html>
   );

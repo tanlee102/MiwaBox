@@ -1,0 +1,607 @@
+*{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html{
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: rgb(241, 241, 241);
+    width: 100%;
+    height: auto;
+    overflow-y: scroll;
+
+    font-size: 100%;
+}
+body.light-mode{
+    background: rgb(241, 241, 241);
+}
+body.dark-mode{
+    background-color: black;
+}
+
+/* ::-webkit-scrollbar {
+    background: #fff;
+    width: 10px;
+    height: 10px; 
+}
+::-webkit-scrollbar-thumb {
+    background: #c5c5c5;
+    border-radius: 7px;
+}
+::-webkit-scrollbar-track {
+    background-color: rgb(255, 255, 255);
+} */
+
+
+a{
+    text-decoration: none;
+    color: inherit; 
+}
+
+input{
+    outline: none;
+}
+
+/*--------------------------------------------------*/
+.content{
+    position: relative;
+    display: block;
+    float: left;
+    padding: 0;
+    border: 0;
+
+    width: 100%;
+    height: auto;
+
+    overflow: visible;
+    margin: auto;
+}
+
+.content[dark-mode="true"]{
+    background-color: black;
+}
+.content[dark-mode="false"]{
+    background: rgb(241, 241, 241);
+}
+
+.fr-content{
+    width: 100%;
+    margin: auto;
+    margin-top: 55px;
+    height: auto;
+}
+
+/* .content[dark-mode="true"] .fr-content{
+    background-color: rgb(53, 53, 53);
+}
+.content[dark-mode="false"] .fr-content{
+    background: white;
+} */
+
+/*--------------------------------------------------*/
+.wrap-bar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* padding-right:10px; */
+    height: 55px;
+    opacity: 1;
+    z-index: 5;
+    border-bottom: 1pt solid rgb(219, 219, 219);
+    background-color: white;
+    overflow: visible;
+    font-size: 16px;
+}
+.wrap-bar *{
+    padding: 0;
+}
+.content[dark-mode="true"] .wrap-bar{
+    background-color: #312f2f;
+    border-bottom: 1px solid black;
+}
+.nav-bar{
+    position: relative;
+    margin: auto;
+    /* float: left; */
+    top: 0;
+    /* left: 50%;
+    transform: translateX(-50%); */
+    height: 100%;
+    opacity: 1;
+    width: 100%;
+    /* background-color: aqua; */
+}
+.fr-nav-bar{
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+/*--------------------------------------------------*/
+.wrap-logo{
+    position: relative;
+    float: left;
+    height: 100%;
+    cursor: pointer;
+}
+.wrap-logo img{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    height: calc(100% - 20px);
+    width: auto;
+}
+.wrap-logo svg{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    height: calc(100% - 20px);
+    width: auto;
+}
+.cls-2{
+    fill: cornflowerblue;
+}
+.content[dark-mode="true"] .nav-bar .cls-1{
+    fill: rgb(234, 234, 234);
+}
+/*--------------------------------------------------*/
+.wrap-item{
+    position: relative;
+    float: left;
+    height: 100%;
+    width: auto;
+    margin-left: 15px;
+}
+.wrap-item div{
+    position: relative;
+    float: left;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 10px;
+    width: auto;
+    font-size: 16px;
+    /* padding: 6px 13px; */
+    /* background-color: cornflowerblue; */
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+
+.wrap-item-mb{
+    position: relative;
+    float: left;
+    display: flex;
+    justify-content: last baseline;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    opacity: 1;
+
+    border-bottom: 1px solid rgb(219, 219, 219);
+    border-top: 1px solid rgb(219, 219, 219);
+    background-color:  white;
+}
+.content[dark-mode="true"] .wrap-item-mb{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    background-color:  #312f2f;
+}
+
+.wrap-item-mb div{
+    float: left;
+    height: auto;
+    width: auto;
+    margin-left: 10px;
+    /* padding: 6px 13px 5px 13px; */
+    /* background-color: cornflowerblue; */
+    border: none;
+    border-radius: 7px;
+    color: white;
+    cursor: pointer;
+}
+
+/*--------------------------------------------------*/
+.wrap-search{
+    position: relative;
+    float: right;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+}
+.content[dark-mode="true"] .wrap-search{
+    background-color: #312f2f;
+}
+.content[dark-mode="false"] .wrap-search{
+    background-color: white;
+}
+
+.search-wall{
+    overflow: hidden;
+    float: right;
+    border-radius: 30px;
+    background-color: whitesmoke;
+    border: 1pt solid whitesmoke;
+}
+.content[dark-mode="true"] .nav-bar .search-wall{
+    background-color: rgb(0, 0, 0);
+    border: 1pt solid  rgb(0, 0, 0);
+}
+.search-button{
+    float: right;
+    height: 20px;
+    width: 20px;
+    padding: 4px 6px 6px 4px;
+    margin: 0px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.content[dark-mode="true"] .nav-bar .search-button{
+    fill: white;
+}
+
+.search-bar{
+    float: left;
+    height: auto;
+    width: calc(100% - 35px);
+
+
+}
+.search-bar input[type=text]{
+    width: 100%;
+    padding: 0px 0px 0px 13px;
+    height: 30px;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.content[dark-mode="true"] .nav-bar .search-bar input[type=text]{
+    color: white;
+}
+
+/*--------------------------------------------------*/
+.mark-item{
+    position: relative;
+    float: left;
+    height: 50px;
+    width: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 5px;
+    cursor: pointer;
+}
+.mark-item div{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+.mark-item svg{
+    margin: 10px;
+    width: 30px;
+    height:  30px;
+    fill: black;
+}
+.content[dark-mode="true"] .mark-item svg{
+    fill: white;
+}
+/*--------------------------------------------------*/
+.mark-search{
+    position: relative;
+    float: right;
+    height: 50px;
+    width: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.mark-search div{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+}
+.mark-search svg{
+    float: right;
+    height: 32px;
+    width: 32px;
+    margin: 9px 0px 9px 0px;
+    fill: black;
+}
+.content[dark-mode="true"] .mark-search svg{
+    fill: white;
+}
+
+/*--------------------------------------------------*/
+.wrap-profile{
+    position: relative;
+    float: right;
+    height: 100%;
+    width: auto;
+    margin-right: 1px;
+}
+.ava-profile{
+    position: relative;
+    float: right;
+    right: 0px;
+    margin-left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 39px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1pt solid black;
+    /* border: 0px solid rgba(182, 0, 0, 0.714); */
+    overflow: hidden;
+    cursor: pointer;
+}
+.ava-profile img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.menu-profile{
+    position: absolute;
+    width: 160px;
+    top: 100%;
+    bottom: 0;
+    right: 0;
+    float: left;
+    margin-top: 1px;
+    z-index: 10;
+}
+
+.menu-profile div{
+    padding: 10px 10px;
+    float: right;
+    width: calc(100% - 20px);
+    z-index: 5;
+    background-color: white;
+    border-radius: 3px;
+    text-align: right;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgb(227, 227, 227);
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+}
+.content[dark-mode="true"] .wrap-profile .menu-profile div{
+    background-color: rgb(92, 92, 92) !important;
+    border-top: 1px solid rgb(0, 0, 0);
+    color:rgb(255, 255, 255)
+}
+
+.menu-profile div:hover{
+    background-color: rgb(152, 152, 152);
+    color: white;
+}
+
+.content[dark-mode="true"] .wrap-profile .menu-profile div:hover{
+    background-color: rgb(230, 230, 230) !important;
+    color: black;
+}
+
+
+
+.mark-head-sheet-profile{
+    z-index: 2;
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: -1px;
+    right: 13px;
+    border: none;
+    border: 8px solid transparent;
+    border-top-width: 0;
+    border-bottom-color: rgb(214, 214, 214);
+}
+.content[dark-mode="true"] .wrap-profile .mark-head-sheet-profile{
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.mark-head-sheet-profile::after {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    top: auto;
+    right: auto;
+    left: -6px;
+    bottom: -8px;
+    border: none;
+    border: 6px solid transparent;
+    border-top-width: 0;
+    border-bottom-color: white;
+}
+
+.content[dark-mode="true"] .wrap-profile .mark-head-sheet-profile::after {
+    border-bottom-color: rgb(92, 92, 92) !important;
+}
+
+/*--------------------------------------------------*/
+.wrap-notification{
+    position: relative;
+    float: left;
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.wrap-notification div {
+    height: auto;
+    width: auto;
+    position: relative;
+    float: left;
+    margin: 0px 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.wrap-notification div svg{
+    color: black;
+    width: 23px;
+    height: 23px;
+    float: left;
+    fill: rgb(35, 35, 35);
+}
+.content[dark-mode="true"] .nav-bar .wrap-notification div svg{
+    fill: white;
+}
+.wrap-notification div p{
+    position: absolute;
+    top: -3px;
+    right: -5px;
+    color: white;
+    padding: 2px 4px;
+    font-size: 10px;
+    border-radius: 2px;
+    background-color: red;
+}
+
+.content[dark-mode="true"] .wrap-notification div i{
+    color: white;
+}
+
+
+
+.wrap-login-btn{
+    float: right;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content[dark-mode="true"] .wrap-login-btn div{
+    background-color: rgb(108, 108, 108);
+    color: white;
+}
+
+.wrap-login-btn div{
+    width: auto;
+    margin-right: 1px;
+
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 7px 10px;
+    color: black;
+    background-color: rgb(227, 227, 227);
+    font-weight: bold;
+}
+
+
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* .wrap-button-service-login{
+    position: relative;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #5b5b5b;
+    width: 100%;
+    height: auto;
+}
+
+.wrap-button-service-login span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.wrap-button-service-login span p {
+    margin-left:5px;
+}
+
+.wrap-button-service-login a:first-child span{
+    background-color: white;
+}
+.wrap-button-service-login a:nth-child(2) span{
+    background-color: cornflowerblue;
+    color: white;
+}
+.wrap-button-service-login a:nth-child(2) span svg{
+    fill: white;
+} */
+
+
+.icon-nav-item{
+    padding: 0px;
+    display: flex;    
+    background-color: transparent;
+    color: black;
+    justify-content: center;
+    align-items: center;
+}
+.icon-nav-item svg{
+    padding: 0px;
+    margin: auto;
+    width: 25px;
+    height: 25px;
+}
+.text-nav-item{
+    padding: 4px;
+    padding-right: 13px;
+    background-color: cornflowerblue;
+}
+.text-nav-item svg{
+    margin-right: 5px;
+}
+.add-icon-nav-item svg path{
+    stroke: #fff;
+}
+
+
+.light-bulb-icon-nav-item{
+    fill: black;
+}
+.content[dark-mode="true"] .light-bulb-icon-nav-item{
+    fill: white;
+}
+
+.message-icon-nav-item svg path{
+    stroke: black;
+}
+.content[dark-mode="true"] .message-icon-nav-item svg path{
+    stroke: white;
+} 
+
+
+.message-icon-nav-item p{
+    position: absolute;
+    top: -3px;
+    right: -5px;
+    color: white;
+    padding: 3px 5px;
+    font-size: 10px;
+    border-radius: 2px;
+    background-color: red;
+}

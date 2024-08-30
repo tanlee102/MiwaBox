@@ -10,13 +10,15 @@ import { WindowContext } from './WindowContext';
 
 import { env_SMARTCHAIN } from '../env';
 import { LENGTH_LIST_VIDEO, url_image_domain, url_video_domain, url_video_upload_local, url_video_upload_worker } from '../env_video';
+import { RootLayoutContext } from './RootLayoutContext';
 
 export const VideoThreadContext = createContext();
 
 const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
 
     const { infoApp } = useContext(AppsConext);
-    const { switchNetwork, myUser } = useContext(AccountContext);
+    const { switchNetwork } = useContext(AccountContext);
+    const { myUser } = useContext(RootLayoutContext);
     const { currentIndex } = useContext(WindowContext);
 
     const [loadCreateState, setLoadCreateState] = useState(false);
@@ -323,9 +325,7 @@ const VideoThreadProvider = ({ children, setDisplayCreateVideo }) => {
     }
 
 
-
-
-
+    
 
     useEffect(() => {
       if(infoApp && infoApp.appType == 2){

@@ -1,11 +1,11 @@
-import { AccountContext } from '@/app/Context/AccountContext';
+import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
 
 const SyncVideo = () => {
 
 	const [state, setState] = useState(false);
-	const { myUser } = useContext(AccountContext);
+	const { myUser } = useContext(RootLayoutContext);
 
 	const startLoading = async () => {
 		setState(true);

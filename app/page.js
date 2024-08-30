@@ -23,7 +23,6 @@ import './css/Apps/SyncVideo.css'
 import React, { useState } from "react";
 import dynamic from 'next/dynamic';
 import { MetaMaskProvider } from "@metamask/sdk-react";
-import Cookies from 'js-cookie';
 
 import CenterBox from "./Components/LayoutBox/CenterBox";
 import LeftBox from "./Components/LayoutBox/LeftBox";
@@ -58,9 +57,6 @@ export default function HomePage() {
   
   const [displayModalCreate, setDisplayModalCreate] = useState(false);
   const [displayCreateVideo, setDisplayCreateVideo] = useState(false);
-  const [myUser, setMyUser] = useState(Cookies.get('myuser') ? JSON.parse(Cookies.get('myuser')) : null);
-  const [displayMiniProfile, setDisplayMiniProfile] = useState(false);
-  const [displayEditUsername, setDisplayEditUsername] = useState(false);
 
   return (
     <WindowProvider>
@@ -73,7 +69,7 @@ export default function HomePage() {
             },
         }}
       >
-        <AccountProvider setMyUser={setMyUser} myUser={myUser} setDisplayMiniProfile={setDisplayMiniProfile}>
+        <AccountProvider>
           <LayoutProvider>
             <AppsProvider>
               <InputProvider>
@@ -87,10 +83,10 @@ export default function HomePage() {
                         </div>
                         <Modal setDisplayModal={setDisplayModalCreate} displayModal={displayModalCreate} title={<TitleCreate/>} body={<Create/>} footer={<ButtonCreate/>} displayfooter={true}></Modal>
                         <Modal setDisplayModal={setDisplayCreateVideo} displayModal={displayCreateVideo} title={"Add Video"} body={<CreateVideo/>} footer={<CreateVideoButton/>} displayfooter={true}></Modal>
-                        <ImageViewer></ImageViewer>
+                        <ImageViewer/>
                         <NoticePopout/>
-                        <MiniProfile setDisplayEditUsername={setDisplayEditUsername} isDisplay={displayMiniProfile} setIsDisplay={setDisplayMiniProfile} user={myUser}></MiniProfile>
-                        <EditUserName isDisplay={displayEditUsername} setIsDisplay={setDisplayEditUsername} setDisplayMiniProfile={setDisplayMiniProfile}></EditUserName>
+                        <MiniProfile/>
+                        <EditUserName/>
                     </VideoPageProvider>
                   </VideoThreadProvider>
                 </ThreadProvider>

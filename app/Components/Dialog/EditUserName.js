@@ -4,16 +4,16 @@ import { useState, useEffect } from 'react';
 import { hideMainScrollBar } from '@/app/helper/hideMainScrollBar'; 
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { AccountContext } from '@/app/Context/AccountContext';
 import { service_url } from '@/app/env_setting';
 import { jwtDecode } from 'jwt-decode';
+import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
 
 
-const EditUserName = ({isDisplay ,setIsDisplay, setDisplayMiniProfile}) => {
+const EditUserName = () => {
 
-    const {myUser, setMyUser} = useContext(AccountContext)
+    const {myUser, setMyUser, setDisplayMiniProfile, displayEditUsername, setDisplayEditUsername} = useContext(RootLayoutContext);
+
     const [textIn, setTextIn] = useState(myUser?.displayName);
-
     useEffect(() => {
       if(myUser?.displayName){
         setTextIn(myUser.displayName);
@@ -23,6 +23,10 @@ const EditUserName = ({isDisplay ,setIsDisplay, setDisplayMiniProfile}) => {
     const handleChange = event => {
         setTextIn(event.target.value);
     };
+
+    useEffect(() => {
+      hideMainScrollBar(displayEditUsername);
+    }, [displayEditUsername]);
 
     const updateUserNameBtn = async () => {
         try {
@@ -38,17 +42,15 @@ const EditUserName = ({isDisplay ,setIsDisplay, setDisplayMiniProfile}) => {
           if (response.status === 200) {
 
             const userData = { ...myUser, displayName: textIn };
-      
             setMyUser(userData);
       
             const decodedToken = jwtDecode(myUser.access_token);
             const expiresAt = decodedToken.exp;
 
             const expiresInDays = (expiresAt * 1000 - Date.now()) / (1000 * 60 * 60 * 24);
-      
             Cookies.set('myuser', JSON.stringify(userData), { expires: Math.floor(expiresInDays) });
 
-            setIsDisplay(false);
+            setDisplayEditUsername(false);
             setDisplayMiniProfile(true);
           }
         } catch (error) {
@@ -57,44 +59,15 @@ const EditUserName = ({isDisplay ,setIsDisplay, setDisplayMiniProfile}) => {
         }
     }
 
-  
-
-
-    useEffect(() => {
-      hideMainScrollBar(isDisplay);
-    }, [isDisplay]);
-
   return (
-    <div  class={isDisplay ? "dialog-confirm active-confirm" : "dialog-confirm"}>
+    <div  class={displayEditUsername ? "dialog-confirm active-confirm" : "dialog-confirm"}>
   
         <div>
-            {/* <div>
-                <header> 
-                    <h3> Chỉnh sửa tên tài khoảng </h3> 
-                    <i class="fa fa-close" aria-hidden="true" onClick={() => setIsDisplay(false)}></i>
-                </header>
-
-                <div class="dialog-msg dialog-user-name"> 
-
-                    <input value={textIn} onChange={handleChange} placeholder='Nhập tên tài khoảng' id='input-dialog-user-name' type="text" maxLength={env_variable.MAX_NAME_USER_LENGTH}
-                    onBlur={(e) => checkUserNameBtn()}/>
-                    {checkSame ? <span>Tên này đã được sử dụng.</span> : "" }
-
-                </div>
-                
-                <footer>
-                    <div class="controls"> 
-                        <button class="button button-danger doAction" onClick={() => {updateUserNameBtn()}}>Vâng</button>  
-                         <button class="button button-default cancelAction" onClick={() => setIsDisplay(false)}>Hủy</button> 
-                    </div>
-                </footer>
-
-            </div> */}
 
             <div>
                 <header> 
                     <h3>Edit Account Name</h3> 
-                    <i class="fa fa-close" aria-hidden="true" onClick={() => setIsDisplay(false)}></i>
+                    <i class="fa fa-close" aria-hidden="true" onClick={() => setDisplayEditUsername(false)}></i>
                 </header>
 
                 <div class="dialog-msg dialog-user-name"> 
@@ -111,7 +84,7 @@ const EditUserName = ({isDisplay ,setIsDisplay, setDisplayMiniProfile}) => {
                 <footer>
                     <div class="controls"> 
                         <button class="button button-danger doAction" onClick={() => {updateUserNameBtn()}}>Yes</button>  
-                        <button class="button button-default cancelAction" onClick={() => setIsDisplay(false)}>Cancel</button> 
+                        <button class="button button-default cancelAction" onClick={() => setDisplayEditUsername(false)}>Cancel</button> 
                     </div>
                 </footer>
             </div>

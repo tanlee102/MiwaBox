@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useSDK } from "@metamask/sdk-react";
 import { env_SMARTCHAIN } from '../env';
 import { ethers } from 'ethers';
@@ -10,16 +10,19 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { service_url } from '../env_setting';
 
 import Cookies from 'js-cookie';
+import { RootLayoutContext } from './RootLayoutContext';
 
 export const AccountContext = createContext();
 
-const AccountProvider = ({ children, myUser, setMyUser, setDisplayMiniProfile }) => {
+const AccountProvider = ({ children }) => {
     
     const {sdk} = useSDK();
 
     const [user, setUser] = useState(null);
 
     const [account, setAccount] = useState(false);
+
+    const {loginFunction, myUser, setMyUser} = useContext(RootLayoutContext)
 
 
     const rpcProvider = async () => {
@@ -147,62 +150,13 @@ const AccountProvider = ({ children, myUser, setMyUser, setDisplayMiniProfile })
           }
     }, []);
 
-
-    const login = () => {
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyB3lo_xu7P2Hd5VrKCfcEMhpjW5tF6JmQI",
-        authDomain: "miwabox-login.firebaseapp.com",
-        projectId: "miwabox-login",
-        storageBucket: "miwabox-login.appspot.com",
-        messagingSenderId: "773556708155",
-        appId: "1:773556708155:web:c3aaa891333b2d5a4a0d1e",
-        measurementId: "G-WZ6KLZN22Y"
-      };
-      
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider();
-    
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          const data_user = result.user
-          const url = service_url+'?access_token='+data_user.accessToken;
-
-          fetch(url)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then(data => {
-              setMyUser(data);
-              Cookies.set('myuser', JSON.stringify(data), { expires: 30, path: '/' });
-            })
-            .catch(error => {
-              setMyUser(null);
-              alert("Error when creating token!");
-              console.error(`Fetch Error: ${error}`)
-            });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    };
-  
-    const logout = () => {
-      setMyUser(null);
-      Cookies.remove('myuser');
-    };
-
   return (
     <AccountContext.Provider  value={{
         rpcProvider,
         connect, account, setAccount,
         switchNetwork, createUser, getUser, updateUser, 
         user, setUser,
-        myUser, setMyUser, setDisplayMiniProfile, login, logout
+        myUser, setMyUser
     }}>
         {children}
     </AccountContext.Provider>
