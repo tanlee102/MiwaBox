@@ -8,8 +8,12 @@ const EditUserName = dynamic(() => import('../../app/Components/Dialog/EditUserN
 import "./css/Nav/Menu.css";
 import "./css/Nav/MenuRes.css";
 import dynamic from 'next/dynamic';
+import Modal from '../Components/Dialog/Modal';
+import AddPost from './Component/AddPost';
 
 const page = () => {
+
+  const [displayModalAddPost, setDisplayModalAddPost] = useState(true)
 
   return (
     <div className='main'>
@@ -18,6 +22,7 @@ const page = () => {
         </Suspense>
         <MiniProfile/>
         <EditUserName/>
+        <Modal setDisplayModal={setDisplayModalAddPost} displayModal={displayModalAddPost} title={"Add Video"} body={<AddPost/>} displayfooter={false}></Modal>
     </div>
   )
 }
