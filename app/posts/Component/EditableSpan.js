@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset=null }) => {
+const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset = null, isAllowEnter = true  }) => {
   const [isEmpty, setIsEmpty] = useState(true);
-  const [text, setText] = useState('');
+  const [htmlContent, setHtmlContent] = useState('');
   const spanRef = useRef(null);
 
   useEffect(() => {
@@ -10,16 +10,20 @@ const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset
   }, []);
 
   useEffect(() => {
-    setIsEmpty(text.trim() === '');
-  }, [text]);
+    setIsEmpty(htmlContent.trim() === '');
+  }, [htmlContent]);
 
   useEffect(() => {
-    if(onReset) document.getElementsByClassName('add-post-title').item(0).innerHTML = '';
-  }, [onReset])
+    if (onReset){ 
+      document.getElementsByClassName('add-post-title').item(0).innerHTML = '';
+      document.getElementsByClassName('add-post-title').item(1).innerHTML = '';
+      setIsEmpty(true);
+    }
+  }, [onReset]);
 
   const handleInput = (e) => {
-    setText(e.target.textContent);
-    onChangeText(e.target.textContent);
+    setHtmlContent(e.target.innerHTML);
+    onChangeText(e.target.innerHTML); // Capture HTML content instead of plain text
   };
 
   const handlePaste = (e) => {
@@ -30,19 +34,16 @@ const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset
 
     selection.deleteFromDocument();
     selection.getRangeAt(0).insertNode(document.createTextNode(text));
-
-    // Move the cursor to the end of the inserted text
     selection.collapseToEnd();
 
-    // Update the state with the new text content
-    setText(spanRef.current.textContent);
-    onChangeText(spanRef.current.textContent);
+    setHtmlContent(spanRef.current.innerHTML);
+    onChangeText(spanRef.current.innerHTML);
   };
 
-  const handleKeyPress = (e) => {
-    // if (e.key === 'Enter') {
-    //   e.preventDefault();
-    // }
+  const handleKeyDown = (e) => {
+    if (!isAllowEnter && (e.key === 'Enter' || e.key === 'Return')) {
+      e.preventDefault(); // Prevent new line
+    }
   };
 
   return (
@@ -53,7 +54,7 @@ const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset
       placeholder={placeholder}
       onInput={handleInput}
       onPaste={handlePaste}
-      onKeyPress={handleKeyPress}
+      onKeyDown={handleKeyDown}
       tabIndex="21"
       style={{
         fontSize: fontSize,

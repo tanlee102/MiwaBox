@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import axios from 'axios';
 import TagInput from './TagInput';
 import '../css/style/Post/AddPost.css';
 import EditableSpan from './EditableSpan';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
 
 const AddPost = () => {
 
@@ -12,12 +12,13 @@ const AddPost = () => {
   const mediaDescriptionsRef = useRef([]);
 
   const title = useRef('');
+  const stitle = useRef('');
   const [onResetTitle, setOnResetTitle] = useState(false)
   const [tags, setTags] = useState(['posts']);
 
-  const [displayRotateUpload, setDisplayRotateUpload] = useState(false);
+  const {myUser} = useContext(RootLayoutContext);
 
-  const router = useRouter();
+  const [displayRotateUpload, setDisplayRotateUpload] = useState(false);
 
   const handleFileUpload = (event) => {
     const files = Array.from(event.target.files);
@@ -37,6 +38,10 @@ const AddPost = () => {
     title.current = text;
   };
 
+  const handleSTitleChange = (text) => {
+    stitle.current = text;
+  };
+
   const fileInputRef = React.useRef(null);
 
   const handleButtonClick = () => {
@@ -47,27 +52,52 @@ const AddPost = () => {
     const resetAttributes = () => {
       setMediaFiles([]);
       mediaDescriptionsRef.current = [];
-      title.current = '';
       setTags(['posts']);
       setOnResetTitle(true);
     };
   
     const uploadPost = async () => {
       try {
-
+        setDisplayRotateUpload(true);
         const formData = new FormData();
 
-        for (let i = 0; i < mediaFiles.length; i++) {
-          formData.append('file', mediaFiles[i]);
-          formData.append('description', mediaDescriptionsRef.current[i]);
-        }
+        // Clean the title by removing HTML tags
+        const cleanTitle = title.current.replace(/<[^>]*>?/gm, ''); // Removes all HTML tags
+        formData.append('title', cleanTitle);
 
+        const cleanSTitle = stitle.current.replace(/<[^>]*>?/gm, ''); // Removes all HTML tags
+        formData.append('stitle', cleanSTitle);
+
+        formData.append('tags', JSON.stringify(tags));
+    
+        // Append files and descriptions in order
+        mediaFiles.forEach((file, index) => {
+          formData.append('files', file); // Append each file
+          formData.append('descriptions', mediaDescriptionsRef.current[index] || ''); // Append corresponding description
+        });
+    
+        const token = myUser.access_token; // Adjust if you use a different cookie name
+        const response = await axios.post('http://localhost:8787', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`, // Add the auth token if needed
+          },
+        });
+    
+        if (response.status === 200) {
+          console.log('Post uploaded successfully:', response.data);
+          resetAttributes();
+          // router.push('/success-page'); // Redirect after successful upload
+        } else {
+          console.error('Unexpected response:', response);
+        }
       } catch (error) {
         console.error('Error uploading post and media files:', error);
-      }finally{
-        setDisplayRotateUpload(false)
+      } finally {
+        setDisplayRotateUpload(false);
       }
     };
+    
   
 
   return (
@@ -81,7 +111,12 @@ const AddPost = () => {
       : ""
       }
 
-      <EditableSpan placeholder="Give your post a unique title..." fontSize="large" fontWeight="bold" onChangeText={handleTitleChange} onReset={onResetTitle}/>
+      <EditableSpan placeholder="Give your post a unique title..." fontSize="large" fontWeight="bold" onChangeText={handleTitleChange} onReset={onResetTitle} isAllowEnter={false}/>
+
+      <br />
+      <br />
+
+      <EditableSpan placeholder="Share your thoughts..." fontSize="medium" fontWeight="bold" onChangeText={handleSTitleChange} onReset={onResetTitle} isAllowEnter={false}/>
 
       <div className="list-media">
         {mediaFiles.map((file, index) => (

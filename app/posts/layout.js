@@ -1,4 +1,10 @@
 import WindowProvider from '../posts/Context/WindowContext';
+import React, { Suspense } from 'react'
+import Nav from './Component/Nav';
+
+import "./css/Nav/Menu.css";
+import "./css/Nav/MenuRes.css";
+import "./css/style/Post/ItemPost.css";
 
 export const metadata = {
   title: "Posts",
@@ -12,6 +18,9 @@ export default function RootLayout({ children }) {
   return (
     <WindowProvider>
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css"/>
+        <Suspense>
+          <Nav/>
+        </Suspense>
         <main>{children}</main>
     </WindowProvider>
   );

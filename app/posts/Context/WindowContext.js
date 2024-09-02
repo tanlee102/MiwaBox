@@ -1,14 +1,14 @@
 "use client";
 
 import React, { createContext, useEffect, useLayoutEffect, useState } from 'react'
-import Cookies from 'js-cookie';
 
 export const WindowContext = createContext();
 
 const WindowProvider = ({ children }) => {
 
   const [displayImageViewer, setDisplayImageViewer] = useState(false);
-  const [urlImageViewer, setUrlImageViewer] = useState("")
+  const [urlImageViewer, setUrlImageViewer] = useState("");
+  const [displayModalAddPost, setDisplayModalAddPost] = useState(false);
 
   const showImageViewer = (url) =>{
       setUrlImageViewer(url);
@@ -18,6 +18,7 @@ const WindowProvider = ({ children }) => {
   return (
     <WindowContext.Provider value={{displayImageViewer, setDisplayImageViewer, 
                                     urlImageViewer, showImageViewer,
+                                    displayModalAddPost, setDisplayModalAddPost
                                     }}>
         {children}
     </WindowContext.Provider>
