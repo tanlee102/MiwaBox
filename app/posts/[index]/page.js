@@ -4,13 +4,17 @@ import React, { useContext, useEffect, useState } from 'react'
 import AddPost from '../Component/AddPost'
 import { WindowContext } from '../Context/WindowContext'
 import '../css/style/Post/PostContent.css'
+import '../css/style/Post/Post.css'
+import dynamic from 'next/dynamic'
+import PostContent from '../Component/PostContent'
+
+const MiniProfile = dynamic(() => import('../../../app/Components/Dialog/MiniProfile.js'), { ssr: false })
+const EditUserName = dynamic(() => import('../../../app/Components/Dialog/EditUserName.js'), { ssr: false })
 
 const Page = ({ params }) => {
 
-  console.log(params)
-
-  const { displayModalAddPost, setDisplayModalAddPost } = useContext(WindowContext)
-  const [postData, setPostData] = useState(null)
+  const { displayModalAddPost, setDisplayModalAddPost } = useContext(WindowContext);
+  const [postData, setPostData] = useState(null);
   
   // Use the ID from params
   const { index } = params;
@@ -32,32 +36,18 @@ const Page = ({ params }) => {
   }
 
   return (
-    <div>
-      <Modal 
-        setDisplayModal={setDisplayModalAddPost} 
-        displayModal={displayModalAddPost} 
-        title={"Add Post"} 
-        body={<AddPost />} 
-        displayfooter={false} 
-      />
+    <div className='contain-mypost-content'>
 
       {/* Displaying post content */}
-      <div className="post-container">
-        <h1>{postData.title}</h1>
-        <h2>{postData.stitle}</h2>
-        <p>By: {postData.displayName} ({postData.email})</p>
-        <p>Tags: {postData.tags.join(', ')}</p>
-
-        <div className="media-content">
-          {postData.content.map((media, index) => (
-            <div key={index} className="media-item">
-              {/* Display media (e.g., images) */}
-              <img src={`https://drive.google.com/uc?export=view&id=${media.id}`} alt={media.description} />
-              <p>{media.description}</p>
-            </div>
-          ))}
-        </div>
+      <div className="mypost-content">
+        <PostContent postData={postData} idFile={index} />
       </div>
+
+
+      <MiniProfile/>
+      <EditUserName/>
+      <Modal setDisplayModal={setDisplayModalAddPost} displayModal={displayModalAddPost} title={"Add Post"} body={<AddPost/>} displayfooter={false}></Modal>
+    
     </div>
   )
 }

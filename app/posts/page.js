@@ -18,111 +18,111 @@ const page = () => {
 
       <div className='list-posts'> 
 
-          <div class="item-post">
-                <div class="aspect-ratio-container">
-                    <img src="https://i.imgflip.com/707bul.png" class="post-image" alt="Post Image"/>
+          <div className="item-post">
+                <div className="aspect-ratio-container">
+                    <img src="https://i.imgflip.com/707bul.png" className="post-image" alt="Post Image"/>
                 </div>
-              <div class="post-details">
-                  <div class="post-footer">
-                      <ul class="post-footer-list">
-                          <li class="post-username">Tan Le</li>
-                          <li class="post-date">23/12/2022</li>
+              <div className="post-details">
+                  <div className="post-footer">
+                      <ul className="post-footer-list">
+                          <li className="post-username">Tan Le</li>
+                          <li className="post-date">23/12/2022</li>
                       </ul>
                   </div>
-                  <h2 class="post-title">Thông báo về Death Click (Chrome Extension)</h2>
-                  <p class="post-description">
+                  <h2 className="post-title">Thông báo về Death Click (Chrome Extension)</h2>
+                  <p className="post-description">
                       Hình thành Thời gian đầu khi mình mới tạo nhóm J2TEAM Community, Facebook...
                   </p>
               </div>
           </div>
 
-          <div class="item-post">
-              <div class="aspect-ratio-container">
-            <img src="https://i.imgflip.com/707bul.png" class="post-image" alt="Post Image"/>
+          <div className="item-post">
+              <div className="aspect-ratio-container">
+            <img src="https://i.imgflip.com/707bul.png" className="post-image" alt="Post Image"/>
         </div>
-              <div class="post-details">
-                  <div class="post-footer">
-                      <ul class="post-footer-list">
-                          <li class="post-username">Tan Le</li>
-                          <li class="post-date">23/12/2022</li>
+              <div className="post-details">
+                  <div className="post-footer">
+                      <ul className="post-footer-list">
+                          <li className="post-username">Tan Le</li>
+                          <li className="post-date">23/12/2022</li>
                       </ul>
                   </div>
-                  <h2 class="post-title">Thông báo về Death Click (Chrome Extension)</h2>
-                  <p class="post-description">
-                      Hình thành Thời gian đầu khi mình mới tạo nhóm J2TEAM Community, Facebook...
-                  </p>
-              </div>
-          </div>
-
-
-          <div class="item-post">
-              <div class="aspect-ratio-container">
-            <img src="https://i.imgflip.com/707bul.png" class="post-image" alt="Post Image"/>
-        </div>
-              <div class="post-details">
-                  <div class="post-footer">
-                      <ul class="post-footer-list">
-                          <li class="post-username">Tan Le</li>
-                          <li class="post-date">23/12/2022</li>
-                      </ul>
-                  </div>
-                  <h2 class="post-title">Thông báo về Death Click (Chrome Extension)</h2>
-                  <p class="post-description">
+                  <h2 className="post-title">Thông báo về Death Click (Chrome Extension)</h2>
+                  <p className="post-description">
                       Hình thành Thời gian đầu khi mình mới tạo nhóm J2TEAM Community, Facebook...
                   </p>
               </div>
           </div>
 
 
-          <div class="item-post">
-              <div class="aspect-ratio-container">
-            <img src="https://i.imgflip.com/707bul.png" class="post-image" alt="Post Image"/>
+          <div className="item-post">
+              <div className="aspect-ratio-container">
+            <img src="https://i.imgflip.com/707bul.png" className="post-image" alt="Post Image"/>
         </div>
-              <div class="post-details">
-                  <div class="post-footer">
-                      <ul class="post-footer-list">
-                          <li class="post-username">Tan Le</li>
-                          <li class="post-date">23/12/2022</li>
+              <div className="post-details">
+                  <div className="post-footer">
+                      <ul className="post-footer-list">
+                          <li className="post-username">Tan Le</li>
+                          <li className="post-date">23/12/2022</li>
                       </ul>
                   </div>
-                  <h2 class="post-title">Thông báo về Death Click (Chrome Extension)</h2>
-                  <p class="post-description">
+                  <h2 className="post-title">Thông báo về Death Click (Chrome Extension)</h2>
+                  <p className="post-description">
                       Hình thành Thời gian đầu khi mình mới tạo nhóm J2TEAM Community, Facebook...
                   </p>
               </div>
           </div>
 
-          <div class="item-post">
-              <div class="aspect-ratio-container">
-            <img src="https://i.imgflip.com/707bul.png" class="post-image" alt="Post Image"/>
+
+          <div className="item-post">
+              <div className="aspect-ratio-container">
+            <img src="https://i.imgflip.com/707bul.png" className="post-image" alt="Post Image"/>
         </div>
-              <div class="post-details">
-                  <div class="post-footer">
-                      <ul class="post-footer-list">
-                          <li class="post-username">Tan Le</li>
-                          <li class="post-date">23/12/2022</li>
+              <div className="post-details">
+                  <div className="post-footer">
+                      <ul className="post-footer-list">
+                          <li className="post-username">Tan Le</li>
+                          <li className="post-date">23/12/2022</li>
                       </ul>
                   </div>
-                  <h2 class="post-title">Thông báo về Death Click (Chrome Extension)</h2>
-                  <p class="post-description">
+                  <h2 className="post-title">Thông báo về Death Click (Chrome Extension)</h2>
+                  <p className="post-description">
                       Hình thành Thời gian đầu khi mình mới tạo nhóm J2TEAM Community, Facebook...
                   </p>
               </div>
           </div>
 
-          <div class="item-post">
-              <div class="aspect-ratio-container">
-            <img src="https://i.imgflip.com/707bul.png" class="post-image" alt="Post Image"/>
+          <div className="item-post">
+              <div className="aspect-ratio-container">
+            <img src="https://i.imgflip.com/707bul.png" className="post-image" alt="Post Image"/>
         </div>
-              <div class="post-details">
-                  <div class="post-footer">
-                      <ul class="post-footer-list">
-                          <li class="post-username">Tan Le</li>
-                          <li class="post-date">23/12/2022</li>
+              <div className="post-details">
+                  <div className="post-footer">
+                      <ul className="post-footer-list">
+                          <li className="post-username">Tan Le</li>
+                          <li className="post-date">23/12/2022</li>
                       </ul>
                   </div>
-                  <h2 class="post-title">Thông báo về Death Click (Chrome Extension)</h2>
-                  <p class="post-description">
+                  <h2 className="post-title">Thông báo về Death Click (Chrome Extension)</h2>
+                  <p className="post-description">
+                      Hình thành Thời gian đầu khi mình mới tạo nhóm J2TEAM Community, Facebook...
+                  </p>
+              </div>
+          </div>
+
+          <div className="item-post">
+              <div className="aspect-ratio-container">
+            <img src="https://i.imgflip.com/707bul.png" className="post-image" alt="Post Image"/>
+        </div>
+              <div className="post-details">
+                  <div className="post-footer">
+                      <ul className="post-footer-list">
+                          <li className="post-username">Tan Le</li>
+                          <li className="post-date">23/12/2022</li>
+                      </ul>
+                  </div>
+                  <h2 className="post-title">Thông báo về Death Click (Chrome Extension)</h2>
+                  <p className="post-description">
                       Hình thành Thời gian đầu khi mình mới tạo nhóm J2TEAM Community, Facebook...
                   </p>
               </div>

@@ -60,17 +60,17 @@ const EditUserName = () => {
     }
 
   return (
-    <div  class={displayEditUsername ? "dialog-confirm active-confirm" : "dialog-confirm"}>
+    <div  className={displayEditUsername ? "dialog-confirm active-confirm" : "dialog-confirm"}>
   
         <div>
 
             <div>
                 <header> 
                     <h3>Edit Account Name</h3> 
-                    <i class="fa fa-close" aria-hidden="true" onClick={() => setDisplayEditUsername(false)}></i>
+                    <i className="fa fa-close" aria-hidden="true" onClick={() => setDisplayEditUsername(false)}></i>
                 </header>
 
-                <div class="dialog-msg dialog-user-name"> 
+                <div className="dialog-msg dialog-user-name"> 
                     <input 
                         value={textIn} 
                         onChange={handleChange} 
@@ -82,9 +82,9 @@ const EditUserName = () => {
                 </div>
                 
                 <footer>
-                    <div class="controls"> 
-                        <button class="button button-danger doAction" onClick={() => {updateUserNameBtn()}}>Yes</button>  
-                        <button class="button button-default cancelAction" onClick={() => setDisplayEditUsername(false)}>Cancel</button> 
+                    <div className="controls"> 
+                        <button className="button button-danger doAction" onClick={() => {updateUserNameBtn()}}>Yes</button>  
+                        <button className="button button-default cancelAction" onClick={() => setDisplayEditUsername(false)}>Cancel</button> 
                     </div>
                 </footer>
             </div>

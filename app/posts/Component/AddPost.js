@@ -91,6 +91,7 @@ const AddPost = () => {
         } else {
           console.error('Unexpected response:', response);
         }
+        
       } catch (error) {
         console.error('Error uploading post and media files:', error);
       } finally {
@@ -106,23 +107,23 @@ const AddPost = () => {
       {
         displayRotateUpload ?
         <div className='background-overlay-loading'>
-        <div class="loader-overlay-loading"></div>
-      </div>
-      : ""
+          <div className="loader-overlay-loading"></div>
+        </div>
+        : ""
       }
 
-      <EditableSpan placeholder="Give your post a unique title..." fontSize="large" fontWeight="bold" onChangeText={handleTitleChange} onReset={onResetTitle} isAllowEnter={false}/>
+      <EditableSpan placeholder="Give your post a unique title..." fontSize="1.8em" fontWeight="normal" onChangeText={handleTitleChange} onReset={onResetTitle} isAllowEnter={false}/>
 
       <br />
       <br />
 
-      <EditableSpan placeholder="Share your thoughts..." fontSize="medium" fontWeight="bold" onChangeText={handleSTitleChange} onReset={onResetTitle} isAllowEnter={false}/>
+      <EditableSpan placeholder="Share your thoughts..." fontSize="medium" fontWeight="normal" onChangeText={handleSTitleChange} onReset={onResetTitle} isAllowEnter={false}/>
 
       <div className="list-media">
         {mediaFiles.map((file, index) => (
           <div key={index} className="media-item">
             {file.type.startsWith('image') && <img src={URL.createObjectURL(file)} alt="Uploaded" />}
-            <button className="remove-button" onClick={() => handleRemoveFile(index)}><svg fill="#000000" viewBox="-3.5 0 19 19" class="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg></button>
+            <button className="remove-button" onClick={() => handleRemoveFile(index)}><svg fill="#000000" viewBox="-3.5 0 19 19" className="cf-icon-svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg></button>
             <EditableSpan placeholder="Give your media a description..." fontSize="normal" fontWeight="normal" onChangeText={(newDescription) => {handleDescriptionChange(index, newDescription)}} />
           </div>
         ))}

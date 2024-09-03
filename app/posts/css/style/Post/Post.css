@@ -1,0 +1,119 @@
+body{
+    background-color: white !important;
+}
+.contain-mypost-content{
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+.mypost-info{
+    font-size: small;
+}
+.mypost-info span:first-child{
+    color: cornflowerblue;
+}
+
+.mypost-info span:last-child{
+    opacity: 0.5;
+}
+
+.mypost-content{
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 65px;
+    padding-bottom: 70px;
+}
+.mypost-title{
+    position: relative;
+    margin-top: 13px;
+    font-size: 2.1em;
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif;
+    margin-top: 10px;
+}
+.mypost-stitle{
+    font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif;
+    position: relative;
+    padding: 0px;
+    font-size: 1.3em;
+    width: 100%;
+    opacity: 0.7;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+
+.mypost-info  .delimiter{
+    font-size: 9px;
+    color: cornflowerblue;
+}
+
+.mypost-main-content{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.mypost-content-media{
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+.mypost-content-media img, .mypost-content-media video{
+    width: 100%;
+    height: auto;
+}
+.mypost-content-media-description{
+    float: left;
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 0px;
+}
+
+.mypost-list-tags{
+    float: left;
+    position: relative;
+    margin-top: 10px;
+}
+
+.mypost-list-tags span{
+    font-size: 0.85em;
+    float: left;
+    margin-right: 5px;
+    color: rgb(148, 148, 148);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.list-item-posts:has(.empty-posts){
+    display: block;
+}
+
+
+.empty-posts{
+    float: left;
+    width: 100% !important;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: rgb(148, 148, 148);
+}
+
+.empty-users{
+    float: left;
+    width: 100% !important;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: rgb(148, 148, 148);
+}

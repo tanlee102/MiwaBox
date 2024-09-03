@@ -28,10 +28,9 @@ function useWindowDimensions() {
     return { width };
 }
 
-
 const Nav = ({}) => {
 
-    const router = useRouter()
+    const router = useRouter();
 
     const {darkMode, setDarkMode} = {};
     const {setDisplayModalAddPost} = useContext(WindowContext)
@@ -47,6 +46,7 @@ const Nav = ({}) => {
             setShowSearchItem(false)
         }
     }, []);
+    
     useEffect(() => {
         const newType = checkType(width);
         if (typeWindow !== newType) {
