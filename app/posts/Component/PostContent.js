@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import React, { useContext } from 'react';
 import axios from 'axios'; // Import axios
 
-import '../css/style/post/PostContent.css';
 import { converTime } from '@/app/videos/helper/converTime';
 
 const PostContent = ({ postData, idFile }) => {
