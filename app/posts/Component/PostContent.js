@@ -6,11 +6,13 @@ import axios from 'axios'; // Import axios
 import { converTime } from '@/app/videos/helper/converTime';
 
 const PostContent = ({ postData, idFile }) => {
+
   const { logged, myUser } = useContext(RootLayoutContext);
   const router = useRouter();
 
   // Function to handle the delete operation using POST method with Axios
   const onDelete = async () => {
+
     if (!idFile) {
       alert('File ID is missing.');
       return;
@@ -21,7 +23,7 @@ const PostContent = ({ postData, idFile }) => {
 
     try {
         const token = myUser.access_token; // Adjust if you use a different cookie name
-      const response = await axios.post('http://localhost:55900?idFile='+idFile, null, {
+      const response = await axios.post('https://my-delete-post.caculus103.workers.dev?idFile='+idFile, null, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`, // Add the auth token if needed
@@ -80,8 +82,9 @@ const PostContent = ({ postData, idFile }) => {
           </span>
         ))}
       </div>
-
+      {logged && myUser && postData.email === myUser?.email ?
       <button className='delete-button-post' onClick={onDelete}>Delete</button>
+      : ""}
     </>
   );
 };

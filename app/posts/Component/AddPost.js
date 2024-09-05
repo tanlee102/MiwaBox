@@ -77,7 +77,7 @@ const AddPost = () => {
         });
     
         const token = myUser.access_token; // Adjust if you use a different cookie name
-        const response = await axios.post('http://localhost:8787', formData, {
+        const response = await axios.post('https://my-upload-post.caculus103.workers.dev', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`, // Add the auth token if needed
