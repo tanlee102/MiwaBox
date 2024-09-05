@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import axios from 'axios'; // Import axios
 
 import { converTime } from '@/app/videos/helper/converTime';
+import { listEmailAdmin } from '@/app/data/listEmailAdmin';
 
 const PostContent = ({ postData, idFile }) => {
 
@@ -82,7 +83,7 @@ const PostContent = ({ postData, idFile }) => {
           </span>
         ))}
       </div>
-      {logged && myUser && postData.email === myUser?.email ?
+      {logged && ((myUser && postData.email === myUser?.email) || listEmailAdmin.includes(myUser?.email)) ?
       <button className='delete-button-post' onClick={onDelete}>Delete</button>
       : ""}
     </>
