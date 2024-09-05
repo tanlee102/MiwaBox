@@ -25,6 +25,14 @@ body{
     margin-top: 65px;
     padding-bottom: 70px;
 }
+/* Responsive adjustments */
+@media (max-width: 840px) {
+    .mypost-content{
+        width: calc(100% - 20px);
+        padding: 0px 10px;
+    }
+}
+
 .mypost-title{
     position: relative;
     margin-top: 13px;
