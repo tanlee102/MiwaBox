@@ -118,10 +118,7 @@ const Nav = ({}) => {
             router.push('/'+'?title='+searchValue)
         }
     }
-    const changeMode = () => {
-        // Cookies.set('dark_mode', !darkMode, {path: '/', expires: 365});
-        // setDarkMode(!darkMode);
-    }
+    const changeMode = () => {}
 
     const searchParams = useSearchParams();
     const title = searchParams.get('title');
