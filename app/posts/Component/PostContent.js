@@ -33,7 +33,6 @@ const PostContent = ({ postData, idFile }) => {
 
       if (response.status === 200) {
         alert('Post deleted successfully.');
-        // Optionally, redirect or update state after deletion
         router.push('/'); // Redirect to home or another page
       } else {
         alert('Failed to delete the post.');

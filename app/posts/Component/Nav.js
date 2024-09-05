@@ -119,8 +119,8 @@ const Nav = ({}) => {
         }
     }
     const changeMode = () => {
-        Cookies.set('dark_mode', !darkMode, {path: '/', expires: 365});
-        setDarkMode(!darkMode);
+        // Cookies.set('dark_mode', !darkMode, {path: '/', expires: 365});
+        // setDarkMode(!darkMode);
     }
 
     const searchParams = useSearchParams();
@@ -227,7 +227,6 @@ return (
                     </div>
                 </div>
                 }
-
 
             </div>
 
