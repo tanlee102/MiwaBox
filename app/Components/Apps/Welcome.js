@@ -42,6 +42,11 @@ const Welcome = () => {
                     <img src='/icon/apps/5000_0.png' />
                 </span>
             </Link>
+            <Link href={"/posts"}>
+                <span>
+                    <img src='/icon/apps/post.png' />
+                </span>
+            </Link>
             <a target="_blank" href="https://cuongonepiece.netlify.app/?episode=1">
                 <span>
                     <img src='/icon/apps/oplogo.png' />

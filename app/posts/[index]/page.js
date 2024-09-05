@@ -43,7 +43,6 @@ const Page = ({ params }) => {
         <PostContent postData={postData} idFile={index} />
       </div>
 
-
       <MiniProfile/>
       <EditUserName/>
       <Modal setDisplayModal={setDisplayModalAddPost} displayModal={displayModalAddPost} title={"Add Post"} body={<AddPost/>} displayfooter={false}></Modal>
