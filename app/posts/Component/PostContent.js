@@ -78,7 +78,7 @@ const PostContent = ({ postData, idFile }) => {
 
       <div className='mypost-list-tags'>
         {postData?.tags?.map((tag) => (
-          <span key={tag} onClick={() => { router.push('/?tagname=' + tag); }}>
+          <span key={tag} onClick={() => {}}>
             #{tag}
           </span>
         ))}
