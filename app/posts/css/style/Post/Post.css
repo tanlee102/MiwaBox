@@ -79,7 +79,7 @@ body{
 }
 
 .mypost-list-tags{
-    float: left;
+    display: inline-block;
     position: relative;
     margin-top: 10px;
 }
@@ -116,4 +116,9 @@ body{
     text-align: center;
     font-size: 18px;
     color: rgb(148, 148, 148);
+}
+
+.delete-button-post{
+    position: relative;
+    display: block;
 }

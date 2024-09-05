@@ -21,7 +21,7 @@ const PostContent = ({ postData, idFile }) => {
 
     try {
         const token = myUser.access_token; // Adjust if you use a different cookie name
-      const response = await axios.post('http://localhost:52850?idFile='+idFile, null, {
+      const response = await axios.post('http://localhost:55900?idFile='+idFile, null, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`, // Add the auth token if needed
@@ -81,7 +81,7 @@ const PostContent = ({ postData, idFile }) => {
         ))}
       </div>
 
-      <button onClick={onDelete}>Delete</button>
+      <button className='delete-button-post' onClick={onDelete}>Delete</button>
     </>
   );
 };
