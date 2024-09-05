@@ -144,6 +144,9 @@ input{
     height: calc(100% - 20px);
     width: auto;
 }
+.wrap-home-icon{
+    margin-left: 15px;
+}
 .cls-2{
     fill: cornflowerblue;
 }
