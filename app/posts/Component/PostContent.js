@@ -5,6 +5,7 @@ import axios from 'axios'; // Import axios
 
 import { converTime } from '@/app/videos/helper/converTime';
 import { listIdAdmin } from '@/app/data/listIdAdmin';
+import { host_post_image_domain } from '../env';
 
 const PostContent = ({ postData, idFile }) => {
 
@@ -58,7 +59,7 @@ const PostContent = ({ postData, idFile }) => {
         {postData?.content?.map((media) => (
           <React.Fragment key={media.id}>
             <div className='mypost-content-media'>
-              <img src={`https://image.lehienthanh1.workers.dev/?id=${media.id}`} alt='' />
+              <img src={`${host_post_image_domain}/?id=${media.id}`} alt='' />
             </div>
             <div
               className='mypost-content-media-description'

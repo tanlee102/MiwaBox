@@ -1,0 +1,1 @@
+export const host_post_image_domain = 'https://image.adumikimio.workers.dev';

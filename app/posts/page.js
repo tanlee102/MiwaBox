@@ -8,6 +8,7 @@ import { WindowContext } from './Context/WindowContext';
 import LoadMore from '../Components/LoadMore';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { host_post_image_domain } from './env';
 
 const MiniProfile = dynamic(() => import('../../app/Components/Dialog/MiniProfile.js'), { ssr: false });
 const EditUserName = dynamic(() => import('../../app/Components/Dialog/EditUserName.js'), { ssr: false });
@@ -73,7 +74,7 @@ const Page = () => {
           <Link key={index} href={'/posts/'+post.idFile}>
           <div className='item-post' key={post._id.$oid}>
             <div className="aspect-ratio-container">
-              <img src={`https://image.lehienthanh1.workers.dev/?id=${post.idImageFile}`} className="post-image" alt="Post Image" />
+              <img src={`${host_post_image_domain}/?id=${post.idImageFile}`} className="post-image" alt="Post Image" />
             </div>
             <div className="post-details">
               <div className="post-footer">
