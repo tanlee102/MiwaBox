@@ -63,7 +63,7 @@ const LeftBox = ({setDisplayModalCreate}) => {
           <div className="connect-wallet non-select">
             <p>TE</p>
             <div onClick={() => {(myUser) ? setDisplayMiniProfile(true) : login();}} id="connect-google">
-              <img src={myUser ? myUser.photoURL : "/icon/item/google.png"} />
+              <img src={myUser ? myUser?.photoURL : `/icon/item/google.png`} />
             </div>
             
             <div>
