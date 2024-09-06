@@ -11,7 +11,7 @@
 @media (max-width: 768px) {
     .list-posts {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust columns for smaller screens */
-        gap: 7px; /* Reduced gap between items */
+        gap: 10px; /* Reduced gap between items */
     }
 }
 
