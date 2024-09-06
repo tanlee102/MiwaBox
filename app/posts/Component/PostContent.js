@@ -12,7 +12,7 @@ import { host_post_image_domain } from '../env';
 
 const PostContent = ({ postData, idFile }) => {
 
-  const { logged, myUser } = useContext(RootLayoutContext);
+  const { logged, myUser, showImageViewer } = useContext(RootLayoutContext);
   const router = useRouter();
 
   const onDelete = async () => {
@@ -61,7 +61,7 @@ const PostContent = ({ postData, idFile }) => {
         {postData?.content?.map((media) => (
           <React.Fragment key={media.id}>
             <div className='mypost-content-media'>
-              <img src={`${host_post_image_domain}/?id=${media.id}`} alt='' />
+              <img onClick={() => {showImageViewer(`${host_post_image_domain}/?id=${media.id}`)}} src={`${host_post_image_domain}/?id=${media.id}`} alt='' />
             </div>
             <div
               className='mypost-content-media-description'

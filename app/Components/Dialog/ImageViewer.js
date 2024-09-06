@@ -1,9 +1,14 @@
-import { WindowContext } from '@/app/Context/WindowContext'
-import React, { useContext } from 'react'
+import { RootLayoutContext } from '@/app/Context/RootLayoutContext'
+import { hideMainScrollBar } from '@/app/helper/hideMainScrollBar';
+import React, { useContext, useEffect } from 'react'
 
 const ImageViewer = () => {
 
-  const {displayImageViewer, setDisplayImageViewer, urlImageViewer} = useContext(WindowContext)
+  const {displayImageViewer, setDisplayImageViewer, urlImageViewer} = useContext(RootLayoutContext);
+
+  useEffect(() => {
+    hideMainScrollBar(displayImageViewer);
+  }, [displayImageViewer]);
 
   if(displayImageViewer){
     return (

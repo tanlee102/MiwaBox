@@ -1,5 +1,6 @@
 import NextTopLoader from 'nextjs-toploader';
 import RootLayoutProvider from './Context/RootLayoutContext';
+import RootClientProvider from './Context/RootClientContext';
 
 import './css/globalRes.css'
 import './css/global.css'
@@ -37,7 +38,9 @@ export default function RootLayout({ children }) {
             speed={999}
           />
             <RootLayoutProvider>
-              <main>{children}</main>
+              <RootClientProvider>
+                <main>{children}</main>
+              </RootClientProvider>
             </RootLayoutProvider>
         </body>
     </html>

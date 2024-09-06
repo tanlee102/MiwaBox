@@ -16,6 +16,9 @@ const RootLayoutProvider = ({ children }) => {
 
     const [displayMiniProfile, setDisplayMiniProfile] = useState(false);
     const [displayEditUsername, setDisplayEditUsername] = useState(false);
+    const [displayImageViewer, setDisplayImageViewer] = useState(false);
+    const [urlImageViewer, setUrlImageViewer] = useState("");
+
     const [language, setLanguage] = useState('en');
 
     const loginFunction = async () => {
@@ -86,12 +89,18 @@ const RootLayoutProvider = ({ children }) => {
         setLanguage(isVietnamese ? 'vi' : 'en');
       }
     }, []);
-    
 
+    const showImageViewer = (url) => {
+      setUrlImageViewer(url);
+      setDisplayImageViewer(true);
+    }
+    
   return (
     <RootLayoutContext.Provider  value={{ loginFunction, myUser, setMyUser, logged, logout, login,
                                           displayMiniProfile, setDisplayMiniProfile,
                                           displayEditUsername, setDisplayEditUsername, 
+                                          displayImageViewer, setDisplayImageViewer, 
+                                          urlImageViewer, showImageViewer,
                                           language, setLanguage
     }}>
       {children}

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import InputThread from './InputThread'
 import { ThreadContext } from '@/app/Context/ThreadContext'
-import { AccountContext } from '@/app/Context/AccountContext'
 import { AppsConext } from '@/app/Context/AppsContext'
-import { WindowContext } from '@/app/Context/WindowContext'
+import { RootLayoutContext } from '@/app/Context/RootLayoutContext'
+
 import { sanitizeAndUrlify } from '@/app/helper/sanitizeAndUrlify'
 import HLSVideoPlayer from '../HLSVideoPlayer'
 import { iconAvatars } from '@/app/env_setting'
@@ -11,7 +11,7 @@ import OneDrivePlayer from '../OneDrivePlayer'
 
 const ThreadChat = () => {
 
-    const { showImageViewer, language } = useContext(WindowContext);
+    const { showImageViewer, language } = useContext(RootLayoutContext);
     const { infoApp } = useContext(AppsConext);
     const { getMessages, listMessage, loadLatest, loader } = useContext(ThreadContext);
 

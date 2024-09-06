@@ -10,8 +10,6 @@ export const WindowContext = createContext();
 const WindowProvider = ({ children }) => {
 
   const [currentIndex, setCurrentIndex] = useState(env_SMARTCHAIN.DEFAULT_IDNDEX);
-  const [displayImageViewer, setDisplayImageViewer] = useState(false);
-  const [urlImageViewer, setUrlImageViewer] = useState("")
 
   const [completeCloseRight, setCompleteCloseRight] = useState(null);
   const [completeOpenLeft, setCompleteOpenLeft] = useState(null);
@@ -94,18 +92,12 @@ const WindowProvider = ({ children }) => {
     setCompleteCloseRight(false)
     document.getElementsByClassName('layout-right-box').item(0).style.display = "block";
   }
-
-  const showImageViewer = (url) =>{
-      setUrlImageViewer(url);
-      setDisplayImageViewer(true);
-  }
   
   return (
     <WindowContext.Provider value={{currentIndex, setCurrentIndex,
                                     closeLeft, closeRight,
                                     showLeft, showRight,
                                     completeOpenLeft,
-                                    displayImageViewer, setDisplayImageViewer, urlImageViewer, showImageViewer,
                                     language, setLanguage, 
                                     notice_pop_state, setNotice_pop_state}}>
         {children}

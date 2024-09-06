@@ -45,11 +45,7 @@ import CreateVideoButton from './Components/CreateVideoButton';
 import VideoPageProvider from './videos/Context/VideoPageContext';
 
 const Modal = dynamic(() => import('../app/Components/Dialog/Modal.js'), { ssr: false })
-const MiniProfile = dynamic(() => import('../app/Components/Dialog/MiniProfile.js'), { ssr: false })
-const EditUserName = dynamic(() => import('../app/Components/Dialog/EditUserName.js'), { ssr: false })
 const NoticePopout = dynamic(() => import('../app/Components/NoticePopout.js'), { ssr: false })
-const ImageViewer = dynamic(() => import('../app/Components/Dialog/ImageViewer.js'), { ssr: false })
-
 
 export default function HomePage() {
 
@@ -83,10 +79,7 @@ export default function HomePage() {
                         </div>
                         <Modal setDisplayModal={setDisplayModalCreate} displayModal={displayModalCreate} title={<TitleCreate/>} body={<Create/>} footer={<ButtonCreate/>} displayfooter={true}></Modal>
                         <Modal setDisplayModal={setDisplayCreateVideo} displayModal={displayCreateVideo} title={"Add Video"} body={<CreateVideo/>} footer={<CreateVideoButton/>} displayfooter={true}></Modal>
-                        <ImageViewer/>
                         <NoticePopout/>
-                        <MiniProfile/>
-                        <EditUserName/>
                     </VideoPageProvider>
                   </VideoThreadProvider>
                 </ThreadProvider>

@@ -4,11 +4,13 @@ import { ThreadContext } from '@/app/Context/ThreadContext'
 import { AppsConext } from '@/app/Context/AppsContext';
 import { AccountContext } from '@/app/Context/AccountContext';
 import { WindowContext } from '@/app/Context/WindowContext';
+import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
 import { sanitizeAndUrlify } from '@/app/helper/sanitizeAndUrlify';
 
 const ThreadPost = () => {
 
-  const { showImageViewer, currentIndex } = useContext(WindowContext);
+  const { currentIndex } = useContext(WindowContext);
+  const { showImageViewer } = useContext(RootLayoutContext)
   const { infoApp } = useContext(AppsConext);
   const { account } = useContext(AccountContext);
   const { getTexts, listMessage, loader } = useContext(ThreadContext);

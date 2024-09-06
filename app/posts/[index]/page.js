@@ -2,11 +2,7 @@ import React from 'react';
 
 import '../css/style/Post/Post.css';
 
-import dynamic from 'next/dynamic';
 import PostContent from '../Component/PostContent';
-
-const MiniProfile = dynamic(() => import('../../../app/Components/Dialog/MiniProfile.js'), { ssr: false });
-const EditUserName = dynamic(() => import('../../../app/Components/Dialog/EditUserName.js'), { ssr: false });
 
 export async function generateMetadata({ params }) {
   const { index } = params;
@@ -28,8 +24,6 @@ export default async function Page({ params }) {
       <div className="mypost-content">
         <PostContent postData={postData} idFile={index} />
       </div>
-      <MiniProfile />
-      <EditUserName />
     </div>
   );
 }

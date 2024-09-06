@@ -2,14 +2,10 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import LoadMore from '../Components/LoadMore';
 import { host_post_image_domain } from './env';
-
-const MiniProfile = dynamic(() => import('../../app/Components/Dialog/MiniProfile.js'), { ssr: false });
-const EditUserName = dynamic(() => import('../../app/Components/Dialog/EditUserName.js'), { ssr: false });
 
 const Page = () => {
   const [posts, setPosts] = useState([]); // State to store posts
@@ -92,9 +88,6 @@ const Page = () => {
       {hasMore && (
         <LoadMore loadState={loadState} setLoadState={setLoadState} btnAct={LoadMoreBtn} />
       )}
-
-      <MiniProfile />
-      <EditUserName />
     </div>
   );
 }
