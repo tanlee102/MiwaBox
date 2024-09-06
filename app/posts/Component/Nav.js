@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useLayoutEffect, useContext } from 'react'
 import Link from 'next/link';
-import Cookies from 'js-cookie';
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { checkHasClass } from '../../helper/checkHasClass';
@@ -105,7 +104,6 @@ const Nav = ({}) => {
         if(darkMode) setSearchBorder("1pt solid black");
         else setSearchBorder("1pt solid whitesmoke");
     }, [darkMode])
-
 
 
 

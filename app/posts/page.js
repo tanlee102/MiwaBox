@@ -2,13 +2,14 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+
 import Modal from '../Components/Dialog/Modal';
 import AddPost from './Component/AddPost';
-import { WindowContext } from './Context/WindowContext';
 import LoadMore from '../Components/LoadMore';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { host_post_image_domain } from './env';
+
+import { WindowContext } from './Context/WindowContext';
 
 const MiniProfile = dynamic(() => import('../../app/Components/Dialog/MiniProfile.js'), { ssr: false });
 const EditUserName = dynamic(() => import('../../app/Components/Dialog/EditUserName.js'), { ssr: false });
@@ -21,7 +22,6 @@ const Page = () => {
   const [hasMore, setHasMore] = useState(true); // State to track if there are more posts to load
   const [loadState, setLoadState] = useState(false); // State to manage the load more button state
   const limit = 20; // Number of posts per page
-  const router = useRouter();
 
   // Use a ref to ensure fetch runs only once
   const initialFetchCompleted = useRef(false);
@@ -69,6 +69,7 @@ const Page = () => {
 
   return (
     <div className='main'>
+
       <div className='list-posts'>
         {posts.map((post, index) => ( // Map over fetched posts to render them dynamically
           <Link key={index} href={'/posts/'+post.idFile}>
@@ -92,7 +93,6 @@ const Page = () => {
         {loading && <p>Loading posts...</p>} {/* Display a loading indicator while fetching data */}
       </div>
 
-      {/* Use the existing LoadMore component */}
       {hasMore && (
         <LoadMore loadState={loadState} setLoadState={setLoadState} btnAct={LoadMoreBtn} />
       )}

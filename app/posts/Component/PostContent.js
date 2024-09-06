@@ -1,7 +1,8 @@
-import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
-import { useRouter } from 'next/navigation';
 import React, { useContext } from 'react';
-import axios from 'axios'; // Import axios
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+
+import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
 
 import { converTime } from '@/app/videos/helper/converTime';
 import { listIdAdmin } from '@/app/data/listIdAdmin';
@@ -12,7 +13,6 @@ const PostContent = ({ postData, idFile }) => {
   const { logged, myUser } = useContext(RootLayoutContext);
   const router = useRouter();
 
-  // Function to handle the delete operation using POST method with Axios
   const onDelete = async () => {
 
     if (!idFile) {
@@ -24,23 +24,23 @@ const PostContent = ({ postData, idFile }) => {
     if (!confirmDelete) return;
 
     try {
-        const token = myUser.access_token; // Adjust if you use a different cookie name
-      const response = await axios.post('https://my-delete-post.caculus103.workers.dev?idFile='+idFile, null, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`, // Add the auth token if needed
-        },
-      });
+        const token = myUser.access_token;
+        const response = await axios.post('https://my-delete-post.caculus103.workers.dev?idFile='+idFile, null, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`, // Add the auth token if needed
+          },
+        });
 
-      if (response.status === 200) {
-        alert('Post deleted successfully.');
-        router.push('/posts'); // Redirect to home or another page
-      } else {
-        alert('Failed to delete the post.');
-      }
+        if (response.status === 200) {
+          alert('Post deleted successfully.');
+          router.push('/posts'); // Redirect to home or another page
+        } else {
+          alert('Failed to delete the post.');
+        }
     } catch (error) {
-      console.error('Error deleting the post:', error);
-      alert('An error occurred while trying to delete the post.');
+        console.error('Error deleting the post:', error);
+        alert('An error occurred while trying to delete the post.');
     }
   };
 
@@ -78,13 +78,13 @@ const PostContent = ({ postData, idFile }) => {
 
       <div className='mypost-list-tags'>
         {postData?.tags?.map((tag) => (
-          <span key={tag} onClick={() => {}}>
+          <span key={tag}>
             #{tag}
           </span>
         ))}
       </div>
       {logged && ((myUser && postData._id === myUser?.id) || listIdAdmin.includes(myUser?.id)) ?
-      <button className='delete-button-post' onClick={onDelete}>Delete</button>
+        <button className='delete-button-post' onClick={onDelete}>Delete</button>
       : ""}
     </>
   );

@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import '../css/style/Tag/TagInput.css';
 
 const TagInput = ({tags, setTags}) => {
 
-  const [maxTags, setMaxTags] = useState(10);
+  const maxTags = 10;
   const inputRef = useRef(null);
 
   const countTags = () => maxTags - tags.length;
