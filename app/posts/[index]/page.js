@@ -1,9 +1,9 @@
 import React from 'react';
+
 import '../css/style/Post/Post.css';
+
 import dynamic from 'next/dynamic';
 import PostContent from '../Component/PostContent';
-import Modal from '@/app/Components/Dialog/Modal';
-import AddPost from '../Component/AddPost';
 
 const MiniProfile = dynamic(() => import('../../../app/Components/Dialog/MiniProfile.js'), { ssr: false });
 const EditUserName = dynamic(() => import('../../../app/Components/Dialog/EditUserName.js'), { ssr: false });
@@ -28,10 +28,8 @@ export default async function Page({ params }) {
       <div className="mypost-content">
         <PostContent postData={postData} idFile={index} />
       </div>
-
       <MiniProfile />
       <EditUserName />
-      <Modal title="Add Post" body={<AddPost />} displayfooter={false} />
     </div>
   );
 }

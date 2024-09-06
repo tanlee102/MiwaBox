@@ -1,21 +1,17 @@
-'use client'
-import React, { useEffect, useState, useContext, useRef } from 'react';
+'use client';
+
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
-import Modal from '../Components/Dialog/Modal';
-import AddPost from './Component/AddPost';
 import LoadMore from '../Components/LoadMore';
 import { host_post_image_domain } from './env';
-
-import { WindowContext } from './Context/WindowContext';
 
 const MiniProfile = dynamic(() => import('../../app/Components/Dialog/MiniProfile.js'), { ssr: false });
 const EditUserName = dynamic(() => import('../../app/Components/Dialog/EditUserName.js'), { ssr: false });
 
 const Page = () => {
-  const { displayModalAddPost, setDisplayModalAddPost } = useContext(WindowContext);
   const [posts, setPosts] = useState([]); // State to store posts
   const [loading, setLoading] = useState(false); // State to manage loading state
   const [page, setPage] = useState(1); // State to track current page
@@ -99,7 +95,6 @@ const Page = () => {
 
       <MiniProfile />
       <EditUserName />
-      <Modal setDisplayModal={setDisplayModalAddPost} displayModal={displayModalAddPost} title={"Add Post"} body={<AddPost />} displayfooter={false} />
     </div>
   );
 }

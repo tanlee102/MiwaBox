@@ -1,10 +1,12 @@
-import WindowProvider from '../posts/Context/WindowContext';
 import React, { Suspense } from 'react'
+
+import WindowProvider from '../posts/Context/WindowContext';
+import PostProvider from './Context/PostContext';
 import Nav from './Component/Nav';
 
 import "./css/Nav/Menu.css";
-import "./css/style/Post/ItemPost.css";
 import "./css/Nav/MenuRes.css";
+import "./css/style/Post/ItemPost.css";
 
 export const metadata = {
   title: "Posts - Share Your Thoughts, Discover New Ideas, and Engage",
@@ -21,7 +23,9 @@ export default function RootLayout({ children }) {
         <Suspense>
           <Nav/>
         </Suspense>
-        <main>{children}</main>
+        <PostProvider>
+          <main>{children}</main>
+        </PostProvider>
     </WindowProvider>
   );
 }
