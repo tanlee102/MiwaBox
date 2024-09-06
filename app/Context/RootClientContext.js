@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext } from 'react'
+import React, { createContext } from 'react';
 import dynamic from 'next/dynamic';
 
 const ImageViewer = dynamic(() => import('../../app/Components/Dialog/ImageViewer.js'), { ssr: false });
