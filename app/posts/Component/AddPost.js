@@ -5,9 +5,11 @@ import '../css/style/Post/AddPost.css';
 import EditableSpan from './EditableSpan';
 import { useRouter } from 'next/navigation';
 import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
+import { WindowContext } from '../Context/WindowContext';
 
 const AddPost = () => {
 
+  const router = useRouter(); 
   const [mediaFiles, setMediaFiles] = useState([]);
   const mediaDescriptionsRef = useRef([]);
 
@@ -17,6 +19,7 @@ const AddPost = () => {
   const [tags, setTags] = useState(['posts']);
 
   const {myUser, logged} = useContext(RootLayoutContext);
+  const {setDisplayModalAddPost} = useContext(WindowContext)
 
   const [displayRotateUpload, setDisplayRotateUpload] = useState(false);
 
@@ -87,7 +90,8 @@ const AddPost = () => {
         if (response.status === 200) {
           console.log('Post uploaded successfully:', response.data);
           resetAttributes();
-          // router.push('/success-page'); // Redirect after successful upload
+          setDisplayModalAddPost(false);
+          router.push('/posts/'+response.data); // Redirect after successful upload
         } else {
           console.error('Unexpected response:', response);
         }
