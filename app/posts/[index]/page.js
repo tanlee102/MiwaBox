@@ -19,7 +19,7 @@ const Page = ({ params }) => {
   const { index } = params;
 
   // Construct the fetch URL using params.id
-  const fetchUrl = `https://html-back.caculus103.workers.dev?id=${index}`;
+  const fetchUrl = `https://html-back.abelonokieepmi.workers.dev?id=${index}`;
 
   useEffect(() => {
     // Fetching data from the constructed URL
