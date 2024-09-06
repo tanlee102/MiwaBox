@@ -21,7 +21,7 @@ const AddPost = () => {
   const [tags, setTags] = useState(['posts']);
 
   const {myUser, logged} = useContext(RootLayoutContext);
-  const {setDisplayModalAddPost} = useContext(WindowContext)
+  const {setDisplayModalAddPost} = useContext(WindowContext);
 
   const [displayRotateUpload, setDisplayRotateUpload] = useState(false);
 
