@@ -131,7 +131,7 @@ const Nav = ({}) => {
 
 
 return (
-    <div className="wrap-bar" style={{position: 'fixed'}} onClick={(e) => {MenuClick(e);}}>
+    <div className="wrap-bar noselect" style={{position: 'fixed'}} onClick={(e) => {MenuClick(e);}}>
         <div className="nav-bar" >
 
             <div className="fr-nav-bar">
