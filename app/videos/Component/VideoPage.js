@@ -126,7 +126,14 @@ const VideoPage = () => {
             const dataFolder = await getListFolder();
             const filteredData = dataFolder.filter(item => item.name !== "public");
             const names = filteredData.map(item => item.name);
-            names.unshift('home')
+            names.unshift('home');
+
+            const index = names.indexOf(folder);
+            if (index > 0) {
+                  names.splice(index, 1);
+                  names.splice(1, 0, folder);
+            }
+            
             setFolderNames(names);
             setListFolder(filteredData)
       }
