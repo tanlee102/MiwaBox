@@ -131,18 +131,18 @@ const Nav = ({}) => {
 
 
 return (
-    <div className="wrap-bar noselect" style={{position: 'fixed'}} onClick={(e) => {MenuClick(e);}}>
+    <div className="wrap-bar" style={{position: 'fixed'}} onClick={(e) => {MenuClick(e);}}>
         <div className="nav-bar" >
 
             <div className="fr-nav-bar">
 
                 {/*LOGO*/}
                 <Link href="/posts">
-                    <div className="wrap-logo"><svg viewBox="0 0 184.48 160.05"><rect className="cls-1" x="76.24" y="-7.48" width="82.8" height="175.02" rx="41.4" transform="translate(-24.63 78.17) rotate(-33.48)"/><rect className="cls-2" x="25.19" y="-7.48" width="82.8" height="175.02" rx="41.4" transform="matrix(0.84, 0.55, -0.55, 0.84, 54.53, -23.38)"/></svg></div>
+                    <div className="wrap-logo noselect"><svg viewBox="0 0 184.48 160.05"><rect className="cls-1" x="76.24" y="-7.48" width="82.8" height="175.02" rx="41.4" transform="translate(-24.63 78.17) rotate(-33.48)"/><rect className="cls-2" x="25.19" y="-7.48" width="82.8" height="175.02" rx="41.4" transform="matrix(0.84, 0.55, -0.55, 0.84, 54.53, -23.38)"/></svg></div>
                 </Link>
                 {/*LOGO*/}
                 <Link href="/">
-                    <div className="wrap-logo wrap-home-icon">
+                    <div className="wrap-logo wrap-home-icon noselect">
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="603.000000pt" height="669.000000pt" viewBox="0 0 603.000000 669.000000" preserveAspectRatio="xMidYMid meet">
                         <g transform="translate(0.000000,669.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M1615 5695 c-764 -486 -1391 -889 -1393 -895 -2 -5 1 -10 7 -10 16 0 15 -2857 0 -2862 -16 -5 11 -48 29 -48 8 0 630 -392 1383 -870 1289 -820 1370-870 1393 -858 13 7 643 407 1399 888 893 567 1373 878 1367 884 -14 14 -14
                         2858 0 2872 6 6 -485 324 -1382 894 -766 487 -1397 886 -1402 887 -6 1 -636
@@ -195,7 +195,7 @@ return (
                 </div>
 
                 {/*BUTT0N DISPLAY ITEM*/}
-                <div className="mark-item" >
+                <div className="mark-item noselect" >
                     <div id="mark-item" onClick={() => {{!showListItems ? setShowSearchItem(false) : null }; setShowListItems(!showListItems)}}>
                         {
                             !showListItems ? 
@@ -208,7 +208,7 @@ return (
 
 
                 {logged && (
-                <div className="mark-search">
+                <div className="mark-search noselect">
                     <div id="mark-search" onClick={() => {{!showSearchItem ? setShowListItems(false) : null }; setShowSearchItem(!showSearchItem);}}>
                         {
                             !showSearchItem ?
@@ -224,7 +224,7 @@ return (
                 
                 {/* PROFILE ITEM */}
                 {logged ?
-                <div onClick={() => {(myUser) ? setDisplayMiniProfile(true) : login();}} className="wrap-profile">
+                <div onClick={() => {(myUser) ? setDisplayMiniProfile(true) : login();}} className="wrap-profile noselect">
                     <div className='ava-profile' onClick={() => {setMenuProfile(!menuProfile)}}>
                         <img src={myUser?.photoURL}/>
                     </div>
