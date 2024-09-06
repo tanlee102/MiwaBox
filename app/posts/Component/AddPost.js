@@ -62,6 +62,19 @@ const AddPost = () => {
     };
   
     const uploadPost = async () => {
+      
+      // Check if title is present
+      if (!title.current || title.current.trim() === '') {
+        alert('Title is required.');
+        return;
+      }
+
+      // Check if at least one file is uploaded
+      if (mediaFiles.length === 0) {
+        alert('At least one file is required.');
+        return;
+      }
+      
       try {
         setDisplayRotateUpload(true);
         const formData = new FormData();
