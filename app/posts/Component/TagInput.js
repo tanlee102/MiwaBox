@@ -3,9 +3,6 @@ import '../css/style/Tag/TagInput.css';
 
 const TagInput = ({tags, setTags}) => {
 
-  console.log('AddPost tags:', tags);  // In AddPost component
-  console.log('TagInput received tags:', tags);  // In TagInput component
-
   const [maxTags, setMaxTags] = useState(10);
   const inputRef = useRef(null);
 

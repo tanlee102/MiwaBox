@@ -69,8 +69,8 @@ const Page = () => {
   return (
     <div className='main'>
       <div className='list-posts'>
-        {posts.map((post) => ( // Map over fetched posts to render them dynamically
-          <Link href={'/posts/'+post.idFile}>
+        {posts.map((post, index) => ( // Map over fetched posts to render them dynamically
+          <Link key={index} href={'/posts/'+post.idFile}>
           <div className='item-post' key={post._id.$oid}>
             <div className="aspect-ratio-container">
               <img src={`https://image.lehienthanh1.workers.dev/?id=${post.idImageFile}`} className="post-image" alt="Post Image" />

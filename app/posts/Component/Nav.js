@@ -40,7 +40,7 @@ const Nav = ({}) => {
     const { width } = useWindowDimensions();
     const [typeWindow, setTypeWindow] = useState(() => checkType(width));
     useLayoutEffect(() => {
-        if(typeWindow > 2){
+        if(checkType(window?.innerWidth) > 2){
             setShowListItems(false)
         }else{
             setShowSearchItem(false)
@@ -48,14 +48,16 @@ const Nav = ({}) => {
     }, []);
     
     useEffect(() => {
-        const newType = checkType(width);
-        if (typeWindow !== newType) {
-            setTypeWindow(newType);
-            if(newType > 2){
-                setShowListItems(false)
-                setShowSearchItem(true)
-            }else{
-                setShowSearchItem(false)
+        if(window?.innerWidth){
+            const newType = checkType(width);
+            if (typeWindow !== newType) {
+                setTypeWindow(newType);
+                if(newType > 2){
+                    setShowListItems(false)
+                    setShowSearchItem(true)
+                }else{
+                    setShowSearchItem(false)
+                }
             }
         }
     }, [width, typeWindow]);
