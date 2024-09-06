@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext, useRef, useState } from 'react';
 import axios from 'axios';
 import TagInput from './TagInput';

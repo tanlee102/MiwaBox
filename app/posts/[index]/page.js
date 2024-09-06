@@ -1,50 +1,37 @@
-'use client'
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react';
+import '../css/style/Post/Post.css';
+import dynamic from 'next/dynamic';
+import PostContent from '../Component/PostContent';
+import Modal from '@/app/Components/Dialog/Modal';
+import AddPost from '../Component/AddPost';
 
-import '../css/style/Post/Post.css'
+const MiniProfile = dynamic(() => import('../../../app/Components/Dialog/MiniProfile.js'), { ssr: false });
+const EditUserName = dynamic(() => import('../../../app/Components/Dialog/EditUserName.js'), { ssr: false });
 
-import Modal from '@/app/Components/Dialog/Modal'
-import AddPost from '../Component/AddPost'
-import dynamic from 'next/dynamic'
-import PostContent from '../Component/PostContent'
-const MiniProfile = dynamic(() => import('../../../app/Components/Dialog/MiniProfile.js'), { ssr: false })
-const EditUserName = dynamic(() => import('../../../app/Components/Dialog/EditUserName.js'), { ssr: false })
+export async function generateMetadata({ params }) {
+  const { index } = params;
+  const postData = await fetch(`https://html-back.abelonokieepmi.workers.dev?id=${index}`).then((res) => res.json());
+  return {
+    title: postData.title,
+    description: postData.stitle,
+  };
+}
 
-import { WindowContext } from '../Context/WindowContext'
-
-const Page = ({ params }) => {
-
-  const { displayModalAddPost, setDisplayModalAddPost } = useContext(WindowContext);
-  const [postData, setPostData] = useState(null);
-  
+export default async function Page({ params }) {
   const { index } = params;
 
-  const fetchUrl = `https://html-back.abelonokieepmi.workers.dev?id=${index}`;
-
-  useEffect(() => {
-    fetch(fetchUrl)
-      .then(response => response.json())
-      .then(data => setPostData(data))
-      .catch(error => console.error("Error fetching data:", error));
-  }, [fetchUrl]);
-
-  if (!postData) {
-    return <div>Loading...</div>;
-  }
+  // Fetch data for page rendering
+  const postData = await fetch(`https://html-back.abelonokieepmi.workers.dev?id=${index}`).then((res) => res.json());
 
   return (
     <div className='contain-mypost-content'>
-
       <div className="mypost-content">
         <PostContent postData={postData} idFile={index} />
       </div>
 
-      <MiniProfile/>
-      <EditUserName/>
-      <Modal setDisplayModal={setDisplayModalAddPost} displayModal={displayModalAddPost} title={"Add Post"} body={<AddPost/>} displayfooter={false}></Modal>
-    
+      <MiniProfile />
+      <EditUserName />
+      <Modal title="Add Post" body={<AddPost />} displayfooter={false} />
     </div>
-  )
+  );
 }
-
-export default Page
