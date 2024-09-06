@@ -3,8 +3,8 @@ import React, { Suspense } from 'react'
 import Nav from './Component/Nav';
 
 import "./css/Nav/Menu.css";
-import "./css/Nav/MenuRes.css";
 import "./css/style/Post/ItemPost.css";
+import "./css/Nav/MenuRes.css";
 
 export const metadata = {
   title: "Posts",
