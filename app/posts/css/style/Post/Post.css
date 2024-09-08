@@ -72,19 +72,26 @@ body{
     float: left;
     width: 100%;
     height: auto;
+    margin: 5px 0px;
 }
 
-.mypost-content-media img, .mypost-content-media video{
+.mypost-content-media img, .mypost-content-media-description video{
     width: 100%;
     height: auto;
     cursor: pointer;
+    float: left;
 }
+.mypost-content-media-description video{
+    margin: 10px 0px;
+}
+
 .mypost-content-media-description{
     float: left;
     height: auto;
     width: 100%;
     box-sizing: border-box;
-    padding: 7px 0px;
+    padding: 5px 0px;
+    line-height: 1.3em;
 }
 
 .mypost-list-tags{

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset = null, isAllowEnter = true  }) => {
+const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset = null, isAllowEnter = true, isEditable = false  }) => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [htmlContent, setHtmlContent] = useState('');
   const spanRef = useRef(null);
@@ -48,21 +48,54 @@ const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset
     }
   };
 
+
+  // Toggle bold formatting
+  const toggleBold = () => {
+    document.execCommand('bold');
+  };
+
+  // Toggle italic formatting
+  const toggleItalic = () => {
+    document.execCommand('italic');
+  };
+
+  // Embed raw video URL
+  const embedVideo = () => {
+    const url = prompt('Enter the raw video URL (e.g., .mp4)');
+    if (url) {
+      const videoHTML = `<video controls width="100%" height="auto">
+                          <source src="${url}" type="video/mp4">
+                          Your browser does not support the video tag.
+                         </video>`;
+      document.execCommand('insertHTML', false, videoHTML);
+    }
+  };
+
+
   return (
-    <span
-      ref={spanRef}
-      className={`add-post-title ${isEmpty ? 'empty' : ''}`}
-      contentEditable="true"
-      placeholder={placeholder}
-      onInput={handleInput}
-      onPaste={handlePaste}
-      onKeyDown={handleKeyDown}
-      tabIndex="21"
-      style={{
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-      }}
-    ></span>
+    <>
+      {isEditable && (
+      <div className="toolbar-editable-span">
+        <button onClick={toggleBold}><b>B</b></button>
+        <button onClick={toggleItalic}><i>I</i></button>
+        <button onClick={embedVideo}><i class="fa fa-video-camera" aria-hidden="true"></i></button>
+      </div>
+      )}
+      <span
+        ref={spanRef}
+        className={`add-post-title ${isEmpty ? 'empty' : ''}`}
+        contentEditable="true"
+        placeholder={placeholder}
+        onInput={handleInput}
+        onPaste={handlePaste}
+        onKeyDown={handleKeyDown}
+        tabIndex="21"
+        style={{
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+        }}
+      ></span>
+    </>
   );
 };
 
