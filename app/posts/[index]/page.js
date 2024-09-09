@@ -2,22 +2,20 @@ import React from 'react';
 
 import '../css/style/Post/Post.css';
 
-import { host_post_image_domain } from '../env';
+import { host_post_image_domain, host_post_json_domain } from '../env';
 import PostContent from '../Component/PostContent';
 
+const getRandomHostUrl = () => {
+  return host_post_json_domain[Math.floor(Math.random() * host_post_json_domain.length)];
+};
 
-const stopWords = ['a', 'an', 'the', 'of', 'and', 'in', 'on', 'to', 'for', 'with', 'at', 'by', 'from', 'as', 'is', 'that', 'this', 'it', 'does', 'he', 'she', 'they', 'we', 'you'];
 export async function generateMetadata({ params }) {
   const { index } = params;
-  const postData = await fetch(`https://html-back.abelonokieepmi.workers.dev?id=${index}`).then((res) => res.json());
+  const postData = await fetch(`${getRandomHostUrl()}?id=${index}`).then((res) => res.json());
 
   const fullTitle = postData.title;
   const sentences = fullTitle.match(/[^.!?]+[.!?]*/g) || [];
-  const words = fullTitle
-    .toLowerCase()
-    .split(/\W+/)
-    .filter(word => word && !stopWords.includes(word));
-  const keywords = [fullTitle, ...sentences, ...words].join(', ');
+  const keywords = [fullTitle, ...sentences].join(', ');
 
   return {
     title: postData.title,
@@ -30,11 +28,11 @@ export async function generateMetadata({ params }) {
 }
 
 
-export default async function Page({ params }) {
-  const { index } = params;
 
-  // Fetch data for page rendering
-  const postData = await fetch(`https://html-back.abelonokieepmi.workers.dev?id=${index}`).then((res) => res.json());
+export default async function Page({ params }) {
+
+  const { index } = params;
+  const postData = await fetch(`${getRandomHostUrl()}?id=${index}`).then((res) => res.json());
 
   return (
     <div className='contain-mypost-content'>
