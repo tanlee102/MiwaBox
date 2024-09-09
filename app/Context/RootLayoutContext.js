@@ -47,7 +47,7 @@ const RootLayoutProvider = ({ children }) => {
         }
         
         const data = await response.json();
-        Cookies.set('myuser', JSON.stringify(data), { expires: 30, path: '/' });
+        Cookies.set('myuser', JSON.stringify(data), { expires: 7, path: '/' });
         
         // Return the fetched data
         setMyUser(data);
