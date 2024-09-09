@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { isInsideH3 } from '../helper/isInsideH3';
 
 const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset = null, isAllowEnter = true, isEditable = false  }) => {
   const [isEmpty, setIsEmpty] = useState(true);
@@ -43,9 +44,21 @@ const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset
   };
 
   const handleKeyDown = (e) => {
+
     if (!isAllowEnter && (e.key === 'Enter' || e.key === 'Return')) {
       e.preventDefault(); // Prevent new line
     }
+
+    if (isAllowEnter && e.key === 'Enter') {
+      const selection = window?.getSelection();
+      const selectedNode = selection?.anchorNode;
+  
+      if (isInsideH3(selectedNode)) {
+        e.preventDefault();
+        document.execCommand('insertHTML', false, '<br>');
+      }
+    }
+
   };
 
 
@@ -57,6 +70,11 @@ const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset
   // Toggle italic formatting
   const toggleItalic = () => {
     document.execCommand('italic');
+  };
+
+  // Insert H3 tag
+  const insertH3 = () => {
+    document.execCommand('formatBlock', false, 'h3');
   };
 
   // Embed raw video URL
@@ -71,13 +89,13 @@ const EditableSpan = ({ placeholder, fontSize, fontWeight, onChangeText, onReset
     }
   };
 
-
   return (
     <>
       {isEditable && (
       <div className="toolbar-editable-span">
         <button onClick={toggleBold}><b>B</b></button>
         <button onClick={toggleItalic}><i>I</i></button>
+        <button onClick={insertH3}><b>H3</b></button>
         <button onClick={embedVideo}><i class="fa fa-video-camera" aria-hidden="true"></i></button>
       </div>
       )}
