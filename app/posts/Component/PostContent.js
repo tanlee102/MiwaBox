@@ -83,7 +83,7 @@ const PostContent = ({ postData, idFile }) => {
         {postData?.content?.map((media) => (
           <React.Fragment key={media.id}>
             <div className='mypost-content-media'>
-              <img onClick={() => {showImageViewer(`${host_post_image_domain}/?id=${media.id}`)}} src={`${host_post_image_domain}/?id=${media.id}`} alt='' />
+              <img onClick={() => {showImageViewer(`${host_post_image_domain}/?id=${media.id}`)}} src={`${host_post_image_domain}/?id=${media.id}`} alt={postData.title} />
             </div>
             {media.description && media.description !== 'undefined' && media.description !== 'null' && media?.description ? 
               (listIdAdmin.includes(postData._id) || /\/api\/item\?index=/.test(media.description) ? (
