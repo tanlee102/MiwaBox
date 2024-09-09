@@ -91,9 +91,7 @@ const VideoPage = () => {
                         const driveUrl = data?.driveUrl;
                         if (driveUrl && Array.isArray(driveUrl)) {
                               const url = (driveUrl[driveUrl.length - 1])
-                              if(url){
-                              setVideoSrc(url);
-                              }
+                              if(url) setVideoSrc(url);
                         }
         
                         fetch(url_host_domain_video_page+'api/suggestion?folder='+data?.folder+'&_idItem='+data?._id+(abe ? '&abe='+encodeURIComponent(abe) : ""))
