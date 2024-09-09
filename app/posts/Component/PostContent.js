@@ -63,17 +63,14 @@ const PostContent = ({ postData, idFile }) => {
             <div className='mypost-content-media'>
               <img onClick={() => {showImageViewer(`${host_post_image_domain}/?id=${media.id}`)}} src={`${host_post_image_domain}/?id=${media.id}`} alt='' />
             </div>
+            {(media.description !== '' && media.description !== 'undefined' && media.description !== 'null' && media?.description) ?
             <div
               className='mypost-content-media-description'
               dangerouslySetInnerHTML={{
-                __html:
-                  media.description !== 'undefined' &&
-                  media.description !== 'null' &&
-                  media?.description
-                    ? media.description
-                    : '',
+                __html: media.description
               }}
             />
+            : null}
           </React.Fragment>
         ))}
       </div>

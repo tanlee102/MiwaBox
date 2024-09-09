@@ -8,6 +8,7 @@
     width: 100%;
     box-sizing: border-box;
     min-height: 24px; /* Ensure some height to show placeholder properly */
+    line-height: 1.3em;
     outline: none;
   }
   
