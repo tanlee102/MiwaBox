@@ -8,6 +8,7 @@ import EditableSpan from './EditableSpan';
 import { useRouter } from 'next/navigation';
 import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
 import { WindowContext } from '../Context/WindowContext';
+import { cleanDescription } from '../helper/cleanDescription';
 
 const AddPost = () => {
 
@@ -91,7 +92,7 @@ const AddPost = () => {
         // Append files and descriptions in order
         mediaFiles.forEach((file, index) => {
           formData.append('files', file); // Append each file
-          formData.append('descriptions', mediaDescriptionsRef.current[index] || ''); // Append corresponding description
+          formData.append('descriptions', cleanDescription(mediaDescriptionsRef.current[index]) || ''); // Append corresponding description
         });
     
         const token = myUser.access_token; // Adjust if you use a different cookie name
@@ -103,7 +104,6 @@ const AddPost = () => {
         });
     
         if (response.status === 200) {
-          console.log('Post uploaded successfully:', response.data);
           resetAttributes();
           setDisplayModalAddPost(false);
           router.push('/posts/'+response.data); // Redirect after successful upload
