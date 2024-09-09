@@ -72,7 +72,7 @@ body{
     float: left;
     width: 100%;
     height: auto;
-    margin: 7px 0px;
+    margin: 7.5px 0px;
 }
 
 .mypost-content-media img, .mypost-content-media-description video{
@@ -90,7 +90,7 @@ body{
     height: auto;
     width: 100%;
     box-sizing: border-box;
-    padding: 7px 0px;
+    padding: 7.5px 0px;
     line-height: 1.3em;
 }
 
