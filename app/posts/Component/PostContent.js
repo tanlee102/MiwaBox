@@ -9,6 +9,7 @@ import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
 import { converTime } from '@/app/videos/helper/converTime';
 import { listIdAdmin } from '@/app/data/listIdAdmin';
 import { host_post_image_domain } from '../env';
+import { cleanDescription } from '../helper/cleanDescription';
 
 const PostContent = ({ postData, idFile }) => {
 
@@ -67,7 +68,7 @@ const PostContent = ({ postData, idFile }) => {
             <div
               className='mypost-content-media-description'
               dangerouslySetInnerHTML={{
-                __html: media.description
+                __html: cleanDescription(media.description)
               }}
             />
             : null}
