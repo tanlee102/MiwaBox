@@ -21,7 +21,10 @@ const RootLayoutProvider = ({ children }) => {
 
     const [language, setLanguage] = useState('en');
 
+    const [showLoading, setShowLoading] = useState(false);
+
     const loginFunction = async () => {
+      setShowLoading(true);
       const firebaseConfig = {
         apiKey: "AIzaSyB3lo_xu7P2Hd5VrKCfcEMhpjW5tF6JmQI",
         authDomain: "miwabox-login.firebaseapp.com",
@@ -49,14 +52,14 @@ const RootLayoutProvider = ({ children }) => {
         const data = await response.json();
         Cookies.set('myuser', JSON.stringify(data), { expires: 7, path: '/' });
         
-        // Return the fetched data
         setMyUser(data);
         return data;
         
-      } catch (error) {
-        console.error(`Error: ${error}`);
+      }catch (error) {
         alert("Error when creating token!");
-        return null;  // Return null in case of error
+        return null;
+      }finally{
+        setShowLoading(false);
       }
     };
 
@@ -104,6 +107,7 @@ const RootLayoutProvider = ({ children }) => {
                                           language, setLanguage
     }}>
       {children}
+      {showLoading && <div className='spinning-loading-user-info'><div id="spinning-loading-user-info"></div></div>}
     </RootLayoutContext.Provider>
   )
 }
