@@ -43,13 +43,6 @@ a, a:link, a:visited, a:focus, a:hover, a:active{
 
 
 
-
-
-
-
-
-
-
 .contain-loader-hozon{
     display: block;
     width: 100%;
@@ -71,6 +64,10 @@ a, a:link, a:visited, a:focus, a:hover, a:active{
 
 
 
+
+
+
+
 .loader-roundo {
   margin-left: 14.5px;
   margin-right: 3.5px;
@@ -89,6 +86,10 @@ a, a:link, a:visited, a:focus, a:hover, a:active{
   animation: l5 1s infinite;
 }
 @keyframes l5 {to{transform: rotate(.5turn)}}
+
+
+
+
 
 
 #notice-popout{
@@ -122,9 +123,15 @@ a, a:link, a:visited, a:focus, a:hover, a:active{
 
 
 
+
+
 .hide-scrollbar {
     overflow-y: hidden;
 }
+
+
+
+
 
 
 .spinning-loading-user-info{
@@ -179,4 +186,24 @@ a, a:link, a:visited, a:focus, a:hover, a:active{
           clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,0 100%,0 25%);
           background:#2FB8AC;
           border-radius: 100px 0 0 100px;}
+}
+
+
+
+
+
+
+
+
+.video-plyr-container{
+    position: relative;
+    display: block;
+    float: left;
+    width: 100%;
+    height: auto;
+}
+.video-plyr-container video{
+    display: block;
+    margin: 0px !important;
+    padding: 0px !important;
 }

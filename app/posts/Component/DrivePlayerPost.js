@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { url_host_domain_video_page } from '../../env_video';
+import 'plyr/dist/plyr.css';
 
 const DrivePlayerPost = ({ index }) => {
   const [videoSrc, setVideoSrc] = useState(null);
@@ -27,13 +28,30 @@ const DrivePlayerPost = ({ index }) => {
     fetchVideoData(); // Fetch video data when the component mounts
   }, [index]);
 
+  const videoRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (videoRef.current) {
+      const Plyr = require('plyr');
+      const player = new Plyr(videoRef.current, {});
+
+      return () => {
+        if (player) {
+          player.destroy();
+          videoRef.current = null;
+        }
+      };
+    }
+  }, [videoSrc]);
+
   return (
     <>
       {videoSrc ? (
-        <video controls width="100%" height="auto">
-          <source src={videoSrc} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <div className='video-plyr-container'>
+          <div>
+            <video controls ref={videoRef} src={videoSrc}></video>
+          </div>
+        </div>
       ) : (
         <div className="video-drive-player">
           <div className="contain-loader-hozon">
