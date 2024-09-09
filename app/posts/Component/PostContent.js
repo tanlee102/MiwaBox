@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import { RootLayoutContext } from '@/app/Context/RootLayoutContext';
+import DrivePlayerPost from './DrivePlayerPost';
 
 import { converTime } from '@/app/videos/helper/converTime';
 import { listIdAdmin } from '@/app/data/listIdAdmin';
@@ -17,15 +18,12 @@ const PostContent = ({ postData, idFile }) => {
   const router = useRouter();
 
   const onDelete = async () => {
-
     if (!idFile) {
       alert('File ID is missing.');
       return;
     }
-
     const confirmDelete = confirm('Are you sure you want to delete this post?');
     if (!confirmDelete) return;
-
     try {
         const token = myUser.access_token;
         const response = await axios.post('https://my-delete-post.caculus103.workers.dev?idFile='+idFile, null, {
@@ -47,6 +45,29 @@ const PostContent = ({ postData, idFile }) => {
     }
   };
 
+
+  const renderContentWithVideos = (description) => {
+    const videoUrlRegex = /\/api\/item\?index=([a-zA-Z0-9_-]+)/;
+
+    // Split the content by the video tags to handle them separately
+    const parts = description.split(/(<video[\s\S]*?>[\s\S]*?<\/video>)/g);
+
+    return parts.map((part, index) => {
+      if (videoUrlRegex.test(part)) {
+        // Extract the video index from the video tag
+        const match = part.match(videoUrlRegex);
+        const videoIndex = match ? match[1] : null;
+
+        if (videoIndex) {
+          return <DrivePlayerPost key={index} index={videoIndex} />;
+        }
+      }
+      // Return the text as a regular string or HTML
+      return <span key={index} dangerouslySetInnerHTML={{ __html: part }} />;
+    });
+  };
+
+
   return (
     <>
       <div className='mypost-info'>
@@ -64,14 +85,20 @@ const PostContent = ({ postData, idFile }) => {
             <div className='mypost-content-media'>
               <img onClick={() => {showImageViewer(`${host_post_image_domain}/?id=${media.id}`)}} src={`${host_post_image_domain}/?id=${media.id}`} alt='' />
             </div>
-            {(media.description !== '' && media.description !== 'undefined' && media.description !== 'null' && media?.description) ?
-            <div
-              className='mypost-content-media-description'
-              dangerouslySetInnerHTML={{
-                __html: cleanDescription(media.description)
-              }}
-            />
-            : null}
+            {media.description && media.description !== 'undefined' && media.description !== 'null' && media?.description ? 
+              (listIdAdmin.includes(postData._id) || /\/api\/item\?index=/.test(media.description) ? (
+                <div className='mypost-content-media-description'>
+                  {renderContentWithVideos(cleanDescription(media.description))}
+                </div>
+              ) : (
+                <div
+                  className='mypost-content-media-description'
+                  dangerouslySetInnerHTML={{
+                    __html: cleanDescription(media.description),
+                  }}
+                />
+              )
+            ) : null}
           </React.Fragment>
         ))}
       </div>
