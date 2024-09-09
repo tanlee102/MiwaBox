@@ -194,7 +194,16 @@ a, a:link, a:visited, a:focus, a:hover, a:active{
 
 
 
-
+.video-drive-post-load-player{
+    position: relative;
+    width: 100% !important;
+    background-color: black !important;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 7;
+}
 .video-plyr-container{
     position: relative;
     display: block;

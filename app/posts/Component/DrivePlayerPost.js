@@ -53,7 +53,7 @@ const DrivePlayerPost = ({ index }) => {
           </div>
         </div>
       ) : (
-        <div className="video-drive-player">
+        <div className="video-drive-post-load-player">
           <div className="contain-loader-hozon">
             <div className="loader-hozon"></div>
           </div>
