@@ -388,7 +388,6 @@ html:has(.video-thread){
 }
 
 .step-video-thread-button div:last-child svg{
-    
     transform: rotate(180deg);
 }
 
