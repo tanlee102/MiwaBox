@@ -10,7 +10,7 @@ import DrivePlayerPost from './DrivePlayerPost';
 import { converTime } from '@/app/videos/helper/converTime';
 import { listIdAdmin } from '@/app/data/listIdAdmin';
 import { host_post_image_domain } from '../env';
-import { cleanDescription, replaceNbsp } from '../helper/cleanDescription';
+import { cleanDescription, cleanTitle } from '../helper/cleanDescription';
 
 const PostContent = ({ postData, idFile }) => {
 
@@ -75,9 +75,9 @@ const PostContent = ({ postData, idFile }) => {
         <span>{converTime(postData.time)}</span>
       </div>
 
-      <div className='mypost-title'>{replaceNbsp(postData.title)}</div>
+      <div className='mypost-title'>{cleanTitle(postData.title)}</div>
 
-      <div className='mypost-stitle'>{replaceNbsp(postData.stitle)}</div>
+      <div className='mypost-stitle'>{cleanTitle(postData.stitle)}</div>
 
       <div className='mypost-main-content'>
         {postData?.content?.map((media) => (

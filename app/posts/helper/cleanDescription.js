@@ -4,6 +4,6 @@ export function cleanDescription(description) {
       .trim();  // Trim extra spaces
 }
 
-export function replaceNbsp(str) {
+export function cleanTitle(str) {
   return str.replace(/&nbsp;/g, ' ');
 }
