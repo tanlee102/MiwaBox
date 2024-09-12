@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import LoadMore from '../Components/LoadMore';
 import { host_post_image_domain } from './env';
+import { replaceNbsp } from './helper/cleanDescription';
 
 const Page = () => {
   const [posts, setPosts] = useState([]); // State to store posts
@@ -73,8 +74,8 @@ const Page = () => {
                   <li className="post-date">{new Date(post.time).toLocaleDateString()}</li> {/* Format the date */}
                 </ul>
               </div>
-              <h2 className="post-title">{post.title}</h2>
-              <p className="post-description">{post.stitle}</p>
+              <h2 className="post-title">{replaceNbsp(post.title)}</h2>
+              <p className="post-description">{replaceNbsp(post.stitle)}</p>
             </div>
             <div className="post-image-container">
               <img src={`${host_post_image_domain}/?id=${post.idImageFile}`} className="post-image" alt="Post Image" />
