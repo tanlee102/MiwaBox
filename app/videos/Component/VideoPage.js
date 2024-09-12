@@ -94,7 +94,7 @@ const VideoPage = () => {
                               if(url) setVideoSrc(url);
                         }
         
-                        fetch(url_host_domain_video_page+'api/suggestion?folder='+data?.folder+'&_idItem='+data?._id+(abe ? '&abe='+encodeURIComponent(abe) : ""))
+                        fetch(url_host_domain_video_page+'api/suggestion/proxy?folder='+data?.folder+'&_idItem='+data?._id+(abe ? '&abe='+encodeURIComponent(abe) : ""))
                         .then(response => {if (response.status === 200) {return response.json();}})
                         .then(da => {
                               if(da?.myItemSet){
