@@ -1,6 +1,8 @@
-import { WindowContext } from '@/app/Context/WindowContext';
-import Link from 'next/link';
 import React, { useContext } from 'react'
+import Link from 'next/link';
+
+import { WindowContext } from '@/app/Context/WindowContext';
+import LoadMore from '@/app/Components/LoadMore';
 
 const HomeVideo = ({data}) => {
 
@@ -19,8 +21,12 @@ const HomeVideo = ({data}) => {
                     </div>
                 </Link>
                 ))}
-
             </div>
+            {data.length == 0 &&
+                <div id='my-folder-video-container-load'>
+                    <LoadMore loadState={true} setLoadState={null} btnAct={null}/>    
+                </div>           
+            }
             <p>@id-888</p>
         </div>
     </div>
