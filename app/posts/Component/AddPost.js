@@ -84,7 +84,7 @@ const AddPost = () => {
         const cleanTitle = title.current.replace(/<[^>]*>?/gm, ''); // Removes all HTML tags
         formData.append('title', cleanTitle);
 
-        const cleanSTitle = stitle.current.replace(/<[^>]*>?/gm, ''); // Removes all HTML tags
+        const cleanSTitle = stitle?.current ? stitle.current.replace(/<[^>]*>?/gm, '') : ''; // Removes all HTML tags
         formData.append('stitle', cleanSTitle);
 
         formData.append('tags', JSON.stringify(tags));
